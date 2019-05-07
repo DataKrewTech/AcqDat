@@ -1,0 +1,5 @@
+<div id="wrapper">
+  <%= render "_header.html", conn: @conn %>
+  <%= render "_sidebar.html", conn: @conn %>
+  <%= render @view_module, @view_template, assigns %>
+</div>

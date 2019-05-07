@@ -9,6 +9,14 @@ import css from "../css/app.css"
 //
 // Import dependencies
 //
+
+import $ from 'jquery';
+window.jQuery = $;
+window.$ = $;
+
+window.WOW = require('wowjs').WOW
+
+import 'bootstrap'
 import "phoenix_html"
 
 // Import local files

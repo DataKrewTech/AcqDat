@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -13,7 +14,7 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
-      './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
+    './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
   },
   output: {
     filename: 'app.js',
@@ -31,11 +32,34 @@ module.exports = (env, options) => ({
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader']
-      }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: '../fonts/'
+          }
+        }
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: '../fonts/'
+            }
+          }
+        ]
+      },
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: '../css/app.css' }),
-    new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
+    new CopyWebpackPlugin([{ from: 'static/', to: '../' }]),
+    new CopyWebpackPlugin([{ from: 'vendor/images', to: '../images' }])
   ]
 });
