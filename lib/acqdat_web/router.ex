@@ -13,8 +13,20 @@ defmodule AcqdatWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :authentication do
+    plug(AcqdatWeb.AuthenticationPipe)
+    plug(AcqdatWeb.CurrentUser)
+  end
+
   scope "/", AcqdatWeb do
     pipe_through :browser
+
+    resources("/session", SessionController, only: [:new, :create])
+    get("/session/log-out", SessionController, :delete)
+  end
+
+  scope "/", AcqdatWeb do
+    pipe_through [:browser, :authentication]
 
     get "/", PageController, :index
   end

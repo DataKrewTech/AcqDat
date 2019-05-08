@@ -25,6 +25,15 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Configure Guardian
+config :acqdat, AcqdatWeb.Guardian,
+  issuer: "acqdat",
+  secret_key: "CaTqqe1yk8ofdh1Cmn8Oh9yOiaVYw06rsjnJWMBqoIMw+w4wnFweNkWAoyeWsjK9"
+
+config :acqdat, AcqdatWeb.AuthenticationPipe,
+  module: AcqdatWeb.Guardian,
+  error_handler: AcqdatWeb.AuthErrorHandler
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

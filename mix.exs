@@ -10,7 +10,9 @@ defmodule Acqdat.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -26,7 +28,7 @@ defmodule Acqdat.MixProject do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
+  defp elixirc_paths(_), do: ["lib", "priv/repo/seed/"]
 
   # Specifies your project dependencies.
   #
@@ -42,7 +44,19 @@ defmodule Acqdat.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+
+      {:params, "~> 2.0"},
+
+       # auth
+       {:comeonin, "~> 4.1.1"},
+       {:argon2_elixir, "~> 1.2"},
+       {:guardian, "~> 1.0"},
+
+       #testing
+       {:ex_machina, "~> 2.3"},
+
+       {:excoveralls, "~> 0.10", only: :test},
     ]
   end
 
