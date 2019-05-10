@@ -42,5 +42,6 @@ defmodule AcqdatWeb.Endpoint do
     key: "_acqdat_key",
     signing_salt: "zgY5nOj5"
 
+  plug(AcqdatWeb.CORS)
   plug AcqdatWeb.Router
 end

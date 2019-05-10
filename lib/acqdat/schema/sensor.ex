@@ -1,0 +1,59 @@
+defmodule Acqdat.Schema.Sensor do
+
+  @moduledoc """
+  Models a sensor in the system.
+
+  To handle a sensor entity it is being assumed that a sensor
+  can exist only with a device.
+  A sensor could have been identified by combination of sensor type
+  and device however, a device can have more than one sensor of the
+  same type.
+  """
+
+  use Acqdat.Schema
+  alias Acqdat.Schema.{Device, SensorType}
+
+  @typedoc """
+  `uuid`: A universallly unique id for the sensor.
+  `name`: A unique name for sensor per device. Note the same
+          name can be used for sensor associated with another
+          device.
+  `device_id`: id of the device to which the sensor belongs.
+               See `Acqdat.Schema.Device`
+  `sensor_type_id`: id of the sensor type to which the sensor belongs.
+                    See `Acqdat.Schema.SensorType`
+  """
+  @type t :: %__MODULE__{}
+
+  schema("acqdat_sensors") do
+    field(:uuid, :string)
+    field(:name, :string)
+
+    #associations
+    belongs_to(:device, Device, on_replace: :delete)
+    belongs_to(:sensor_type, SensorType)
+
+    timestamps()
+  end
+
+  @permitted ~w(device_id sensor_type_id uuid name)a
+
+  @spec changeset(
+          __MODULE__.t(),
+          map
+        ) :: Ecto.Changeset.t()
+  def changeset(%__MODULE__{} = sensor, params) do
+    sensor
+    |> cast(params, @permitted)
+    |> add_uuid()
+    |> validate_required(@permitted)
+    |> assoc_constraint(:device)
+    |> assoc_constraint(:sensor_type)
+    |> unique_constraint(:name, name: :unique_sensor_per_device)
+  end
+
+  defp add_uuid(%Ecto.Changeset{valid?: true} = changeset) do
+    changeset
+    |> put_change(:uuid, UUID.uuid1(:hex))
+  end
+end
