@@ -57,6 +57,10 @@ defmodule Acqdat.MixProject do
        {:ex_machina, "~> 2.3"},
 
        {:excoveralls, "~> 0.10", only: :test},
+       { :elixir_uuid, "~> 1.2" },
+
+       #cors
+       {:corsica, "~> 1.0"}
     ]
   end
 

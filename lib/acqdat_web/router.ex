@@ -26,6 +26,12 @@ defmodule AcqdatWeb.Router do
   end
 
   scope "/", AcqdatWeb do
+    pipe_through :api
+
+    post("/device/add-data", DeviceController, :insert_data)
+  end
+
+  scope "/", AcqdatWeb do
     pipe_through [:browser, :authentication]
 
     get "/", PageController, :index
