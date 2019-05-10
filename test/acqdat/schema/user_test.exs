@@ -3,8 +3,6 @@ defmodule Acqdat.Schema.UserTest do
   use ExUnit.Case, async: true
   use Acqdat.DataCase
 
-  import Acqdat.Support.Factory
-
   alias Acqdat.Schema.User
 
   describe "changeset/2" do

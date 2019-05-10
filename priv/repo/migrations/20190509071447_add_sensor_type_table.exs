@@ -7,6 +7,7 @@ defmodule Acqdat.Repo.Migrations.AddSensorTypeTable do
       add(:make, :text)
       add(:visualizer, :string)
       add(:identifier, :string, null: false)
+      add(:value_keys, {:array, :string}, null: false)
 
       timestamps()
     end

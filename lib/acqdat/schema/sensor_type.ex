@@ -19,6 +19,11 @@ defmodule Acqdat.Schema.SensorType do
                 temperature sensor can be itself different for differnt types.
                 Identifier uniquely identifies the sensor. This identifier would
                 be used by devices sending data for different types of sensors.
+  'value_keys': keys that would be used to store data created by this type of sensor.
+                e.g. gyro sensor creates data in format ['gx', 'gy', 'gz'] then
+                `value_keys` stores these keys in an array an used to look for the same.
+                Sensors creating only one type of value should have only one element in
+                the list for example temperature ["temp"].
   """
   @type t :: %__MODULE__{}
 
@@ -27,11 +32,12 @@ defmodule Acqdat.Schema.SensorType do
     field(:make, :string)
     field(:visualizer, :string)
     field(:identifier, :string)
+    field(:value_keys, {:array, :string})
 
     timestamps()
   end
 
-  @required_params ~w(name identifier)a
+  @required_params ~w(name identifier value_keys)a
   @optional_parmas ~w(make visualizer)a
 
   @permitted @required_params ++ @optional_parmas
