@@ -7,7 +7,7 @@ defmodule Acqdat.Schema do
     quote do
       use Ecto.Schema
       import Ecto.Changeset
-
+      @timestamps_opts [type: :utc_datetime]
       alias Acqdat.Repo
     end
   end
