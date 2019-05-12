@@ -1,6 +1,8 @@
 /* This file is for your main application css. */
 
 /* @import "./phoenix.css"; */
+@import "./../vendor/css/bootstrap-tagsinput.css";
+@import "./../vendor/css/bootstrap-table.min.css";
 @import "./../vendor/css/bootstrap.min.css";
 @import "./../vendor/css/icons.css";
 @import "./../vendor/css/style.css";

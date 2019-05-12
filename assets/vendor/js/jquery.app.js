@@ -258,9 +258,9 @@ var debounce = function(func, wait, immediate) {
 
 function resizeitems(){
   if($.isArray(resizefunc)){  
-    for (i = 0; i < resizefunc.length; i++) {
-        window[resizefunc[i]]();
-    }
+    // for (i = 0; i < resizefunc.length; i++) {
+    //     window[resizefunc[i]]();
+    // }
   }
 }
 

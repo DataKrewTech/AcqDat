@@ -1,0 +1,30 @@
+<div class="content-page">
+  <div class="content">
+    <div class="container-fluid">
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Edit Sensor Type</h4>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/sensor_types">sensor_types</a></li>
+              <li class="breadcrumb-item active">Edit SensorType</li>
+            </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card-box">
+            <div class="p-20">
+              <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.sensor_type_path(@conn, :update, @sensor_type)
+              %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
