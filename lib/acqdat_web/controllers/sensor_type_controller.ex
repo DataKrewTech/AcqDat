@@ -67,7 +67,7 @@ defmodule AcqdatWeb.SensorTypeController do
         |> redirect(to: Routes.sensor_type_path(conn, :index))
       {:error, _} ->
         conn
-        |> put_flash(:error, "Some errro occured!")
+        |> put_flash(:error, "Some error occured!")
         |> redirect(to: Routes.sensor_type_path(conn, :index))
     end
   end

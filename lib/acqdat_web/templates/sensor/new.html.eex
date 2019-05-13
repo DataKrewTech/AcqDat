@@ -1,0 +1,31 @@
+<div class="content-page">
+  <div class="content">
+    <div class="container-fluid">
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Add new Sensor</h4>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><%= link "device", to: "/devices/#{@device_id}" %></a></li>
+              <li class="breadcrumb-item active">New Sensor</li>
+            </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card-box">
+            <div class="p-20">
+              <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.device_sensor_path(@conn, :create, @device_id),
+                device_id: @device_id
+              %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

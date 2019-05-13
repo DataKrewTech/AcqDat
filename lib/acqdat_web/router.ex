@@ -36,7 +36,9 @@ defmodule AcqdatWeb.Router do
 
     get "/", PageController, :index
     resources("/sensor_types", SensorTypeController)
-    resources("/devices", DeviceController)
+    resources("/devices", DeviceController) do
+      resources("/sensors", SensorController)
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -5,6 +5,7 @@ defmodule Acqdat.Model.SensorType do
 
   alias Acqdat.Repo
   alias Acqdat.Schema.SensorType
+  import Ecto.Query
 
   @doc """
   Creates a new sensor type.
@@ -35,7 +36,6 @@ defmodule Acqdat.Model.SensorType do
   @spec update(SensorType.t(), map) :: {:ok, SensorType.t()} | {:error, Ecto.Changeset.t()}
   def update(sensor_type, params) do
     changeset = SensorType.changeset(sensor_type, params)
-
     Repo.update(changeset)
   end
 
@@ -43,5 +43,13 @@ defmodule Acqdat.Model.SensorType do
     SensorType
     |> Repo.get(id)
     |> Repo.delete()
+  end
+
+  @spec formatted_list() :: [{String.t(), non_neg_integer}]
+  def formatted_list do
+    SensorType
+    |> order_by([s], asc: s.name)
+    |> select([s], {s.name, s.id})
+    |> Repo.all()
   end
 end

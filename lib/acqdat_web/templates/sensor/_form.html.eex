@@ -1,0 +1,25 @@
+<%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
+<div class="form-group row">
+  <%= label f, :name, "Name", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= text_input(f, :name, class: "form-control") %>
+  </div>
+  <%= error_tag(f, :name) %>
+</div>
+
+<div class="form-group row">
+  <%= label f, :sensor_type_id, "Sensor Type", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= select(f, :sensor_type_id, formatted_list(:sensor_type), class: "form-control") %>
+  </div>
+  <%= error_tag(f, :sensor_type_id) %>
+</div>
+
+<div class="form-group mb-0  row">
+  <div class="col-9">
+    <%= submit "Save", class: "btn btn-info waves-effect waves-light" %>
+    <%= link("Back", to: "/devices/#{@device_id}", class: "btn btn-info waves-effect waves-light") %>
+  </div>
+</div>
+
+<% end %>
