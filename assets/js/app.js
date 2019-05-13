@@ -23,3 +23,14 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+$(document).ready(() => {
+  let flash_message = $("#flash_message").data()
+  if (flash_message["info"]) {
+    $.Notification.notify('success','top right', 'Information', 
+      flash_message["info"])
+  } else if (flash_message["error"]) {
+    $.Notification.notify('error','top right', 'Error', 
+      flash_message["info"])
+  }
+});

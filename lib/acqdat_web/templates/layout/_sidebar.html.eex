@@ -4,11 +4,14 @@
     <div id="sidebar-menu">
       <ul>
         <li class="has_sub">
-          <a href="javascript:void(0);" class="waves-effect"><i class="ti-pie-chart"></i> <span> Dashboard </span></a>
+          <a href="/" class="waves-effect"><i class="ti-pie-chart"></i> <span> Dashboard </span></a>
         </li>
 
         <li class="has_sub">
-          <a href="javascript:void(0);" class="waves-effect"><i class="typcn typcn-device-tablet"></i> <span> Devices </span> </a>
+          <a href="/devices" class="waves-effect"><i class="typcn typcn-device-tablet"></i> <span> Devices </span> </a>
+        </li>
+        <li class="has_sub">
+          <a href="/sensor_types" class="waves-effect"><i class="ti-pulse"></i> <span> Sensor Types </span> </a>
         </li>
 
         <li class="has_sub">

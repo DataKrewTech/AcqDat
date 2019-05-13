@@ -35,6 +35,10 @@ defmodule AcqdatWeb.Router do
     pipe_through [:browser, :authentication]
 
     get "/", PageController, :index
+    resources("/sensor_types", SensorTypeController)
+    resources("/devices", DeviceController) do
+      resources("/sensors", SensorController)
+    end
   end
 
   # Other scopes may use custom stacks.

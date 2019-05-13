@@ -1,0 +1,30 @@
+<div class="content-page">
+  <div class="content">
+    <div class="container-fluid">
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Add new Device</h4>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/devices">devices</a></li>
+              <li class="breadcrumb-item active">New Device</li>
+            </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card-box">
+            <div class="p-20">
+              <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.device_path(@conn, :create)  
+              %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

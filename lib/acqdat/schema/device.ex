@@ -7,6 +7,8 @@ defmodule Acqdat.Schema.Device do
   """
   use Acqdat.Schema
 
+  alias Acqdat.Schema.Sensor
+
   @typedoc """
   `uuid`: A universally unique id to identify the device.
   `name`: Name for easy identification of the device.
@@ -20,6 +22,8 @@ defmodule Acqdat.Schema.Device do
     field(:name, :string)
     field(:access_token, :string)
     field(:description, :string)
+
+    has_many(:sensors, Sensor)
 
     timestamps()
   end

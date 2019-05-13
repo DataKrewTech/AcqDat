@@ -1,0 +1,89 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Device</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/devices">devices</a></li>
+            <li class="breadcrumb-item"><%= @device.name %></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 col-lg-3 col-xs-12">
+          <!-- Simple card -->
+          <div class="card m-b-20">
+            <img class="card-img-top img-fluid" src="/images/device_detail_card.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title mt-0">Device Details</h5>
+              <hr>
+              <p class="font-13"><strong>Name :</strong> 
+                <span class="m-l-15"><%= @device.name %></span></p>
+              <p class="font-13"><strong>UUID :</strong> 
+                <span ><%= @device.uuid %></span></p>
+              <p class="font-13"><strong>Description :</strong> 
+                <span ><%= @device.description %></span></p>
+              <p class="font-13"><strong>Access Token :</strong> 
+                <span class="m-l-15"><%= @device.access_token %></span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensors list -->
+        <div class="col-lg-9 col-sm-8 col-xs-12">
+          <div class="card-box">
+            <h3 class="m-t-0 header-title">
+              <b>Sensors</b>
+              <span class="float-right">
+                <%= link to: "/devices/#{@device.id}/sensors/new", class: "btn btn-default" do %>
+                <i class="md md-add"></i> Add new
+                <% end %>
+              </span>
+            </h3>
+            <p class="text-muted font-13">
+              Sensors configured for the <%= @device.name %>.
+            </p>
+
+            <table data-toggle="table" data-show-columns="false" data-page-list="[5, 10, 20]" data-page-size="5"
+              data-pagination="true" data-show-pagination-switch="true" class="table-bordered ">
+              <thead>
+                <tr>
+                  <th data-field="id" data-switchable="false">Name</th>
+                  <th data-field="name">UUID</th>
+                  <th data-field="type"> Sensor Type </th>
+                  <th data-field="actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= for sensor <- @device.sensors do %>
+                <tr>
+                  <td>
+                    <%= link sensor.name, to: Routes.device_sensor_path(@conn, :show, @device.id, sensor.id), 
+                          class: "btn btn-default"%>
+                  </td>
+                  <td><%= sensor.uuid %></td>
+                  <td><%= sensor.sensor_type.name %></td>
+                  <td>
+                    <%= link to: "/devices/#{@device.id}/sensors/#{sensor.id}/edit" do %>
+                    <span class="label label-table label-success">Edit</span>
+                    <% end %>
+                    <%= link to: "/devices/#{@device.id}/sensors/#{sensor.id}", 
+                      method: :delete, data: [confirm: "Are you sure?"], class: "delete_link" do %>
+                    <span class="label label-table label-danger">Delete</span>
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body class="fixed-left">
-    <%= render "_flash.html", conn: @conn %>
+    <div id="flash_message" data-info='<%= get_flash(@conn, "info") %>' 
+      data-error='<%= get_flash(@conn, "error") %>'></div>
     <%= render "_main.html", assigns %>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

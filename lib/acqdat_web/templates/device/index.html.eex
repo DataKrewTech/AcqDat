@@ -1,0 +1,56 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <h3 class="m-t-0 header-title">
+              <b>Devices</b>
+              <span class="float-right"> 
+                <%= link to: "/devices/new", class: "btn btn-default" do %>
+                <i class="md md-add"></i>  Add new
+                <% end %>
+              </span>
+            </h3>
+            <p class="text-muted font-13">
+              Devices configured in application.
+            </p>
+           
+            <table data-toggle="table" data-show-columns="false" 
+              data-page-list="[5, 10, 20]" data-page-size="5"
+              data-pagination="true" data-show-pagination-switch="true"
+              class="table-bordered ">
+              <thead>
+                <tr>
+                  <th data-field="id" data-switchable="false">Name</th>
+                  <th data-field="name">UUID</th>
+                  <th data-field="actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= for device <- @devices do %>
+                  <tr>
+                    <td>
+                      <%= link device.name, to: Routes.device_path(@conn, :show, device.id), 
+                         class: "btn btn-default"%>
+                    </td>
+                    <td><%= device.uuid %></td>
+                    <td>
+                      <%= link to: "/devices/#{device.id}/edit" do %>
+                        <span class="label label-table label-success">Edit</span>
+                      <% end %>
+                      <%= link to: "/devices/#{device.id}", method: :delete do %>
+                        <span class="label label-table label-danger">Delete</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
