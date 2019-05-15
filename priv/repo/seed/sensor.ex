@@ -23,8 +23,8 @@ defmodule AcqdatWeb.Seed.Sensor do
       end)
     |> Enum.map(fn sensor ->
       sensor
-      |> Map.put(:inserted_at, DateTime.utc_now())
-      |> Map.put(:updated_at, DateTime.utc_now())
+      |> Map.put(:inserted_at, DateTime.truncate(DateTime.utc_now(), :second))
+      |> Map.put(:updated_at, DateTime.truncate(DateTime.utc_now(), :second))
     end)
 
     Repo.insert_all(Sensor, sensors)
