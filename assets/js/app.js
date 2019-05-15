@@ -18,6 +18,8 @@ window.WOW = require('wowjs').WOW
 
 import 'bootstrap'
 import "phoenix_html"
+import loadView from './views/loader';
+
 
 // Import local files
 //
@@ -34,3 +36,23 @@ $(document).ready(() => {
       flash_message["info"])
   }
 });
+
+function handleDOMContentLoaded() {
+  // Get the current view name
+  const viewName = document.getElementsByTagName("body")[0].dataset.jsViewName;
+  console.log('viewName', viewName);
+  // Load view class and mount it
+  const ViewClass = loadView(viewName);
+  const view = new ViewClass();
+  view.mount();
+
+  window.currentView = view;
+}
+
+function handleDocumentUnload() {
+  console.log('unmounted view', window.currentView);
+  window.currentView.unmount();
+}
+
+window.addEventListener("DOMContentLoaded", handleDOMContentLoaded, false);
+window.addEventListener("unload", handleDocumentUnload, false);

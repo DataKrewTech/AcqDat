@@ -4,10 +4,20 @@ defmodule AcqdatWeb.DeviceController do
   alias Acqdat.Schema.Device, as: DeviceSchema
   alias Acqdat.Repo
 
-  def insert_data(conn, _params) do
-    conn
-    |> put_status(200)
-    |> render("success.json", message: "success")
+  def insert_data(conn, params) do
+
+    AcqdatWeb.Endpoint.broadcast!("room:lobby", "data_point", params)
+
+    case Device.add_data(params) do
+      {:ok, _data} ->
+        conn
+        |> put_status(200)
+        |> render("success.json", message: "success")
+      {:error, _message} ->
+        conn
+        |> put_status(400)
+        |> render("error.json", message: "error")
+    end
   end
 
   def index(conn, _params) do

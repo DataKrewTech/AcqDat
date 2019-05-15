@@ -16,6 +16,16 @@ defmodule AcqdatWeb.Router do
   pipeline :authentication do
     plug(AcqdatWeb.AuthenticationPipe)
     plug(AcqdatWeb.CurrentUser)
+    plug :put_user_token
+  end
+
+  defp put_user_token(conn, _) do
+    if current_user = conn.assigns[:current_user] do
+      token = Phoenix.Token.sign(conn, "user socket", current_user.id)
+      assign(conn, :user_token, token)
+    else
+      conn
+    end
   end
 
   scope "/", AcqdatWeb do
