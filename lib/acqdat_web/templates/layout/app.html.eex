@@ -4,10 +4,18 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Acqdat · Phoenix Framework</title>
+    <title>Acqdat</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
   </head>
-  <body class="fixed-left">
+  <body class="fixed-left" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <div id="flash_message" data-info='<%= get_flash(@conn, "info") %>' 
       data-error='<%= get_flash(@conn, "error") %>'></div>
     <%= render "_main.html", assigns %>
@@ -15,5 +23,9 @@
   </body>
   <script>
     var resizefunc = [];
+  </script>
+  <script>
+    window.userToken = "<%= assigns[:user_token] %>"; 
+    window.userId = "<%= assigns[:current_user].id %>";
   </script>
 </html>
