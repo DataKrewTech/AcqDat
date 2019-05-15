@@ -20,8 +20,8 @@ defmodule AcqdatWeb.Seed.SensorType do
     entries = @type_list
     |> Enum.map(fn sensor_type ->
       sensor_type
-      |> Map.put(:inserted_at, DateTime.utc_now())
-      |> Map.put(:updated_at, DateTime.utc_now())
+      |> Map.put(:inserted_at, DateTime.truncate(DateTime.utc_now(), :second))
+      |> Map.put(:updated_at, DateTime.truncate(DateTime.utc_now(), :second))
     end)
 
     Repo.insert_all(SensorType, entries)
