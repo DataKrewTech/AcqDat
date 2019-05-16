@@ -28,7 +28,7 @@ defmodule Acqdat.Model.Device do
   end
 
   def update(device, params) do
-    changeset = Device.changeset(device, params)
+    changeset = Device.update_changeset(device, params)
     Repo.update(changeset)
   end
 

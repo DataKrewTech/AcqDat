@@ -28,7 +28,7 @@ defmodule Acqdat.Model.Sensor do
   end
 
   def update(sensor, params) do
-    changeset = Sensor.changeset(sensor, params)
+    changeset = Sensor.update_changeset(sensor, params)
     Repo.update(changeset)
   end
 
