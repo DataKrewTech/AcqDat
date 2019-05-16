@@ -2,6 +2,8 @@ defmodule Acqdat.Model.Sensor do
 
   alias Acqdat.Schema.{Sensor, SensorData}
   alias Acqdat.Repo
+  import Ecto.Query
+
   def create(params) do
     changeset = Sensor.changeset(%Sensor{}, params)
     Repo.insert(changeset)
@@ -46,5 +48,23 @@ defmodule Acqdat.Model.Sensor do
     changeset = SensorData.changeset(%SensorData{}, params)
 
     Repo.insert(changeset)
+  end
+
+  def sensor_data(sensor_id, identifier) do
+    query = from(
+      data in SensorData,
+      where: data.sensor_id == ^sensor_id,
+      order_by: data.inserted_timestamp,
+      select: [data.inserted_timestamp, fragment("? ->> ?", data.datapoint, ^identifier)]
+    )
+
+    stream = Repo.stream(query)
+    {:ok, result} = Repo.transaction(fn ->
+      Enum.map(stream, fn [date, value] ->
+        {value, _} = Float.parse(value)
+        [DateTime.to_unix(date, :millisecond), value]
+      end)
+    end)
+    result
   end
 end

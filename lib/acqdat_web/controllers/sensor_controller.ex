@@ -90,4 +90,11 @@ defmodule AcqdatWeb.SensorController do
     end
   end
 
+  def sensor_data(conn, %{"id" => id, "identifier" => identifier }) do
+    id = String.to_integer(id)
+    result = Sensor.sensor_data(id, identifier)
+    conn
+    |> put_status(200)
+    |> render("sensor_data.json", sensor_data: result)
+  end
 end
