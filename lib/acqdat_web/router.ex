@@ -39,6 +39,7 @@ defmodule AcqdatWeb.Router do
     pipe_through :api
 
     post("/device/add-data", DeviceController, :insert_data)
+    get("/sensor-data/:id/:identifier", SensorController, :sensor_data)
   end
 
   scope "/", AcqdatWeb do

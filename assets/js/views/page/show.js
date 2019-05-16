@@ -9,8 +9,6 @@ var chartTemp
 export default class View extends MainView {
   
   mount() {
-    let sensor_data = $(".sensor-highcharts-container").data()
-    console.log('sensor data', sensor_data);
     let channel = liveView();
 
     chartHumid = Highcharts.chart('container-humid-gauge', humidChartObj);

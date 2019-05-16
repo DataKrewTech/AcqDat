@@ -12,4 +12,10 @@ defmodule AcqdatWeb.SensorView do
 
     Jason.encode!(data)
   end
+
+  def render("sensor_data.json", %{sensor_data: data}) do
+    %{
+      "data" => data
+    }
+  end
 end
