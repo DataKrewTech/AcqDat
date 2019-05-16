@@ -37,6 +37,7 @@ defmodule Acqdat.Schema.Sensor do
   end
 
   @permitted ~w(device_id sensor_type_id uuid name)a
+  @update_params ~w(device_id sensor_type_id name)a
 
   @spec changeset(
           __MODULE__.t(),
@@ -47,6 +48,18 @@ defmodule Acqdat.Schema.Sensor do
     |> cast(params, @permitted)
     |> add_uuid()
     |> validate_required(@permitted)
+    |> common_changeset()
+  end
+
+  def update_changeset(%__MODULE__{} = sensor, params) do
+    sensor
+    |> cast(params, @update_params)
+    |> validate_required(@permitted)
+    |> common_changeset()
+  end
+
+  def common_changeset(changeset) do
+    changeset
     |> assoc_constraint(:device)
     |> assoc_constraint(:sensor_type)
     |> unique_constraint(:name, name: :unique_sensor_per_device)

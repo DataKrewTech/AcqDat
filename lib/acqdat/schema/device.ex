@@ -32,6 +32,7 @@ defmodule Acqdat.Schema.Device do
   @optional_params ~w(description)a
 
   @permitted @required_params ++ @optional_params
+  @update_required_params ~w(name access_token)a
 
   @spec changeset(
           __MODULE__.t(),
@@ -42,6 +43,18 @@ defmodule Acqdat.Schema.Device do
     |> cast(params, @permitted)
     |> add_uuid()
     |> validate_required(@required_params)
+    |> common_changeset()
+  end
+
+  def update_changeset(%__MODULE__{} = device, params) do
+    device
+    |> cast(params, @permitted)
+    |> validate_required(@update_required_params)
+    |> common_changeset()
+  end
+
+  def common_changeset(changeset) do
+    changeset
     |> unique_constraint(:name, name: :acqdat_devices_name_index)
     |> unique_constraint(:uuid, name: :acqdat_devices_uuid_index)
   end
