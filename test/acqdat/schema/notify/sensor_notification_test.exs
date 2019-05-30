@@ -12,7 +12,16 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
       sensor = insert(:sensor)
       params = %{
         sensor_id: sensor.id,
-        rule_values: [%{"temp" => %{"lower" => 20, "upper" => 50}}]
+        rule_values: %{
+          "temp" => %{
+            "preferences" => %{"lower_limit" => 20, "upper_limit" => 50},
+            "module" => "Elixir.Acqdat.Schema.Notification.RangeBased"
+          },
+          "humid" => %{
+            "preferences" => %{"lower_limit" => 100, "upper_limit" => 80},
+            "module" => "Elixir.Acqdat.Schema.Notification.RangeBased"
+          }
+        }
       }
       %{valid?: validity} = SN.changeset(%SN{}, params)
       assert validity

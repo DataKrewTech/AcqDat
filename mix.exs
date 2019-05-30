@@ -60,7 +60,10 @@ defmodule Acqdat.MixProject do
        { :elixir_uuid, "~> 1.2" },
 
        #cors
-       {:corsica, "~> 1.0"}
+       {:corsica, "~> 1.0"},
+
+        #enumeration
+       {:ecto_enum, "~> 1.2"}
     ]
   end
 

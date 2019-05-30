@@ -3,7 +3,7 @@ defmodule Acqdat.Repo.Migrations.AddSensorNotification do
 
   def change do
     create table("acqdat_sensor_notifications") do
-      add(:rule_values, {:array, :map})
+      add(:rule_values, :map)
       add(:sensor_id, references("acqdat_sensors", on_delete: :delete_all), null: false)
 
       timestamps()
