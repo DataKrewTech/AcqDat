@@ -1,0 +1,14 @@
+defmodule Acqdat.Repo.Migrations.AddSensorNotification do
+  use Ecto.Migration
+
+  def change do
+    create table("acqdat_sensor_notifications") do
+      add(:rule_values, {:array, :map})
+      add(:sensor_id, references("acqdat_sensors", on_delete: :delete_all), null: false)
+
+      timestamps()
+    end
+
+    create unique_index("acqdat_sensor_notifications", [:sensor_id])
+  end
+end
