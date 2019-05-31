@@ -18,7 +18,7 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
             "module" => "Elixir.Acqdat.Schema.Notification.RangeBased"
           },
           "humid" => %{
-            "preferences" => %{"lower_limit" => 100, "upper_limit" => 80},
+            "preferences" => %{"lower_limit" => 100, "upper_limit" => 50},
             "module" => "Elixir.Acqdat.Schema.Notification.RangeBased"
           }
         }
