@@ -58,11 +58,25 @@ defmodule Acqdat.Schema.SensorNotifications do
     |> validate_embedded_data()
   end
 
-  def validate_embedded_data(%Ecto.Changeset{valid?: true} = changeset) do
+  defp validate_embedded_data(%Ecto.Changeset{valid?: true} = changeset) do
     {:ok, rule_values} = fetch_change(changeset, :rule_values)
 
-    result_list = Enum.map(rule_values, fn {key, value} ->
-      module = value["module"] |> String.to_atom()
+    rule_values
+    |> run_rule_validations()
+    |> data_reduce_filter(changeset)
+    |> case do
+      %Ecto.Changeset{} = changeset ->
+        changeset
+      %{} = data ->
+        put_change(changeset, :rule_values, data)
+    end
+  end
+
+  defp validate_embedded_data(changeset), do: changeset
+
+  defp run_rule_validations(rule_values) do
+    Enum.map(rule_values, fn {key, value} ->
+      module = value["module"] |> String.to_existing_atom()
 
       changeset = module.changeset(struct(module), value["preferences"])
       case add_preferences_change(key, changeset, value["module"]) do
@@ -72,9 +86,10 @@ defmodule Acqdat.Schema.SensorNotifications do
           result
       end
     end)
+  end
 
-    test_data = result_list
-    |> Enum.reduce_while(%{}, fn
+  defp data_reduce_filter(enumerable, changeset) do
+    Enum.reduce_while(enumerable, %{}, fn
       {:ok, {key, value}}, acc ->
         {:cont, Map.put(acc, key, value)}
       {:error, {key, value}}, _acc ->
@@ -82,18 +97,7 @@ defmodule Acqdat.Schema.SensorNotifications do
         changeset = add_error(changeset, :rule_values, value)
         {:halt, changeset}
     end)
-    |> case do
-      %Ecto.Changeset{} = changeset ->
-        changeset
-      %{} = data ->
-        put_change(changeset, :rule_values, data)
-    end
-
-    require IEx
-    IEx.pry
   end
-
-  def validate_embedded_data(changeset, _module_key, _key), do: changeset
 
   defp add_preferences_change(key, %Ecto.Changeset{valid?: true} = embed_changeset, module) do
     data = embed_changeset.changes
@@ -113,8 +117,11 @@ defmodule Acqdat.Schema.SensorNotifications do
     {:error, {"#{key}", additional_info}}
   end
 
-  defp map_error(key, value) do
-    Enum.reduce(value, acc, fun)
+  defp map_error(key, error_data) do
+    result_string = Enum.reduce(error_data, "", fn {key, value}, acc ->
+      acc <> "{#{key}: #{inspect(value)} }\n"
+    end)
+    key <> ": " <> result_string
   end
 
 end

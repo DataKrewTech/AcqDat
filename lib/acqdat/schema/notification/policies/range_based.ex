@@ -31,8 +31,7 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     true
   end
 
-
-  defp validate_data(changeset) do
+  defp validate_data(%Ecto.Changeset{valid?: true} = changeset) do
     {:ok, lower_limit} = fetch_change(changeset, :lower_limit)
     {:ok, upper_limit} = fetch_change(changeset, :upper_limit)
 
@@ -43,4 +42,6 @@ defmodule Acqdat.Schema.Notification.RangeBased do
         Ecto.Changeset.add_error(changeset, :lower_limit, "lower limit should be less than upper")
     end
   end
+
+  defp validate_data(changeset), do: changeset
 end

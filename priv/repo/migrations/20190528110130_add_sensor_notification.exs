@@ -5,6 +5,7 @@ defmodule Acqdat.Repo.Migrations.AddSensorNotification do
     create table("acqdat_sensor_notifications") do
       add(:rule_values, :map)
       add(:sensor_id, references("acqdat_sensors", on_delete: :delete_all), null: false)
+      add(:alarm_status, :boolean, default: false)
 
       timestamps()
     end

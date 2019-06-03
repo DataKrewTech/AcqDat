@@ -1,5 +1,18 @@
 defmodule Acqdat.Notification.PolicyMap do
 
+  @moduledoc """
+  Holds a mapping between policy module and an integer representation
+  to be used for storing in database.
+
+  The module also exposes other important helpers related to notification
+  policy modules.
+
+  ### Caution !
+  The module name can be modified however, the integer representation
+  should not be changed as it will lead to incosistent state in the
+  database.
+  """
+
   @module_policy_map %{
     "Elixir.Acqdat.Schema.Notification.RangeBased" => 0
   }
@@ -27,6 +40,9 @@ defmodule Acqdat.Notification.PolicyMap do
     end
   end
 
+  @doc """
+  Returns the list of policies availble for configuring notification.
+  """
   def policies() do
     Map.keys(@module_policy_map)
   end
