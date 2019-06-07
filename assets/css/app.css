@@ -1,6 +1,7 @@
 /* This file is for your main application css. */
 
 /* @import "./phoenix.css"; */
+@import "./../vendor/css/jquery.steps.css";
 @import "./../vendor/css/notification.css";
 @import "./../vendor/css/bootstrap-tagsinput.css";
 @import "./../vendor/css/bootstrap-table.min.css";

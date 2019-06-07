@@ -50,6 +50,8 @@ defmodule AcqdatWeb.Router do
     resources("/devices", DeviceController) do
       resources("/sensors", SensorController)
     end
+    resources("/notifications", NotificationController)
+
   end
 
   # Other scopes may use custom stacks.

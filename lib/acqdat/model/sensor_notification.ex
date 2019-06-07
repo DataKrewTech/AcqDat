@@ -16,8 +16,17 @@ defmodule Acqdat.Model.SensorNotification do
     Repo.update(changeset)
   end
 
+  def get(id) do
+    case Repo.get(SNotifications, id) do
+      nil ->
+        {:error, "not found"}
+      notification ->
+        {:ok, notification}
+    end
+  end
+
   def get_all() do
-    Repo.all(Device)
+    SNotifications |> Repo.all() |> Repo.preload([sensor: :device])
   end
 
 end
