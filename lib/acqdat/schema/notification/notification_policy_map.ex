@@ -1,5 +1,4 @@
 defmodule Acqdat.Notification.PolicyMap do
-
   @moduledoc """
   Holds a mapping between policy module and an integer representation
   to be used for storing in database.
@@ -20,21 +19,23 @@ defmodule Acqdat.Notification.PolicyMap do
 
   def load(param) do
     @module_policy_map
-    |> Enum.find(fn {_key, value} ->
-      value == param
+    |> Enum.find(fn {key, value} ->
+      value == param or key == param
     end)
     |> case do
       nil ->
         {:error, @error}
+
       {module, _value} ->
         {:ok, String.to_existing_atom(module)}
-     end
+    end
   end
 
   def dump(param) do
     case Map.get(@module_policy_map, param) do
       nil ->
         {:error, "module not found"}
+
       module ->
         {:ok, module}
     end
@@ -46,5 +47,4 @@ defmodule Acqdat.Notification.PolicyMap do
   def policies() do
     Map.keys(@module_policy_map)
   end
-
 end

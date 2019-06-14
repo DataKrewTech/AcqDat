@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.SensorDataTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
   import Acqdat.Support.Factory
@@ -9,19 +8,35 @@ defmodule Acqdat.Schema.SensorDataTest do
   describe "changeset/2" do
     setup do
       device = insert(:device)
-      sensor_type = insert(:sensor_type, name: "Temperature",
-        make: "From Adafruit", identifier: "temperature", visualizer: "pie-chart",
-        value_keys: ["temp"])
-      sensor = insert(:sensor, device: device, sensor_type: sensor_type,
-        name: "Temperature", uuid: UUID.uuid1(:hex))
+
+      sensor_type =
+        insert(:sensor_type,
+          name: "Temperature",
+          make: "From Adafruit",
+          identifier: "temperature",
+          visualizer: "pie-chart",
+          value_keys: ["temp"]
+        )
+
+      sensor =
+        insert(:sensor,
+          device: device,
+          sensor_type: sensor_type,
+          name: "Temperature",
+          uuid: UUID.uuid1(:hex)
+        )
 
       [sensor: sensor]
     end
 
     test "returns a valid changeset and makes insert", context do
       %{sensor: sensor} = context
-      params = %{datapoint: %{"temp" => 23, "humid" => 10},
-      inserted_timestamp: DateTime.utc_now(), sensor_id: sensor.id}
+
+      params = %{
+        datapoint: %{"temp" => 23, "humid" => 10},
+        inserted_timestamp: DateTime.utc_now(),
+        sensor_id: sensor.id
+      }
 
       %{valid?: validity} = changeset = SensorData.changeset(%SensorData{}, params)
       assert validity
@@ -30,8 +45,11 @@ defmodule Acqdat.Schema.SensorDataTest do
     end
 
     test "fails if sensor not found" do
-      params = %{datapoint: %{"temp" => 23, "humid" => 10},
-      inserted_timestamp: DateTime.utc_now(), sensor_id: -1}
+      params = %{
+        datapoint: %{"temp" => 23, "humid" => 10},
+        inserted_timestamp: DateTime.utc_now(),
+        sensor_id: -1
+      }
 
       %{valid?: validity} = changeset = SensorData.changeset(%SensorData{}, params)
       assert validity

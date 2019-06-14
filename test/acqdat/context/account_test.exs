@@ -1,5 +1,4 @@
 defmodule Acqdat.Context.AccountTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
 
@@ -24,12 +23,13 @@ defmodule Acqdat.Context.AccountTest do
     test "fails if params empty" do
       params = %{}
       assert {:error, changeset} = Account.register(params)
+
       assert %{
-        email: ["can't be blank"],
-        first_name: ["can't be blank"],
-        password: ["can't be blank"],
-        password_confirmation: ["can't be blank"]
-      } == errors_on(changeset)
+               email: ["can't be blank"],
+               first_name: ["can't be blank"],
+               password: ["can't be blank"],
+               password_confirmation: ["can't be blank"]
+             } == errors_on(changeset)
     end
   end
 
@@ -63,5 +63,4 @@ defmodule Acqdat.Context.AccountTest do
       assert message == :not_found
     end
   end
-
 end

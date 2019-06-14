@@ -13,7 +13,7 @@
     
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <%= csrf_meta_tag %>
   </head>
   <body class="fixed-left" data-js-view-name="<%= js_view_name(@conn, @view_template) %>">
     <div id="flash_message" data-info='<%= get_flash(@conn, "info") %>' 

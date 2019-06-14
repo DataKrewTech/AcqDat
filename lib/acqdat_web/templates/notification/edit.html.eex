@@ -1,0 +1,65 @@
+<div class="content-page">
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Edit Notification</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/notifications">Notifications</a></li>
+            <li class="breadcrumb-item active">Notification</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8 col-xs-12 col-lg-6">
+          <div class="card-box">
+            <%= form_for @changeset, Routes.notification_path(@conn, :update, @notification),
+              [as: :notification], fn f -> %>
+            <div class="form-group">
+              <label for="device">Device</label>
+              <input type="text" disabled="true" class="form-control" id="device" aria-describedby="device"
+                value="<%= @notification.sensor.device.name %>">
+              <small id="emailHelp" class="form-text text-muted">Notification set for above device</small>
+            </div>
+
+            <div class="form-group">
+              <label for="sensor">Sensor</label>
+              <input type="text" disabled="true" class="form-control" id="sensor" aria-describedby="sensor"
+                value="<%= @notification.sensor.name %>">
+              <%= hidden_input(f, :sensor_id) %>
+              <small id="emailHelp" class="form-text text-muted">Notification for the particular sensor</small>
+            </div>
+
+            <div class="form-group">
+              <%= label(f, :alarm_status, "Alarm Status") %> <br>
+              <%= checkbox(f, :alarm_status, data: [plugin: "switchery", color: "#81c868", size: "small"]) %>
+            </div>
+
+            <div class="form-group">
+              <h5>Rule Configuration</h5>
+              <%= for key <- @notification.sensor.sensor_type.value_keys do %>
+              <div class="form-group clearfix">
+                <div class="col-lg-12 card m-b-20 card-body" id="<%= "rule-configuration-#{key}" %>">
+                  <h5 class="card-title">Key: <%= key %></h5>
+                  <label class="control-label" for="name2"></label>
+                  <select class="selectpicker rules" data-style="btn-default btn-custom" id="<%= "#{key}" %>">
+                    <option value="-1">Choose Policy</option>
+                    <%= for {name, module} <- @policies do %>
+                    <option value="<%= module %>" <%= selected(key, @notification.rule_values) %> ><%= name %></option>
+                    <% end %>
+                  </select>
+                  <%= policy_preferences(f, key) %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+            <%= link("Cancel", to: "/notifications", class: "btn btn-primary waves-effect waves-light") %>
+            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

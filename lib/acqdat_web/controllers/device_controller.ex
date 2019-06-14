@@ -5,7 +5,6 @@ defmodule AcqdatWeb.DeviceController do
   alias Acqdat.Repo
 
   def insert_data(conn, params) do
-
     AcqdatWeb.Endpoint.broadcast!("room:lobby", "data_point", params)
 
     case Device.add_data(params) do
@@ -13,6 +12,7 @@ defmodule AcqdatWeb.DeviceController do
         conn
         |> put_status(200)
         |> render("success.json", message: "success")
+
       {:error, _message} ->
         conn
         |> put_status(400)
@@ -35,6 +35,7 @@ defmodule AcqdatWeb.DeviceController do
       {:ok, _device} ->
         conn
         |> redirect(to: Routes.device_path(conn, :index))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -48,6 +49,7 @@ defmodule AcqdatWeb.DeviceController do
       {:ok, device} ->
         changeset = DeviceSchema.changeset(device, %{})
         render(conn, "edit.html", changeset: changeset, device: device)
+
       {:error, message} ->
         conn
         |> put_flash(:error, message)
@@ -61,8 +63,9 @@ defmodule AcqdatWeb.DeviceController do
     |> Device.get()
     |> case do
       {:ok, device} ->
-        device = Repo.preload(device, [sensors: :sensor_type])
+        device = Repo.preload(device, sensors: :sensor_type)
         render(conn, "show.html", device: device)
+
       {:error, message} ->
         conn
         |> put_flash(:error, message)
@@ -79,6 +82,7 @@ defmodule AcqdatWeb.DeviceController do
         conn
         |> put_flash(:info, "Record updated!")
         |> redirect(to: Routes.device_path(conn, :index))
+
       {:error, changeset} ->
         conn
         |> put_flash("error", "There are some errors!")
@@ -95,11 +99,11 @@ defmodule AcqdatWeb.DeviceController do
         conn
         |> put_flash(:info, "Record removed")
         |> redirect(to: Routes.device_path(conn, :index))
+
       {:error, _} ->
         conn
         |> put_flash(:error, "Some error occured!")
         |> redirect(to: Routes.device_path(conn, :index))
     end
   end
-
 end

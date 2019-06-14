@@ -27,6 +27,25 @@ defmodule Acqdat.Schema.Notification.RangeBased do
   end
 
   @impl SensorNotifications
+  def rule_preferences(params) do
+    %{
+      name: @rule,
+      rule_data: [
+        %{
+          key: :lower_limit,
+          type: :input,
+          value: params["lower_limit"]
+        },
+        %{
+          key: :upper_limit,
+          type: :input,
+          value: params["upper_limit"]
+        }
+      ]
+    }
+  end
+
+  @impl SensorNotifications
   def eligible?(sensor, value_key, value) do
     true
   end
@@ -38,6 +57,7 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     case Decimal.cmp(lower_limit, upper_limit) do
       :lt ->
         changeset
+
       _ ->
         Ecto.Changeset.add_error(changeset, :lower_limit, "lower limit should be less than upper")
     end

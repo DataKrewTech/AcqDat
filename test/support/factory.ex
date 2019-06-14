@@ -50,5 +50,4 @@ defmodule Acqdat.Support.Factory do
       sensor_type: build(:sensor_type)
     }
   end
-
 end

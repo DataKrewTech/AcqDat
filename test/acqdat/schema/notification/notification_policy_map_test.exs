@@ -1,5 +1,4 @@
 defmodule Acqdat.Notification.PolicyMapTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
   alias Acqdat.Notification.PolicyMap

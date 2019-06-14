@@ -37,5 +37,4 @@ defmodule AcqdatWeb.LayoutView do
     |> Enum.at(0)
     |> Macro.camelize()
   end
-
 end

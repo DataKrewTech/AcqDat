@@ -1,5 +1,4 @@
 defmodule AcqdatWeb.View.DataHelpers do
-
   alias Acqdat.Model.SensorType
 
   @doc """
@@ -9,5 +8,4 @@ defmodule AcqdatWeb.View.DataHelpers do
   Can also be used elsewhere.
   """
   def formatted_list(:sensor_type), do: SensorType.formatted_list()
-
 end

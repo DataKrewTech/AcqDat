@@ -14,6 +14,5 @@ defmodule Acqdat.Repo.Migrations.AddSensorTypeTable do
 
     create unique_index("acqdat_sensor_types", [:name])
     create unique_index("acqdat_sensor_types", [:identifier])
-
   end
 end

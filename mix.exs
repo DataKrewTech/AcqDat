@@ -12,7 +12,12 @@ defmodule Acqdat.MixProject do
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -45,25 +50,23 @@ defmodule Acqdat.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-
       {:params, "~> 2.0"},
 
-       # auth
-       {:comeonin, "~> 4.1.1"},
-       {:argon2_elixir, "~> 1.2"},
-       {:guardian, "~> 1.0"},
+      # auth
+      {:comeonin, "~> 4.1.1"},
+      {:argon2_elixir, "~> 1.2"},
+      {:guardian, "~> 1.0"},
 
-       #testing
-       {:ex_machina, "~> 2.3"},
+      # testing
+      {:ex_machina, "~> 2.3"},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:elixir_uuid, "~> 1.2"},
 
-       {:excoveralls, "~> 0.10", only: :test},
-       { :elixir_uuid, "~> 1.2" },
+      # cors
+      {:corsica, "~> 1.0"},
 
-       #cors
-       {:corsica, "~> 1.0"},
-
-        #enumeration
-       {:ecto_enum, "~> 1.2"}
+      # enumeration
+      {:ecto_enum, "~> 1.2"}
     ]
   end
 

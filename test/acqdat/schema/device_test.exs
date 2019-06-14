@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.DeviceTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
   import Acqdat.Support.Factory
@@ -20,9 +19,13 @@ defmodule Acqdat.Schema.DeviceTest do
 
     test "returns invalid changeset if name not unique" do
       device = insert(:device)
+
       params = %{
-        name: device.name, uuid: UUID.uuid1(:hex),
-        access_token: "abcd1234", description: "new device"}
+        name: device.name,
+        uuid: UUID.uuid1(:hex),
+        access_token: "abcd1234",
+        description: "new device"
+      }
 
       changeset = Device.changeset(%Device{}, params)
 
@@ -33,11 +36,11 @@ defmodule Acqdat.Schema.DeviceTest do
     test "fails if params missing" do
       assert %{valid?: validity} = changeset = Device.changeset(%Device{}, %{})
       refute validity
-      assert %{
-        access_token: ["can't be blank"],
-        name: ["can't be blank"]
-      } == errors_on(changeset)
-    end
 
+      assert %{
+               access_token: ["can't be blank"],
+               name: ["can't be blank"]
+             } == errors_on(changeset)
+    end
   end
 end

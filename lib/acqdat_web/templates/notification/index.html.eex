@@ -23,8 +23,9 @@
               class="table-bordered ">
               <thead>
                 <tr>
-                  <th data-field="name">Device</th>
-                  <th data-field="id" data-switchable="false">Sensor Name</th>
+                  <th data-field="device">Device</th>
+                  <th data-field="sensor-name" data-switchable="false">Sensor Name</th>
+                  <th data-field="alarm">Alarm Status</th>
                   <th data-field="actions">Actions</th>
                 </tr>
               </thead>
@@ -32,7 +33,7 @@
                 <%= for notification <- @notifications do %>
                   <tr>
                     <td><%= notification.sensor.device.name %></td>
-                    <td> notification.sensor.name</td>
+                    <td> <%= notification.sensor.name %> </td>
                     <td><%= notification.alarm_status %></td>
                     <td>
                       <%= link to: "/notifications/#{notification.id}/edit" do %>

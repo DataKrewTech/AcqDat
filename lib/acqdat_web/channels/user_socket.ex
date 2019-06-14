@@ -16,11 +16,12 @@ defmodule AcqdatWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(%{"token" => token}, socket, _connect_info) do
-    case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
-        {:ok, user_id} ->
-          {:ok, assign(socket, :user, user_id)}
-        {:error, _reason} ->
-          :error
+    case Phoenix.Token.verify(socket, "user socket", token, max_age: 1_209_600) do
+      {:ok, user_id} ->
+        {:ok, assign(socket, :user, user_id)}
+
+      {:error, _reason} ->
+        :error
     end
   end
 

@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.SensorNotificationsTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
 
@@ -21,10 +20,12 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
   describe "changeset/2" do
     test "returns a valid changeset" do
       sensor = insert(:sensor)
+
       params = %{
         sensor_id: sensor.id,
         rule_values: @correct_rule_values
       }
+
       %{valid?: validity} = SN.changeset(%SN{}, params)
       assert validity
     end
@@ -34,6 +35,7 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
         sensor_id: -1,
         rule_values: @correct_rule_values
       }
+
       changeset = SN.changeset(%SN{}, params)
 
       {:error, changeset} = Repo.insert(changeset)
@@ -42,6 +44,7 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
 
     test "returns invalid changeset if error gen by embed module" do
       sensor = insert(:sensor)
+
       params = %{
         sensor_id: sensor.id,
         rule_values: %{
@@ -55,12 +58,15 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
           }
         }
       }
+
       %{valid?: validity} = changeset = SN.changeset(%SN{}, params)
       refute validity
+
       assert %{
-        rule_values: ["humid: {lower_limit: [\"is invalid\"] }\n{upper_limit: [\"is invalid\"] }\n"]
-      } == errors_on(changeset)
+               rule_values: [
+                 "humid: {lower_limit: [\"is invalid\"] }\n{upper_limit: [\"is invalid\"] }\n"
+               ]
+             } == errors_on(changeset)
     end
   end
-
 end

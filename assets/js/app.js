@@ -11,15 +11,16 @@ import css from "../css/app.css"
 //
 
 import $ from 'jquery';
+import "script-loader!./switchery.js";
+
 window.jQuery = $;
 window.$ = $;
 
-window.WOW = require('wowjs').WOW
+window.WOW = require('wowjs').WOW;
 
 import 'bootstrap'
 import "phoenix_html"
 import loadView from './views/loader';
-
 
 // Import local files
 //

@@ -50,5 +50,4 @@ defmodule Acqdat.Schema.SensorType do
     |> unique_constraint(:name)
     |> unique_constraint(:identifier)
   end
-
 end

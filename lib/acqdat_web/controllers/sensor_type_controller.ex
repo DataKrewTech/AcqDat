@@ -4,7 +4,6 @@ defmodule AcqdatWeb.SensorTypeController do
   alias Acqdat.Model.SensorType
   alias Acqdat.Schema.SensorType, as: SensorTypeSchema
 
-
   def index(conn, _params) do
     sensor_types = SensorType.get_all()
     render(conn, "index.html", sensor_types: sensor_types)
@@ -15,6 +14,7 @@ defmodule AcqdatWeb.SensorTypeController do
       {:ok, _sensor_type} ->
         conn
         |> redirect(to: Routes.sensor_type_path(conn, :index))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -33,6 +33,7 @@ defmodule AcqdatWeb.SensorTypeController do
       {:ok, sensor_type} ->
         changeset = SensorTypeSchema.changeset(sensor_type, %{})
         render(conn, "edit.html", changeset: changeset, sensor_type: sensor_type)
+
       {:error, message} ->
         conn
         |> put_flash(:error, message)
@@ -49,6 +50,7 @@ defmodule AcqdatWeb.SensorTypeController do
         conn
         |> put_flash(:info, "Record updated!")
         |> redirect(to: Routes.sensor_type_path(conn, :index))
+
       {:error, changeset} ->
         conn
         |> put_flash("error", "There are some errors!")
@@ -65,6 +67,7 @@ defmodule AcqdatWeb.SensorTypeController do
         conn
         |> put_flash(:info, "Record removed")
         |> redirect(to: Routes.sensor_type_path(conn, :index))
+
       {:error, _} ->
         conn
         |> put_flash(:error, "Some error occured!")

@@ -47,11 +47,16 @@ defmodule AcqdatWeb.Router do
 
     get "/", PageController, :index
     resources("/sensor_types", SensorTypeController)
+
     resources("/devices", DeviceController) do
       resources("/sensors", SensorController)
     end
+
     resources("/notifications", NotificationController)
 
+    get "/device-sensors/:id", SensorController, :device_sensors
+    get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
+    post "/notification/rule_preferences", NotificationController, :policy_preferences
   end
 
   # Other scopes may use custom stacks.

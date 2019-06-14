@@ -31,10 +31,11 @@ defmodule Acqdat.Schema.SensorNotifications do
 
   @callback rule_name() :: name :: String.t()
   @callback eligible?(sensor :: Sensor, value_key :: String.t(), value :: Decimal) :: true | false
+  @callback rule_preferences(params :: map) :: map
 
   schema("acqdat_sensor_notifications") do
     field(:rule_values, :map)
-    field(:alarm_status, :boolean, default: false)
+    field(:alarm_status, :boolean, default: true)
     belongs_to(:sensor, Sensor, on_replace: :delete)
 
     timestamps()
@@ -58,6 +59,10 @@ defmodule Acqdat.Schema.SensorNotifications do
     |> validate_embedded_data()
   end
 
+  def update_changeset(rule, params) do
+    cast(rule, params, @permitted_params)
+  end
+
   defp validate_embedded_data(%Ecto.Changeset{valid?: true} = changeset) do
     {:ok, rule_values} = fetch_change(changeset, :rule_values)
 
@@ -67,6 +72,7 @@ defmodule Acqdat.Schema.SensorNotifications do
     |> case do
       %Ecto.Changeset{} = changeset ->
         changeset
+
       %{} = data ->
         put_change(changeset, :rule_values, data)
     end
@@ -79,9 +85,11 @@ defmodule Acqdat.Schema.SensorNotifications do
       module = value["module"] |> String.to_existing_atom()
 
       changeset = module.changeset(struct(module), value["preferences"])
+
       case add_preferences_change(key, changeset, value["module"]) do
         {:ok, _data} = result ->
           result
+
         {:error, _info} = result ->
           result
       end
@@ -92,6 +100,7 @@ defmodule Acqdat.Schema.SensorNotifications do
     Enum.reduce_while(enumerable, %{}, fn
       {:ok, {key, value}}, acc ->
         {:cont, Map.put(acc, key, value)}
+
       {:error, {key, value}}, _acc ->
         value = map_error(key, value)
         changeset = add_error(changeset, :rule_values, value)
@@ -102,7 +111,7 @@ defmodule Acqdat.Schema.SensorNotifications do
   defp add_preferences_change(key, %Ecto.Changeset{valid?: true} = embed_changeset, module) do
     data = embed_changeset.changes
     {:ok, module} = PolicyMap.dump(module)
-    {:ok, {"#{key}",  %{"preferences" => data, "module" => module}}}
+    {:ok, {"#{key}", %{"preferences" => data, "module" => module}}}
   end
 
   defp add_preferences_change(key, pref_changeset, _module) do
@@ -118,10 +127,6 @@ defmodule Acqdat.Schema.SensorNotifications do
   end
 
   defp map_error(key, error_data) do
-    result_string = Enum.reduce(error_data, "", fn {key, value}, acc ->
-      acc <> "{#{key}: #{inspect(value)} }\n"
-    end)
-    key <> ": " <> result_string
+    Jason.encode!(Map.put(%{}, key, error_data))
   end
-
 end

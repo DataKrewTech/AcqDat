@@ -13,5 +13,4 @@ defmodule AcqdatWeb.RoomChannel do
     broadcast!(socket, "data_point", %{body: body})
     {:noreply, socket}
   end
-
 end
