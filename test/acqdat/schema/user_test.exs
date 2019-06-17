@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.UserTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
 
@@ -8,12 +7,13 @@ defmodule Acqdat.Schema.UserTest do
   describe "changeset/2" do
     test "returns error changeset on empty params" do
       changeset = User.changeset(%User{}, %{})
+
       assert %{
-          email: ["can't be blank"],
-          first_name: ["can't be blank"],
-          password: ["can't be blank"],
-          password_confirmation: ["can't be blank"]
-        } == errors_on(changeset)
+               email: ["can't be blank"],
+               first_name: ["can't be blank"],
+               password: ["can't be blank"],
+               password_confirmation: ["can't be blank"]
+             } == errors_on(changeset)
     end
 
     test "returns error if password and confirm do not match" do
@@ -26,9 +26,10 @@ defmodule Acqdat.Schema.UserTest do
       }
 
       changeset = User.changeset(%User{}, params)
+
       assert %{
-        password_confirmation: ["does not match confirmation"]
-      } == errors_on(changeset)
+               password_confirmation: ["does not match confirmation"]
+             } == errors_on(changeset)
     end
 
     test "returns error if email regex not matched" do
@@ -41,11 +42,10 @@ defmodule Acqdat.Schema.UserTest do
       }
 
       changeset = User.changeset(%User{}, params)
+
       assert %{
-        email: ["has invalid format"]
-      } == errors_on(changeset)
+               email: ["has invalid format"]
+             } == errors_on(changeset)
     end
-
   end
-
 end

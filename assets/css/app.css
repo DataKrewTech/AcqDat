@@ -1,9 +1,23 @@
 /* This file is for your main application css. */
 
 /* @import "./phoenix.css"; */
+@import "./../vendor/css/switchery.min.css";
+@import "./../vendor/css/jquery.steps.css";
+@import "./../vendor/css/bootstrap-select.css";
 @import "./../vendor/css/notification.css";
 @import "./../vendor/css/bootstrap-tagsinput.css";
 @import "./../vendor/css/bootstrap-table.min.css";
 @import "./../vendor/css/bootstrap.min.css";
 @import "./../vendor/css/icons.css";
 @import "./../vendor/css/style.css";
+
+
+.loader {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(/images/preloader.gif) center no-repeat #fff;
+}

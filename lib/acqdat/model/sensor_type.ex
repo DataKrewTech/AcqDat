@@ -24,6 +24,7 @@ defmodule Acqdat.Model.SensorType do
     case Repo.get(SensorType, id) do
       nil ->
         {:error, "not found"}
+
       sensor_type ->
         {:ok, sensor_type}
     end

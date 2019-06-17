@@ -1,5 +1,4 @@
 defmodule Acqdat.Model.Sensor do
-
   alias Acqdat.Schema.{Sensor, SensorData}
   alias Acqdat.Repo
   import Ecto.Query
@@ -13,6 +12,7 @@ defmodule Acqdat.Model.Sensor do
     case Repo.get(Sensor, id) do
       nil ->
         {:error, "not found"}
+
       sensor ->
         {:ok, sensor}
     end
@@ -22,9 +22,19 @@ defmodule Acqdat.Model.Sensor do
     case Repo.get_by(Sensor, query) do
       nil ->
         {:error, "not found"}
+
       sensor ->
         {:ok, sensor}
     end
+  end
+
+  def get_all_by_device(device_id) do
+    query =
+      from sensor in Sensor,
+        where: sensor.device_id == ^device_id,
+        select: sensor
+
+    Repo.all(query)
   end
 
   def update(sensor, params) do
@@ -43,28 +53,36 @@ defmodule Acqdat.Model.Sensor do
   end
 
   def insert_data(sensor, sensor_data) do
-    params = %{sensor_id: sensor.id,
-      datapoint: sensor_data, inserted_timestamp: DateTime.utc_now()}
+    params = %{
+      sensor_id: sensor.id,
+      datapoint: sensor_data,
+      inserted_timestamp: DateTime.utc_now()
+    }
+
     changeset = SensorData.changeset(%SensorData{}, params)
 
     Repo.insert(changeset)
   end
 
   def sensor_data(sensor_id, identifier) do
-    query = from(
-      data in SensorData,
-      where: data.sensor_id == ^sensor_id,
-      order_by: data.inserted_timestamp,
-      select: [data.inserted_timestamp, fragment("? ->> ?", data.datapoint, ^identifier)]
-    )
+    query =
+      from(
+        data in SensorData,
+        where: data.sensor_id == ^sensor_id,
+        order_by: data.inserted_timestamp,
+        select: [data.inserted_timestamp, fragment("? ->> ?", data.datapoint, ^identifier)]
+      )
 
     stream = Repo.stream(query)
-    {:ok, result} = Repo.transaction(fn ->
-      Enum.map(stream, fn [date, value] ->
-        {value, _} = Float.parse(value)
-        [DateTime.to_unix(date, :millisecond), value]
+
+    {:ok, result} =
+      Repo.transaction(fn ->
+        Enum.map(stream, fn [date, value] ->
+          {value, _} = Float.parse(value)
+          [DateTime.to_unix(date, :millisecond), value]
+        end)
       end)
-    end)
+
     result
   end
 end

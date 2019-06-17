@@ -1,0 +1,54 @@
+<div class="content-page">
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Add new Notification</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/notifications">Notifications</a></li>
+            <li class="breadcrumb-item active">New Notification</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <%= form_for @changeset, "/notifications/", [id: "wizard-vertical"], fn f -> %>
+            <h3>Choose Device</h3>
+            <section>
+              <div class="form-group clearfix">
+                <span style="display:none" class="loader">
+                </span>
+                <label class="control-label " for="userName1">Device *</label>
+                <div class="p-20">
+                  <select class="selectpicker device" data-style="btn-default btn-custom">
+                    <%= for device <- @devices do %>
+                      <option value="<%= device.id %>"><%= device.name %></option>
+                    <% end %>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <h3>Choose Sensor</h3>
+            <section>
+              <div class="form-group clearfix">
+                <label class="control-label" for="name1"> Sensor *</label>
+                <select class="selectpicker sensor" data-style="btn-default btn-custom" name="notification[sensor_id]">
+                </select>
+              </div>
+            </section>
+
+            <h3>Configure Rules</h3>
+            <section >
+              <div id="configure-rules"></div>
+            </section>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

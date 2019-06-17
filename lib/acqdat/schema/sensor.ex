@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.Sensor do
-
   @moduledoc """
   Models a sensor in the system.
 
@@ -29,7 +28,7 @@ defmodule Acqdat.Schema.Sensor do
     field(:uuid, :string)
     field(:name, :string)
 
-    #associations
+    # associations
     belongs_to(:device, Device, on_replace: :delete)
     belongs_to(:sensor_type, SensorType)
 

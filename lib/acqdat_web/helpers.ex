@@ -1,5 +1,4 @@
 defmodule AcqdatWeb.Helpers do
-
   import Ecto.Changeset
 
   def extract_changeset_data(changeset) do
@@ -17,5 +16,4 @@ defmodule AcqdatWeb.Helpers do
       end)
     end)
   end
-
 end

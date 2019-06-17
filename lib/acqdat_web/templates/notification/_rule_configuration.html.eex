@@ -1,0 +1,14 @@
+<%= for key <- @value_keys do %>
+<div class="form-group clearfix">
+  <div class="col-lg-12 card m-b-20 card-body" id="<%= "rule-configuration-#{key}" %>">
+    <h5 class="card-title">Key: <%= key %></h5>
+    <label class="control-label" for="name2"></label>
+    <select class="selectpicker rules" data-style="btn-default btn-custom" id="<%= "#{key}" %>">
+      <option value="-1">Choose Policy</option>
+      <%= for {name, module} <- @policies do %>
+      <option value="<%= module %>"><%= name %></option>
+      <% end %>
+    </select>
+    </div>
+  </div>
+<% end %>

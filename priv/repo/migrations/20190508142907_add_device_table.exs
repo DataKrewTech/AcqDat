@@ -13,6 +13,5 @@ defmodule Acqdat.Repo.Migrations.AddDeviceTable do
 
     create unique_index("acqdat_devices", [:name])
     create unique_index("acqdat_devices", [:uuid])
-
   end
 end
