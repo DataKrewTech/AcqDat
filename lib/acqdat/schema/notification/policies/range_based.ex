@@ -57,6 +57,8 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     case Decimal.cmp(lower_limit, upper_limit) do
       :lt ->
         changeset
+      :eq ->
+        changeset
 
       _ ->
         Ecto.Changeset.add_error(changeset, :lower_limit, "lower limit should be less than upper")

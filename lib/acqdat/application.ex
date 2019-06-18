@@ -11,9 +11,12 @@ defmodule Acqdat.Application do
       # Start the Ecto repository
       Acqdat.Repo,
       # Start the endpoint when the application starts
-      AcqdatWeb.Endpoint
+      AcqdatWeb.Endpoint,
       # Starts a worker by calling: Acqdat.Worker.start_link(arg)
       # {Acqdat.Worker, arg},
+
+      # Start the notification supervisor
+      Acqdat.Context.NotificationSupervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
