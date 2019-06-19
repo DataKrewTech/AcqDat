@@ -16,7 +16,7 @@ defmodule Acqdat.Application do
       # {Acqdat.Worker, arg},
 
       # Start the notification supervisor
-      Acqdat.Context.NotificationSupervisor
+      Acqdat.Domain.Notification.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

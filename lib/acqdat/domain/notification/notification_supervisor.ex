@@ -1,7 +1,7 @@
-defmodule Acqdat.Domain.NotificationSupervisor do
+defmodule Acqdat.Domain.Notification.Supervisor do
   use Supervisor
 
-  alias Acqdat.Domain.{NotificationManager, NotificationServer}
+  alias Acqdat.Domain.Notification.{Manager, Server}
 
   def start_link(args) do
     Supervisor.start_link(__MODULE__, args, name: __MODULE__)
@@ -9,8 +9,8 @@ defmodule Acqdat.Domain.NotificationSupervisor do
 
   def init(_args) do
     children = [
-      NotificationServer,
-      NotificationManager
+      Server,
+      Manager
     ]
 
     Supervisor.init(children, strategy: :rest_for_one)
