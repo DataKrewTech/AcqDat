@@ -77,7 +77,7 @@ defmodule Acqdat.Model.Device do
     result_array =
       Enum.map(data, fn {sensor, sensor_data} ->
         result = Sensor.get(%{device_id: device.id, name: sensor})
-        # insert_sensor_data(result, sensor_data)
+        insert_sensor_data(result, sensor_data)
       end)
 
     if Enum.any?(result_array, fn {status, _data} -> status == :error end) do

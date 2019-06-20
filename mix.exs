@@ -75,6 +75,8 @@ defmodule Acqdat.MixProject do
       # worker pool
       {:poolboy, "~> 1.5"},
 
+      # mailer
+      {:bamboo, github: "thoughtbot/bamboo"},
 
       # code quality
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},

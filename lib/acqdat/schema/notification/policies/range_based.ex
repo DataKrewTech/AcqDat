@@ -9,6 +9,7 @@ defmodule Acqdat.Schema.Notification.RangeBased do
   use Acqdat.Schema
   @type t :: %__MODULE__{}
   @rule "RangeBasedPolicy"
+  @decimal_zero Decimal.from_float(0.0)
 
   embedded_schema do
     field(:lower_limit, :decimal, default: 0.0)
@@ -46,8 +47,60 @@ defmodule Acqdat.Schema.Notification.RangeBased do
   end
 
   @impl SensorNotifications
-  def eligible?(sensor, value_key, value) do
-    true
+  def eligible?(preferences, value) do
+    lower_limit = Decimal.new(preferences["lower_limit"])
+    upper_limit = Decimal.new(preferences["upper_limit"])
+    value =  Decimal.new(value)
+
+    check_eligibility?(lower_limit, upper_limit, value)
+  end
+
+  defp check_eligibility?(@decimal_zero, @decimal_zero, _), do: false
+
+  defp check_eligibility?(lower_limit, @decimal_zero, value) do
+    case Decimal.cmp(lower_limit, value) do
+      :lt ->
+        true
+      :eq ->
+        true
+      _ ->
+        false
+    end
+  end
+
+  defp check_eligibility?(@decimal_zero, upper_limit, value) do
+    case Decimal.cmp(value, upper_limit) do
+      :lt ->
+        false
+      :eq ->
+        true
+      _ ->
+        true
+    end
+  end
+
+  defp check_eligibility?(lower_limit, upper_limit, value) do
+    value_lower =
+      case Decimal.cmp(lower_limit, value) do
+        :lt ->
+          true
+        :eq ->
+          true
+        _ ->
+          false
+      end
+
+    value_upper =
+      case Decimal.cmp(upper_limit, value) do
+        :gt ->
+          true
+        :eq ->
+          true
+        _ ->
+          false
+      end
+
+    value_lower && value_upper
   end
 
   defp validate_data(%Ecto.Changeset{valid?: true} = changeset) do
