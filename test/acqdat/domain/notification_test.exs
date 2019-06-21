@@ -16,13 +16,6 @@ defmodule Acqdat.Domain.NotificationTest do
     }
   }
 
-  @data %{
-    "Temperature" => %{
-      "temp" => 10,
-      "humid" => 30
-    }
-  }
-
   describe "handle_notification/1" do
     setup do
       device = insert(:device)

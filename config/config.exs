@@ -30,9 +30,15 @@ config :acqdat, AcqdatWeb.Guardian,
   issuer: "acqdat",
   secret_key: "CaTqqe1yk8ofdh1Cmn8Oh9yOiaVYw06rsjnJWMBqoIMw+w4wnFweNkWAoyeWsjK9"
 
+# Configure authentication pipeline
 config :acqdat, AcqdatWeb.AuthenticationPipe,
   module: AcqdatWeb.Guardian,
   error_handler: AcqdatWeb.AuthErrorHandler
+
+# Configure mailer using Thoughtbot/Bamboo
+config :acqdat, Acqdat.Mailer,
+  adapter:  Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_KEY")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

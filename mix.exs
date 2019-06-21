@@ -76,6 +76,7 @@ defmodule Acqdat.MixProject do
       {:poolboy, "~> 1.5"},
 
       # mailer
+      {:poison, "~> 3.1"},
       {:bamboo, github: "thoughtbot/bamboo"},
 
       # code quality

@@ -6,6 +6,8 @@ defmodule Acqdat.Domain.Notification do
   alias Acqdat.Model.Sensor
   alias Acqdat.Model.SensorNotification, as: SNotify
   alias Acqdat.Notification.PolicyMap
+  alias Acqdat.Mailer
+  alias Acqdat.Mailer.NotificationEmail
 
   @doc """
   Handles notifications for a device.
@@ -69,8 +71,12 @@ defmodule Acqdat.Domain.Notification do
   end
 
   defp send_notification(device, message_list) do
-    require IEx
-    IEx.pry
+
+    device
+    |> NotificationEmail.email(message_list)
+    |> Mailer.deliver_now()
+
+    {:ok, "notification_sent"}
   end
 
 end

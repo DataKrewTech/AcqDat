@@ -1,0 +1,3 @@
+<%= for message <- @message_list do %>
+  <p>Hey there!</p>
+<% end %>
