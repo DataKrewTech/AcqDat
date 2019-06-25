@@ -46,13 +46,13 @@ defmodule Acqdat.Domain.Notification.Server do
   defp drain_queue(pool, queue) do
     case :poolboy.status(pool) do
       {:ready, _, _, _} ->
-        do_work pool, queue
+        do_work(pool, queue)
 
       {:overflow, _, _, _} ->
-        do_work pool, queue
+        do_work(pool, queue)
 
       {:full, _, _, _} ->
-        #warn "pool exhausted, stopping drain"
+        # warn "pool exhausted, stopping drain"
         {:exhausted, queue}
     end
   end
@@ -62,10 +62,10 @@ defmodule Acqdat.Domain.Notification.Server do
       {:ok, args, queue} ->
         worker = :poolboy.checkout(pool)
         Worker.handle_notificaton(worker, args)
-        drain_queue pool, queue
+        drain_queue(pool, queue)
 
       {:empty, _queue} = result ->
-        #debug "queue empty, stopping drain"
+        # debug "queue empty, stopping drain"
         result
     end
   end
@@ -73,8 +73,9 @@ defmodule Acqdat.Domain.Notification.Server do
   defp queue_next(queue) do
     case :queue.out(queue) do
       {{:value, item}, queue} ->
-         {:ok, item, queue}
-      {:empty,  _queue} = result ->
+        {:ok, item, queue}
+
+      {:empty, _queue} = result ->
         result
     end
   end
@@ -82,5 +83,4 @@ defmodule Acqdat.Domain.Notification.Server do
   defp enqueue(queue, item) do
     :queue.in(item, queue)
   end
-
 end

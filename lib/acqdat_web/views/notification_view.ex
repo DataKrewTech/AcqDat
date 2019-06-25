@@ -1,6 +1,6 @@
 defmodule AcqdatWeb.NotificationView do
   use AcqdatWeb, :view
-  alias  Acqdat.Notification.PolicyMap
+  alias Acqdat.Notification.PolicyMap
 
   def render("policy_preferences.html", params) do
     %{preferences: preferences, key: key, module: module} = params
@@ -34,16 +34,19 @@ defmodule AcqdatWeb.NotificationView do
   end
 
   def selected(key, rule_values) do
-    result = if Map.has_key?(rule_values, key) do
-      "selected"
-    else
-      ""
-    end
+    result =
+      if Map.has_key?(rule_values, key) do
+        "selected"
+      else
+        ""
+      end
+
     result
   end
 
   def policy_preferences(form, key) do
     manifest = preferences_manifest(form.source, form.source.changes)
+
     with module_id when not is_nil(module_id) <- manifest.rule_values[key]["module"] do
       {:ok, module} = PolicyMap.load(module_id)
       preferences = module.rule_preferences(manifest.rule_values[key]["preferences"])
@@ -58,15 +61,18 @@ defmodule AcqdatWeb.NotificationView do
   defp preferences_manifest(source, changes) when changes == %{} do
     source.data
   end
+
   defp preferences_manifest(_source, changes) do
     changes
   end
 
   defp add_errors(nil, _, _), do: []
+
   defp add_errors(form, rule, value_key) do
     case form.errors[:rule_values] do
       nil ->
         []
+
       {errors, _} ->
         error = Jason.decode!(errors)
         result_list = error[value_key][to_string(rule.key)]

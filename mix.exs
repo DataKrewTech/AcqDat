@@ -65,6 +65,7 @@ defmodule Acqdat.MixProject do
       {:ex_machina, "~> 2.3"},
       {:excoveralls, "~> 0.10", only: :test},
       {:elixir_uuid, "~> 1.2"},
+      {:timex, "~> 3.1"},
 
       # cors
       {:corsica, "~> 1.0"},
@@ -78,6 +79,9 @@ defmodule Acqdat.MixProject do
       # mailer
       {:poison, "~> 3.1"},
       {:bamboo, github: "thoughtbot/bamboo"},
+
+      # http client
+      {:httpoison, "~> 1.4"},
 
       # code quality
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
@@ -104,7 +108,7 @@ defmodule Acqdat.MixProject do
         "credo --strict",
         "sobelow --exit",
         "dialyzer --halt-exit-status"
-      ],
+      ]
     ]
   end
 end

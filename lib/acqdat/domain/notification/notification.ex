@@ -25,24 +25,27 @@ defmodule Acqdat.Domain.Notification do
   def handle_notification(params) do
     %{device: device, data: data} = params
 
-    result_list = Enum.flat_map(data, fn {sensor, sensor_data} ->
-      result = Sensor.get(%{device_id: device.id, name: sensor})
-      process_sensor_data(result, sensor_data)
-    end)
+    result_list =
+      Enum.flat_map(data, fn {sensor, sensor_data} ->
+        result = Sensor.get(%{device_id: device.id, name: sensor})
+        process_sensor_data(result, sensor_data)
+      end)
 
     result_list
     |> Enum.filter(fn {status, _value} ->
-        status == :ok
-      end)
+      status == :ok
+    end)
     |> case do
-        [] ->
-          result_list
-        message_list ->
-          send_notification(device, message_list)
-      end
+      [] ->
+        result_list
+
+      message_list ->
+        send_notification(device, message_list)
+    end
   end
 
   defp process_sensor_data({:error, _data}, _sensor_data), do: [{:error, "sensor not found"}]
+
   defp process_sensor_data({:ok, sensor}, sensor_data) do
     sensor.id
     |> SNotify.get_by_sensor()
@@ -50,7 +53,8 @@ defmodule Acqdat.Domain.Notification do
   end
 
   defp apply_rules(nil, _sensor, _), do: [{:error, "no rules set"}]
-  defp apply_rules(%{alarm_status: false},_sensor, _), do: [{:error, "alarm disabled"}]
+  defp apply_rules(%{alarm_status: false}, _sensor, _), do: [{:error, "alarm disabled"}]
+
   defp apply_rules(notification_config, sensor, data) do
     Enum.map(data, fn {key, value} ->
       apply_rule_sensor_value_key(sensor, notification_config, key, value)
@@ -79,5 +83,4 @@ defmodule Acqdat.Domain.Notification do
 
     {:ok, "notification_sent"}
   end
-
 end

@@ -22,5 +22,4 @@ defmodule Acqdat.Domain.Notification.Worker do
     Server.finished(self())
     {:noreply, nil}
   end
-
 end

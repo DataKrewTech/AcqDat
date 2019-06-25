@@ -21,5 +21,4 @@ config :argon2_elixir,
   t_cost: 1,
   m_cost: 8
 
-config :acqdat, Acqdat.Mailer,
-  adapter: Bamboo.TestAdapter
+config :acqdat, Acqdat.Mailer, adapter: Bamboo.TestAdapter

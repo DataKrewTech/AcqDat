@@ -1,5 +1,6 @@
 defmodule Acqdat.Domain.Notification.Manager do
   alias Acqdat.Domain.Notification.Worker
+
   def child_spec(_) do
     :poolboy.child_spec(
       __MODULE__,
@@ -16,5 +17,4 @@ defmodule Acqdat.Domain.Notification.Manager do
       max_overflow: 500
     ]
   end
-
 end

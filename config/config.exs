@@ -37,7 +37,7 @@ config :acqdat, AcqdatWeb.AuthenticationPipe,
 
 # Configure mailer using Thoughtbot/Bamboo
 config :acqdat, Acqdat.Mailer,
-  adapter:  Bamboo.SendGridAdapter,
+  adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_KEY")
 
 # Import environment specific config. This must remain at the bottom
