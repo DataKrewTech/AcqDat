@@ -71,6 +71,7 @@ defmodule Acqdat.Domain.Notification do
   end
 
   defp send_notification(device, message_list) do
+    {_, message_list} = Enum.unzip(message_list)
 
     device
     |> NotificationEmail.email(message_list)

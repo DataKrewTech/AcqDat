@@ -73,5 +73,3 @@ config :acqdat, Acqdat.Repo,
   database: "acqdat_dev",
   hostname: "localhost",
   pool_size: 10
-
-config :acqdat, Acqdat.Mailer, sandbox: true

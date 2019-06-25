@@ -11,8 +11,8 @@ defmodule Acqdat.Mailer.NotificationEmailTest do
     device = insert(:device)
     message_list = [%{"Temperature" => %{"humid" => 35}}, %{"Temperature" => %{"temp" => 90}}]
 
-    email = NotificationEmail.send_email(device, message_list)
-    result = email |> Mailer.deliver_now()
+    email = NotificationEmail.email(device, message_list)
+    email |> Mailer.deliver_now()
     assert_delivered_email email
   end
 end

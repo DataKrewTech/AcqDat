@@ -2,8 +2,8 @@ defmodule Acqdat.Mailer.NotificationEmail do
   use Bamboo.Phoenix, view: AcqdatWeb.EmailView
   import Bamboo.Email
 
-  @from_address "arjun289singh@gmail.com"
-  @to_address "arjun289singh@gmail.com"
+  @to_address System.get_env("FROM_EMAIL")
+  @from_address System.get_env("TO_EMAIL")
   @subject "Device Notification ACQDAT"
 
   def email(device, message_list) do
