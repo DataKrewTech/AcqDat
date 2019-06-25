@@ -17,6 +17,10 @@ defmodule Acqdat.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+      dialyzer: [
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        ignore_warnings: ".dialyzer_ignore.exs"
       ]
     ]
   end
@@ -66,7 +70,19 @@ defmodule Acqdat.MixProject do
       {:corsica, "~> 1.0"},
 
       # enumeration
-      {:ecto_enum, "~> 1.2"}
+      {:ecto_enum, "~> 1.2"},
+
+      # worker pool
+      {:poolboy, "~> 1.5"},
+
+      # mailer
+      {:poison, "~> 3.1"},
+      {:bamboo, github: "thoughtbot/bamboo"},
+
+      # code quality
+      {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.6", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.7", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -80,7 +96,15 @@ defmodule Acqdat.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      quality: ["format", "credo --strict", "sobelow --verbose", "dialyzer", "test"],
+      "quality.ci": [
+        "test",
+        "format --check-formatted",
+        "credo --strict",
+        "sobelow --exit",
+        "dialyzer --halt-exit-status"
+      ],
     ]
   end
 end

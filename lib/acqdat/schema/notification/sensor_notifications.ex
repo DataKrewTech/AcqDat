@@ -30,7 +30,7 @@ defmodule Acqdat.Schema.SensorNotifications do
   @type t :: %__MODULE__{}
 
   @callback rule_name() :: name :: String.t()
-  @callback eligible?(sensor :: Sensor, value_key :: String.t(), value :: Decimal) :: true | false
+  @callback eligible?(preferences :: map, value :: integer) :: true | false
   @callback rule_preferences(params :: map) :: map
 
   schema("acqdat_sensor_notifications") do

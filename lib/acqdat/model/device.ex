@@ -2,6 +2,7 @@ defmodule Acqdat.Model.Device do
   alias Acqdat.Schema.Device
   alias Acqdat.Repo
   alias Acqdat.Model.Sensor
+  alias Acqdat.Domain.Notification.Server, as: NotificationServer
 
   def create(params) do
     changeset = Device.changeset(%Device{}, params)
@@ -69,6 +70,10 @@ defmodule Acqdat.Model.Device do
   end
 
   defp insert_data(device, data) do
+    # handle notification, move or modify the location of this call.
+    params = %{device: device, data: data}
+    NotificationServer.handle_notification(params)
+
     result_array =
       Enum.map(data, fn {sensor, sensor_data} ->
         result = Sensor.get(%{device_id: device.id, name: sensor})

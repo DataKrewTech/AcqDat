@@ -5,7 +5,8 @@ defmodule Acqdat.Support.Factory do
     User,
     Device,
     SensorType,
-    Sensor
+    Sensor,
+    SensorNotifications
   }
 
   def user_factory() do
@@ -48,6 +49,19 @@ defmodule Acqdat.Support.Factory do
       name: sequence(:sensor_name, &"Sensor#{&1}"),
       device: build(:device),
       sensor_type: build(:sensor_type)
+    }
+  end
+
+  def sensor_notification_factory() do
+    %SensorNotifications{
+      alarm_status: true,
+      sensor: build(:sensor),
+      rule_values: %{
+        "temp" => %{
+          "module" => 0,
+          "preferences" => %{"lower_limit" => "10.0", "upper_limit" => "20"}
+        }
+      }
     }
   end
 end

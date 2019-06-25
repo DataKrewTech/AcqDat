@@ -28,6 +28,10 @@ defmodule Acqdat.Model.SensorNotification do
     end
   end
 
+  def get_by_sensor(sensor_id) do
+    Repo.get_by(SNotifications, sensor_id: sensor_id)
+  end
+
   def get_all() do
     SNotifications |> Repo.all() |> Repo.preload(sensor: :device)
   end
