@@ -50,7 +50,7 @@ defmodule Acqdat.Schema.Notification.RangeBased do
   def eligible?(preferences, value) do
     lower_limit = Decimal.new(preferences["lower_limit"])
     upper_limit = Decimal.new(preferences["upper_limit"])
-    value =  Decimal.new(value)
+    value = Decimal.new(value)
 
     check_eligibility?(lower_limit, upper_limit, value)
   end
@@ -61,8 +61,10 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     case Decimal.cmp(lower_limit, value) do
       :lt ->
         true
+
       :eq ->
         true
+
       _ ->
         false
     end
@@ -72,8 +74,10 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     case Decimal.cmp(value, upper_limit) do
       :lt ->
         false
+
       :eq ->
         true
+
       _ ->
         true
     end
@@ -84,8 +88,10 @@ defmodule Acqdat.Schema.Notification.RangeBased do
       case Decimal.cmp(lower_limit, value) do
         :lt ->
           true
+
         :eq ->
           true
+
         _ ->
           false
       end
@@ -94,8 +100,10 @@ defmodule Acqdat.Schema.Notification.RangeBased do
       case Decimal.cmp(upper_limit, value) do
         :gt ->
           true
+
         :eq ->
           true
+
         _ ->
           false
       end
@@ -110,6 +118,7 @@ defmodule Acqdat.Schema.Notification.RangeBased do
     case Decimal.cmp(lower_limit, upper_limit) do
       :lt ->
         changeset
+
       :eq ->
         changeset
 

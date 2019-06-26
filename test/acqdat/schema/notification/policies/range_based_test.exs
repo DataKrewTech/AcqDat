@@ -1,5 +1,4 @@
 defmodule Acqdat.Schema.Notification.RangeBasedTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
   alias Acqdat.Schema.Notification.RangeBased
@@ -37,5 +36,4 @@ defmodule Acqdat.Schema.Notification.RangeBasedTest do
       assert result
     end
   end
-
 end

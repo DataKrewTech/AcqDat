@@ -1,0 +1,67 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <h4 class="page-title">Block</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/data-trace">blocks</a></li>
+            <li class="breadcrumb-item">Block: <%= @block["Index"] %></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-lg-4 col-xs-12">
+          <!-- Simple card -->
+          <div class="card m-b-20">
+            <img class="card-img-top img-fluid" src="/images/block_chain.jpg" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title mt-0">Block Details</h5>
+              <hr>
+              <p class="font-13"><strong>Index :</strong> 
+                <span class="m-l-15"><%= @block["Index"] %></span></p>
+              <p class="font-13"><strong>Previous Hash :</strong> 
+                <span ><%= @block["PrevHash"] %></span></p>
+              <p class="font-13"><strong>Block Hash :</strong> 
+                <span ><%= @block["ThisHash"] %></span></p>
+              <p class="font-13"><strong>TimeStamp :</strong> 
+                <span class="m-l-15"><%= @block["TimeStamp"] %></span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensors list -->
+        <div class="col-lg-5 col-sm-6 col-xs-12">
+          <div class="card-box">
+            <h3 class="m-t-0 header-title">
+              <b>Device UUID</b>
+            </h3>
+            <p>
+              <span class="label label-info" style="font-size:90%"><%= @block["IoTDataPointEntry"]["Device_ID"] %></span>
+            </p>
+            <hr>
+            <h3 class="m-t-0 header-title">
+              <b>Sensor Data</b>
+            </h3>
+            <div class="col-lg-10">
+              <%= for {sensor_key, sensor_value} <- @block["IoTDataPointEntry"]["Sensor"] do %>
+                <%= if is_map(sensor_value) do %>
+                  <div class="card-box p-2">
+                    <h4 class="m-t-0 header-title"><%= sensor_key %></h4>
+                    <%= for {value_key, data} <- sensor_value do %>
+                      <p><%= value_key %>: <%= data %></p> 
+                    <% end %>  
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

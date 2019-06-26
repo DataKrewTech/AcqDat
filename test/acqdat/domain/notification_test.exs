@@ -1,5 +1,4 @@
 defmodule Acqdat.Domain.NotificationTest do
-
   use ExUnit.Case, async: true
   use Acqdat.DataCase
   import Acqdat.Support.Factory
@@ -36,8 +35,7 @@ defmodule Acqdat.Domain.NotificationTest do
 
     test "does not send if config has alarm set to false", context do
       %{sensor: sensor, device: device} = context
-      insert(:sensor_notification, sensor: sensor,
-        rule_values: @rule_values, alarm_status: false)
+      insert(:sensor_notification, sensor: sensor, rule_values: @rule_values, alarm_status: false)
       data = %{"#{sensor.name}" => %{"temp" => 10, "humid" => 30}}
       params = %{device: device, data: data}
 
@@ -47,8 +45,7 @@ defmodule Acqdat.Domain.NotificationTest do
 
     test "does not send if rules are not met", context do
       %{sensor: sensor, device: device} = context
-      insert(:sensor_notification, sensor: sensor,
-        rule_values: @rule_values, alarm_status: true)
+      insert(:sensor_notification, sensor: sensor, rule_values: @rule_values, alarm_status: true)
       data = %{"#{sensor.name}" => %{"temp" => 10, "humid" => 20}}
       params = %{device: device, data: data}
 
@@ -58,13 +55,11 @@ defmodule Acqdat.Domain.NotificationTest do
 
     test "sends if config has alarm set to true", context do
       %{sensor: sensor, device: device} = context
-      insert(:sensor_notification, sensor: sensor,
-        rule_values: @rule_values, alarm_status: true)
+      insert(:sensor_notification, sensor: sensor, rule_values: @rule_values, alarm_status: true)
       data = %{"#{sensor.name}" => %{"temp" => 90, "humid" => 35}}
       params = %{device: device, data: data}
 
       result = Notification.handle_notification(params)
     end
   end
-
 end

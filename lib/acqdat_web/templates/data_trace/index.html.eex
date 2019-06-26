@@ -1,0 +1,49 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-box">
+            <h3 class="m-t-0 header-title">
+              <b>DataTrace</b>
+            </h3>
+            <p class="text-muted font-13">
+              Blocks added till date.
+            </p>
+           
+            <table data-toggle="table" data-show-columns="false" 
+              data-page-list="[5, 10, 20]" data-page-size="5"
+              data-pagination="true" data-show-pagination-switch="true"
+              class="table-bordered ">
+              <thead>
+                <tr>
+                  <th data-field="Index" data-switchable="false">Index</th>
+                  <th data-field="hash">Hash</th>
+                  <th data-field="actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= for block <- @blocks do %>
+                  <tr>
+                     <td>
+                      <%= block["Index"] %>
+                    </td>
+                    <td>
+                      <%= block["ThisHash"] %>
+                    </td>
+                    <td>
+                      <%= link to: "/data-trace/#{block["Index"]}" do %>
+                        <span class="label label-table label-success">Show</span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

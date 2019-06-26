@@ -13,6 +13,6 @@ defmodule Acqdat.Mailer.NotificationEmailTest do
 
     email = NotificationEmail.email(device, message_list)
     email |> Mailer.deliver_now()
-    assert_delivered_email email
+    assert_delivered_email(email)
   end
 end

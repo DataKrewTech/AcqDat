@@ -57,6 +57,7 @@ defmodule AcqdatWeb.Router do
     get "/device-sensors/:id", SensorController, :device_sensors
     get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
     post "/notification/rule_preferences", NotificationController, :policy_preferences
+    resources("/data-trace", DataTraceController, only: [:index, :show])
   end
 
   # Other scopes may use custom stacks.
