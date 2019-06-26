@@ -25,7 +25,7 @@
                 <span class="m-l-15"><%= @device.name %></span></p>
               <p class="font-13"><strong>UUID :</strong> 
                 <span ><%= @device.uuid %></span></p>
-              <p class="font-13"><strong>Description :</strong> 
+              <p class="font-13"><strong>Description :</strong>
                 <span ><%= @device.description %></span></p>
               <p class="font-13"><strong>Access Token :</strong> 
                 <span class="m-l-15"><%= @device.access_token %></span></p>
