@@ -40,6 +40,24 @@ config :acqdat, Acqdat.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_KEY")
 
+# Configures JSON API encoding
+config :phoenix, :format_encoders, "json-api": Jason
+
+# Configures JSON API mime type
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json-api"]
+}
+
+# Configures Key Format
+config :ja_serializer,
+  key_format: :underscored,
+  page_key: "page",
+  page_number_key: "offset",
+  page_size_key: "limit",
+  page_number_origin: 1,
+  page_size: 2
+
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

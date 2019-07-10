@@ -1,4 +1,4 @@
-defmodule AcqdatWeb.Auth.BearerAuthPipeline do
+defmodule AcqdatWeb.API.BearerAuthPipeline do
   use Guardian.Plug.Pipeline,
     otp_app: :acqdat,
     module: AcqdatWeb.Guardian,

@@ -10,7 +10,15 @@ defmodule AcqdatWeb.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["json", "json-api"]
+  end
+
+  pipeline :api_bearer_auth do
+    plug AcqdatWeb.API.BearerAuthPipeline
+  end
+
+  pipeline :api_ensure_auth do
+    plug AcqdatWeb.API.EnsureAuthPipeline
   end
 
   pipeline :authentication do
@@ -58,6 +66,21 @@ defmodule AcqdatWeb.Router do
     get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
     post "/notification/rule_preferences", NotificationController, :policy_preferences
     resources("/data-trace", DataTraceController, only: [:index, :show])
+  end
+
+  scope "/api", AcqdatWeb.API do
+    pipe_through [:api]
+
+    post "/token", TokenController, :create
+  end
+
+  scope "/api", AcqdatWeb.API do
+    pipe_through [:api, :api_bearer_auth, :api_ensure_auth]
+
+    get "/devices", DeviceController, :index
+    get "/devices/:id/show", DeviceController, :show
+    post "/sensor/:id/data", SensorController, :data
+
   end
 
   # Other scopes may use custom stacks.

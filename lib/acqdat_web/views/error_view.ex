@@ -1,6 +1,16 @@
 defmodule AcqdatWeb.ErrorView do
   use AcqdatWeb, :view
 
+
+  def render("404.json-api", _assigns) do
+    %{
+      title: "404 Not Found",
+      detail: "404 Not Found",
+      status: "404"
+    }
+    |> JaSerializer.ErrorSerializer.format
+  end
+
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
   # def render("500.html", _assigns) do
