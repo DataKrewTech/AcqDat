@@ -10,7 +10,7 @@ defmodule Acqdat.Schema.Sensor do
   """
 
   use Acqdat.Schema
-  alias Acqdat.Schema.{Device, SensorType}
+  alias Acqdat.Schema.{Device, SensorType, SensorData}
 
   @typedoc """
   `uuid`: A universallly unique id for the sensor.
@@ -32,6 +32,7 @@ defmodule Acqdat.Schema.Sensor do
     belongs_to(:device, Device, on_replace: :delete)
     belongs_to(:sensor_type, SensorType)
 
+    has_many(:sensor_data, SensorData)
     timestamps()
   end
 

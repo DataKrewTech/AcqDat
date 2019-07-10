@@ -86,7 +86,10 @@ defmodule Acqdat.MixProject do
       # code quality
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0-rc.6", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.7", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.7", only: [:dev, :test], runtime: false},
+
+      # JSON View
+      {:ja_serializer, "~> 0.15"}
     ]
   end
 
