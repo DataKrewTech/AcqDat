@@ -11,8 +11,8 @@ defmodule  AcqdatWeb.Seed.Device do
 
   def see_device!() do
     entries = @device_manifest
-    |> Enum.map(fn sensor_type ->
-      sensor_type
+    |> Enum.map(fn device ->
+      device
       |> Map.put(:inserted_at, DateTime.truncate(DateTime.utc_now(), :second))
       |> Map.put(:updated_at, DateTime.truncate(DateTime.utc_now(), :second))
     end)
