@@ -9,6 +9,13 @@ defmodule Acqdat.Schema do
       import Ecto.Changeset
       @timestamps_opts [type: :utc_datetime]
       alias Acqdat.Repo
+
+      @spec permalink(integer) :: binary
+      def permalink(bytes_count) do
+        bytes_count
+        |> :crypto.strong_rand_bytes()
+        |> Base.url_encode64(padding: false)
+        end
     end
   end
 end

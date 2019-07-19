@@ -92,7 +92,10 @@ defmodule Acqdat.MixProject do
       {:ja_serializer, "~> 0.15"},
 
       # Live View
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"}
+      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+
+      # Phone Number Validation
+      {:ex_phone_number, "~> 0.2"}
     ]
   end
 

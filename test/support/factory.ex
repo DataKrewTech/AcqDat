@@ -1,13 +1,16 @@
 defmodule Acqdat.Support.Factory do
   use ExMachina.Ecto, repo: Acqdat.Repo
+  use Acqdat.Schema
 
   alias Acqdat.Schema.{
     User,
     Device,
     SensorType,
     Sensor,
-    SensorNotifications
+    SensorNotifications,
   }
+
+  alias Acqdat.Schema.ToolManagement.{Employee, ToolType}
 
   def user_factory() do
     %User{
@@ -64,4 +67,21 @@ defmodule Acqdat.Support.Factory do
       }
     }
   end
+
+  def employee_factory() do
+    %Employee{
+      name: sequence(:employee_name, &"Employee#{&1}"),
+      phone_number: "123456",
+      address: "54 Peach Street, Gotham",
+      role: "big boss",
+      uuid: "U" <> permalink(4)
+    }
+  end
+
+  def tool_type_factory() do
+    %ToolType{
+      identifier: sequence(:tl_type_identifier, &"ToolType#{&1}")
+    }
+  end
+
 end
