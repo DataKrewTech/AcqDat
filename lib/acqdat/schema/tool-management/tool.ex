@@ -4,9 +4,10 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
   """
 
   use Acqdat.Schema
-  alias Acqdat.Schema.ToolManagement.ToolBox
+  alias Acqdat.Schema.ToolManagement.{ToolBox, ToolType}
 
   @tool_prefix "T"
+  @tool_status ~w(issued in_inventory)s
 
   @typedoc """
   `uuid`: a unique id assigned to the tool.
@@ -19,13 +20,18 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
   schema("acqdat_tm_tools") do
     field(:uuid, :string)
     field(:name, :string)
-    field(:tool_type, :string)
+    field(:status, :string, default: "in_inventory")
+    field(:description, :string)
 
     belongs_to(:tool_box, ToolBox)
+    belongs_to(:tool_type, ToolType)
     timestamps()
   end
 
-  @permitted ~w(name tool_type uuid tool_box_id)a
+  @required ~w(name tool_type_id uuid tool_box_id )a
+  @optional ~w(description status)a
+
+  @permitted @required ++ @optional
 
   @spec create_changeset(__MODULE__.t(), map) :: Ecto.Changeset.t()
   def create_changeset(%__MODULE__{} = tool, params) do
@@ -44,9 +50,12 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
 
   defp common_changeset(changeset) do
     changeset
-    |> validate_required(@permitted)
+    |> validate_required(@required)
+    |> validate_inclusion(:status, @tool_status)
     |> assoc_constraint(:tool_box)
-    |> unique_constraint(:name, message: "Unique tool name per tool box!")
+    |> assoc_constraint(:tool_type)
+    |> unique_constraint(:name, name: :acqdat_tm_tools_name_tool_box_id_index,
+      message: "Unique tool name per tool box!")
   end
 
   defp add_uuid(%Ecto.Changeset{valid?: true} = changeset) do

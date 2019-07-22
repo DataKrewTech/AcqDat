@@ -10,7 +10,12 @@ defmodule Acqdat.Support.Factory do
     SensorNotifications,
   }
 
-  alias Acqdat.Schema.ToolManagement.{Employee, ToolType}
+  alias Acqdat.Schema.ToolManagement.{
+    Employee,
+    ToolType,
+    ToolBox,
+    Tool
+  }
 
   def user_factory() do
     %User{
@@ -81,6 +86,24 @@ defmodule Acqdat.Support.Factory do
   def tool_type_factory() do
     %ToolType{
       identifier: sequence(:tl_type_identifier, &"ToolType#{&1}")
+    }
+  end
+
+  def tool_box_factory() do
+    %ToolBox{
+      name: sequence(:employee_name, &"ToolBox#{&1}"),
+      uuid: "TB" <> permalink(4),
+      description: "Tool box at Djaya"
+    }
+  end
+
+  def tool_factory() do
+    %Tool{
+      name: sequence(:employee_name, &"Tool#{&1}"),
+      uuid: "T" <> permalink(4),
+      status: "in_inventory",
+      tool_box: build(:tool_box),
+      tool_type: build(:tool_type),
     }
   end
 

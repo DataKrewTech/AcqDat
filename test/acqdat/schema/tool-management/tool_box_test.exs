@@ -9,7 +9,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolBoxTest do
   describe "create_changeset/2" do
     test "returns a valid changeset" do
       params = %{name: "ToolBox1", description: "holds rubber tools"}
-      %{valid?: validity} = changeset = ToolBox.create_changeset(%ToolBox{}, params)
+      %{valid?: validity} = ToolBox.create_changeset(%ToolBox{}, params)
       assert validity
     end
 
@@ -22,6 +22,15 @@ defmodule Acqdat.Schema.ToolManagement.ToolBoxTest do
   end
 
   describe "update_changeset/2" do
+    test "does not update uuid on update" do
+      tool_box = insert(:tool_box)
+      params = %{name: "ToolBoxNew"}
+      changeset = ToolBox.update_changeset(tool_box, params)
 
+      assert {:ok, updated_toolbox} = Repo.update(changeset)
+      assert updated_toolbox.id == tool_box.id
+      assert updated_toolbox.name != tool_box.name
+      assert updated_toolbox.uuid == tool_box.uuid
+    end
   end
 end
