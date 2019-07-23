@@ -49,7 +49,8 @@ defmodule Acqdat.Schema.ToolManagement.Employee do
     changeset
     |> validate_required(@required_fields)
     |> validate_length(:phone_number, max: 10, min: 5)
-    |> unique_constraint(:name, message: "User already exists!")
+    |> unique_constraint(:name, name: :acqdat_tm_employees_name_phone_number_index,
+      message: "User already exists!")
   end
 
   defp add_uuid(%Ecto.Changeset{valid?: true} = changeset) do

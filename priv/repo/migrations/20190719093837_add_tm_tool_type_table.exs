@@ -4,6 +4,7 @@ defmodule Acqdat.Repo.Migrations.AddTmToolTypeTable do
   def change do
     create table("acqdat_tm_tool_types") do
       add(:identifier, :citext)
+      add(:description, :string)
 
       timestamps()
     end

@@ -1,21 +1,18 @@
-<div class="content-page">
-  <!-- Start content -->
+
   <div class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
           <div class="card-box">
             <h3 class="m-t-0 header-title">
-              <b>Devices</b>
+              <b>ToolBoxes</b>
               <span class="float-right"> 
-                <%= link to: "/devices/new", class: "btn btn-default" do %>
+                <%= link to: "/tool-management/tool-box/new", class: "btn btn-default" do %>
                 <i class="md md-add"></i>  Add new
                 <% end %>
               </span>
             </h3>
-            <p class="text-muted font-13">
-              Devices configured in application.
-            </p>
+            <br>
            
             <table data-toggle="table" data-show-columns="false" 
               data-page-list="[5, 10, 20]" data-page-size="5"
@@ -29,18 +26,18 @@
                 </tr>
               </thead>
               <tbody>
-                <%= for device <- @devices do %>
+                <%= for tool_box <- @tool_boxes do %>
                   <tr>
                     <td>
-                      <%= link device.name, to: Routes.device_path(@conn, :show, device.id), 
+                      <%= link tool_box.name, to: Routes.tool_box_path(@conn, :show, tool_box.id), 
                          class: "btn btn-default"%>
                     </td>
-                    <td><%= device.uuid %></td>
+                    <td><%= tool_box.uuid %></td>
                     <td>
-                      <%= link to: "/devices/#{device.id}/edit" do %>
+                      <%= link to: "/tool-management/tool-box/#{tool_box.id}/edit" do %>
                         <span class="label label-table label-success">Edit</span>
                       <% end %>
-                      <%= link to: "/devices/#{device.id}", data: [confirm: "Sure to remove?"], method: :delete do %>
+                      <%= link to: "/tool-management/tool-box/#{tool_box.id}", data: [confirm: "Sure to remove?"], method: :delete do %>
                         <span class="label label-table label-danger">Delete</span>
                       <% end %>
                     </td>
@@ -53,4 +50,3 @@
       </div>
     </div>
   </div>
-</div>

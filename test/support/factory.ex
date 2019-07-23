@@ -107,4 +107,9 @@ defmodule Acqdat.Support.Factory do
     }
   end
 
+  def employee_list(%{employee_count: count}) do
+    employees = insert_list(count, :employee)
+    [employees: employees]
+  end
+
 end

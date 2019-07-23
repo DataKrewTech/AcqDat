@@ -37,4 +37,8 @@ defmodule AcqdatWeb.LayoutView do
     |> Enum.at(0)
     |> Macro.camelize()
   end
+
+  def render_layout(layout, assigns, do: content) do
+    render(layout, Map.put(assigns, :inner_layout, content))
+  end
 end

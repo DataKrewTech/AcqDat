@@ -3,5 +3,5 @@
     <%= render "_header.html", conn: @conn %>
     <%= render "_sidebar.html", conn: @conn %>
   <% end %>
-    <%= render @view_module, @view_template, assigns %>
+    <%= Map.get(assigns, :inner_layout) || render @view_module, @view_template, assigns %>
 </div>

@@ -1,0 +1,33 @@
+
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-xl-3">
+    <div class="widget-panel widget-style-2 bg-white card">
+      <i class="ion-ios7-compose text-custom"></i>
+      <h2 class="m-0 text-dark counter font-600">5</h2>
+      <div class="text-muted m-t-5">Tool Types</div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-3">
+    <div class="widget-panel widget-style-2 bg-white card">
+      <i class="ion-wrench text-primary"></i>
+      <h2 class="m-0 text-dark counter font-600">200</h2>
+      <div class="text-muted m-t-5">Total Tools</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-xl-3">
+      <div class="widget-panel widget-style-2 bg-white card">
+          <i class="ion-filing text-primary"></i>
+          <h2 class="m-0 text-dark counter font-600">20</h2>
+          <div class="text-muted m-t-5">Total Tool Boxes</div>
+      </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-3">
+      <div class="widget-panel widget-style-2 bg-white card">
+          <i class="md md-account-child text-custom"></i>
+          <h2 class="m-0 text-dark counter font-600">125</h2>
+          <div class="text-muted m-t-5">Total Employees</div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h4 class="page-title">Edit Tool Type</h4>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/tool-management/tool-type">tool_types</a></li>
+          <li class="breadcrumb-item active">Edit Tool Type</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card-box">
+          <div class="p-20">
+            <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.tool_type_path(@conn, :update, @tool_type)
+              %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

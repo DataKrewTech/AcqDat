@@ -21,6 +21,9 @@
         <li class="has_sub">
           <a href="/notifications" class="waves-effect"><i class="ti-bell"></i> <span> Knotify </span> </a>
         </li>
+        <li class="has_sub">
+          <a href="/tool-management/dashboard" class="waves-effect"><i class="icon-wrench"></i> <span> Tool-Management </span> </a>
+        </li>
       </ul>
       <div class="clearfix"></div>
     </div>
