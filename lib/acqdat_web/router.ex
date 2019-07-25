@@ -66,12 +66,22 @@ defmodule AcqdatWeb.Router do
     get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
     post "/notification/rule_preferences", NotificationController, :policy_preferences
     resources("/data-trace", DataTraceController, only: [:index, :show])
+
+    # Tool Management
+    scope "/tool-management", ToolManagement do
+      get("/dashboard", DashboardController, :show)
+      resources("/employee", EmployeeController)
+      resources("/tool-box", ToolBoxController)
+      resources("/tool-type", ToolTypeController, except: [:show])
+    end
+
   end
 
   scope "/api", AcqdatWeb.API do
     pipe_through [:api]
 
     post "/token", TokenController, :create
+    post("/tl-mgmt/employee/identify", ToolManagementController, :verify_employee)
   end
 
   scope "/api", AcqdatWeb.API do

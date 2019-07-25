@@ -1,0 +1,40 @@
+<%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
+<div class="form-group row">
+  <%= label f, :name, "Name", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= text_input(f, :name, class: "form-control") %>
+  </div>
+  <%= error_tag(f, :name) %>
+</div>
+
+<div class="form-group row">
+  <%= label f, :phone_number, "Phone Number", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= text_input(f, :phone_number, class: "form-control") %>
+  </div>
+  <%= error_tag(f, :phone_number) %>
+</div>
+
+<div class="form-group row">
+  <%= label f, :address, "Address", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= text_input(f, :address, class: "form-control") %>
+  </div>
+  <%= error_tag(f, :address) %>
+</div>
+
+<div class="form-group row">
+  <%= label f, :role, "Role", class: "col-2 col-form-table" %>
+  <div class="col-5">
+    <%= text_input(f, :role, class: "form-control") %>
+  </div>
+  <%= error_tag(f, :role) %>
+</div>
+
+<div class="form-group mb-0  row">
+  <div class="col-9">
+    <%= submit "Save", class: "btn btn-info waves-effect waves-light" %>
+    <%= link("Back", to: "/tool-management/employee", class: "btn btn-info waves-effect waves-light") %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h4 class="page-title">Add Employee</h4>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/tool-management/employee">employees</a></li>
+          <li class="breadcrumb-item active">New Employee</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card-box">
+          <div class="p-20">
+            <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.employee_path(@conn, :create)  
+              %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

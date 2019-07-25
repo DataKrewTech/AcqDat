@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h4 class="page-title">Edit Tool Box Info</h4>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/tool-management/tool-type">tool_boxes</a></li>
+          <li class="breadcrumb-item active">Edit Tool Box Info</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card-box">
+          <div class="p-20">
+            <%= render "_form.html", 
+                conn: @conn,
+                changeset: @changeset,
+                action: Routes.tool_box_path(@conn, :update, @tool_box)
+              %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

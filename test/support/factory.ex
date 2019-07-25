@@ -1,12 +1,20 @@
 defmodule Acqdat.Support.Factory do
   use ExMachina.Ecto, repo: Acqdat.Repo
+  use Acqdat.Schema
 
   alias Acqdat.Schema.{
     User,
     Device,
     SensorType,
     Sensor,
-    SensorNotifications
+    SensorNotifications,
+  }
+
+  alias Acqdat.Schema.ToolManagement.{
+    Employee,
+    ToolType,
+    ToolBox,
+    Tool
   }
 
   def user_factory() do
@@ -64,4 +72,44 @@ defmodule Acqdat.Support.Factory do
       }
     }
   end
+
+  def employee_factory() do
+    %Employee{
+      name: sequence(:employee_name, &"Employee#{&1}"),
+      phone_number: "123456",
+      address: "54 Peach Street, Gotham",
+      role: "big boss",
+      uuid: "U" <> permalink(4)
+    }
+  end
+
+  def tool_type_factory() do
+    %ToolType{
+      identifier: sequence(:tl_type_identifier, &"ToolType#{&1}")
+    }
+  end
+
+  def tool_box_factory() do
+    %ToolBox{
+      name: sequence(:employee_name, &"ToolBox#{&1}"),
+      uuid: "TB" <> permalink(4),
+      description: "Tool box at Djaya"
+    }
+  end
+
+  def tool_factory() do
+    %Tool{
+      name: sequence(:employee_name, &"Tool#{&1}"),
+      uuid: "T" <> permalink(4),
+      status: "in_inventory",
+      tool_box: build(:tool_box),
+      tool_type: build(:tool_type),
+    }
+  end
+
+  def employee_list(%{employee_count: count}) do
+    employees = insert_list(count, :employee)
+    [employees: employees]
+  end
+
 end
