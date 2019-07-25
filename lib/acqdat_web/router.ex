@@ -81,6 +81,7 @@ defmodule AcqdatWeb.Router do
     pipe_through [:api]
 
     post "/token", TokenController, :create
+    post("/tl-mgmt/employee/identify", ToolManagementController, :verify_employee)
   end
 
   scope "/api", AcqdatWeb.API do
