@@ -3,6 +3,7 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
   Exposes APIs to interact with tool DB table.
   """
 
+  import Ecto.Query
   alias Acqdat.Repo
   alias Acqdat.Schema.ToolManagement.Tool
 
@@ -44,5 +45,15 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
     Tool
     |> Repo.get(id)
     |> Repo.delete()
+  end
+
+  @spec get_all_by_uuids(list) :: [non_neg_integer]
+  def get_all_by_uuids(uuids) do
+    query = from(
+      tool in Tool,
+      where: tool.uuid in ^uuids,
+      select: tool.id
+    )
+    Repo.all(query)
   end
 end

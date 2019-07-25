@@ -18,4 +18,12 @@ defmodule AcqdatWeb.API.ToolManagementView do
       message: message
     }
   end
+
+  def render("transaction_success.json", %{data: data}) do
+    %{data: data, status: "success"}
+  end
+
+  def render("transaction_error.json", %{errors: errors}) do
+    %{errors: errors, status: "error"}
+  end
 end

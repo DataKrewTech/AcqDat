@@ -112,4 +112,9 @@ defmodule Acqdat.Support.Factory do
     [employees: employees]
   end
 
+  def tool_list(%{tool_count: count, tool_box: tool_box}) do
+    tools = insert_list(count, :tool, tool_box: tool_box)
+    [tools: tools]
+  end
+
 end

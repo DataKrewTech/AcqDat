@@ -7,10 +7,11 @@ defmodule Acqdat.Schema.ToolManagement.ToolReturn do
   alias Acqdat.Schema.ToolManagement.{Employee, Tool, ToolBox, ToolIssue}
 
   @typedoc """
-    `issue_time`: time at which tool was issued.
+    `return_time`: time at which tool was issued.
     `employee_id`: employee id of person who issued.
     `tool_id`: id of the tool issued.
     `tool_box_id`: id of box from which tool was issued.
+    `tool_issue_id`: id of issue against which return was made.
   """
   @type t :: %__MODULE__{}
 
@@ -26,7 +27,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolReturn do
     timestamps()
   end
 
-  @permitted ~w(issue_time employee_id tool_id tool_box_id)a
+  @permitted ~w(return_time employee_id tool_id tool_box_id tool_issue_id)a
 
   def changeset(%__MODULE__{} = tool_issue, params) do
     tool_issue
@@ -35,5 +36,8 @@ defmodule Acqdat.Schema.ToolManagement.ToolReturn do
     |> assoc_constraint(:employee)
     |> assoc_constraint(:tool)
     |> assoc_constraint(:tool_box)
+    |> assoc_constraint(:tool_issue)
+    |> unique_constraint(:tool_issue, name: :unique_issue_for_return,
+      message: "unique issue and return combination")
   end
 end
