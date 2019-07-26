@@ -5,7 +5,7 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
 
   import Ecto.Query
   alias Acqdat.Repo
-  alias Acqdat.Schema.ToolManagement.Tool
+  alias Acqdat.Schema.ToolManagement.{Tool, ToolIssue}
 
   def create(params) do
     changeset = Tool.create_changeset(%Tool{}, params)
@@ -21,6 +21,7 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
         {:ok, tool}
     end
   end
+
 
   def get(query) when is_map(query) do
     case Repo.get_by(Tool, query) do
@@ -47,13 +48,40 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
     |> Repo.delete()
   end
 
-  @spec get_all_by_uuids(list) :: [non_neg_integer]
-  def get_all_by_uuids(uuids) do
+  @spec get_all_by_uuids_and_status(list, String.t()) :: [non_neg_integer]
+  def get_all_by_uuids_and_status(uuids, status) do
     query = from(
       tool in Tool,
-      where: tool.uuid in ^uuids,
+      where: tool.uuid in ^uuids and tool.status == ^status,
       select: tool.id
     )
     Repo.all(query)
+  end
+
+  @doc """
+  Updates tool status with supplied status in params.
+  Takes as input a list of tool_ids and status.
+  """
+  def update_tool_status(tool_ids, status) do
+    query = from(
+      tool in Tool,
+      where: tool.id in ^tool_ids
+    )
+
+    {_, updates} = Repo.update_all(query, set: [status: status])
+    updates
+  end
+
+  def get_tool_latest_issue_id(tool_id) do
+    query = from(
+      issue in ToolIssue,
+      group_by: issue.id,
+      having: issue.tool_id == ^tool_id,
+      order_by: [desc: issue.issue_time],
+      limit: 1,
+      select: issue.id
+    )
+
+    Repo.one(query)
   end
 end

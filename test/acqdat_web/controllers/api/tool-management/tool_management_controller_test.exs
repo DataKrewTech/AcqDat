@@ -19,21 +19,8 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
     setup :tool_list
 
     @tag tool_count: 2
-    test "issue a list of tools", context do
-      %{tools: tools, employee: employee, tool_box: tool_box,
-      conn: conn} = context
-      params = %{"user_uuid" => employee.uuid,
-        "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
-        "transaction" => "issue"}
-
-      result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(200)
-      assert %{"data" => "tools issued", "status" => "success"} == result
-    end
-
-    @tag tool_count: 2
     test "fails for bad params", context do
-      %{tools: tools, employee: employee, tool_box: tool_box,
-      conn: conn} = context
+      %{conn: conn} = context
 
       result = conn |> post("/api/tl-mgmt/tool-transaction", %{}) |> json_response(200)
       assert %{
@@ -45,6 +32,69 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
           "status" => "error"
         } == result
     end
+
+    @tag tool_count: 2
+    test "issue a list of tools", context do
+      %{tools: tools, employee: employee, tool_box: tool_box,
+      conn: conn} = context
+      params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
+        "transaction" => "issue"}
+
+      result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(200)
+      assert %{"status" => "success", "data" => "transaction issue succedded"} == result
+    end
+
+    @tag tool_count: 2
+    test "error if non tool ids not found", context do
+      %{tools: tools, employee: employee, tool_box: tool_box,
+      conn: conn} = context
+      params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => ["1234", "abcd"],
+        "transaction" => "issue"}
+
+      result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(200)
+      assert %{"status" => "error", "errors" => "no issuable tools"} == result
+    end
+
+    @tag tool_count: 2
+    test "successfully return a list of tools", context do
+      %{tools: tools, employee: employee, tool_box: tool_box,
+      conn: conn} = context
+      issue_params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
+        "transaction" => "issue"}
+
+      # issue a list of tools
+      conn |> post("/api/tl-mgmt/tool-transaction", issue_params) |> json_response(200)
+
+      # return a list of tools
+      return_params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
+        "transaction" => "return"}
+      result = conn |> post("/api/tl-mgmt/tool-transaction", return_params) |> json_response(200)
+      assert result == %{"data" => "transaction return succedded", "status" => "success"}
+    end
+
+    @tag tool_count: 2
+    test "error if no returnable tools found", context do
+      %{tools: tools, employee: employee, tool_box: tool_box,
+      conn: conn} = context
+      issue_params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
+        "transaction" => "issue"}
+
+      # issue a list of tools
+      conn |> post("/api/tl-mgmt/tool-transaction", issue_params) |> json_response(200)
+
+      # return a list of tools
+      return_params = %{"user_uuid" => employee.uuid,
+        "tool_box_uuid" => tool_box.uuid, "tool_ids" => ["abcd", "1234"],
+        "transaction" => "return"}
+      result = conn |> post("/api/tl-mgmt/tool-transaction", return_params) |> json_response(200)
+      assert result == %{"status" => "error", "errors" => "no returnable tools"}
+    end
+
   end
 
   defp tool_uuid_list(tools) do
