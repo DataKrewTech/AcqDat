@@ -14,7 +14,8 @@ defmodule Acqdat.Support.Factory do
     Employee,
     ToolType,
     ToolBox,
-    Tool
+    Tool,
+    ToolIssue
   }
 
   def user_factory() do
@@ -110,6 +111,21 @@ defmodule Acqdat.Support.Factory do
   def employee_list(%{employee_count: count}) do
     employees = insert_list(count, :employee)
     [employees: employees]
+  end
+
+  def tool_list(%{tool_count: count, tool_box: tool_box}) do
+    tools = insert_list(count, :tool, tool_box: tool_box)
+    [tools: tools]
+  end
+
+  def tool_issue() do
+    %ToolIssue{
+      employee: build(:employee),
+      tool: build(:tool),
+      tool_box: build(:tool_box),
+
+      issue_time: DateTime.truncate(DateTime.utc_now(), :second)
+    }
   end
 
 end
