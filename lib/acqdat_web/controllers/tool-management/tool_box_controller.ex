@@ -2,6 +2,7 @@ defmodule AcqdatWeb.ToolManagement.ToolBoxController do
   use AcqdatWeb, :controller
   alias Acqdat.Model.ToolManagement.ToolBox
   alias Acqdat.Schema.ToolManagement.ToolBox, as: ToolBoxSchema
+  alias Acqdat.Repo
 
   plug(:put_layout, {AcqdatWeb.ToolManagementView, "tool_management_layout.html"})
 
@@ -11,7 +12,19 @@ defmodule AcqdatWeb.ToolManagement.ToolBoxController do
   end
 
   def show(conn, %{"id" => id}) do
+    id
+    |> String.to_integer()
+    |> ToolBox.get()
+    |> case do
+      {:ok, tool_box} ->
+        tool_box = Repo.preload(tool_box, tools: :tool_type)
+        render(conn, "show.html", tool_box: tool_box)
 
+      {:error, message} ->
+        conn
+        |> put_flash(:error, message)
+        |> redirect(to: Routes.tool_box_path(conn, :index))
+    end
   end
 
   def new(conn, _params) do

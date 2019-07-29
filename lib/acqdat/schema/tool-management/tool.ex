@@ -48,6 +48,12 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
     |> common_changeset()
   end
 
+  def tool_status() do
+    @tool_status
+  end
+
+  ################################# private functions ###########################
+
   defp common_changeset(changeset) do
     changeset
     |> validate_required(@required)
@@ -64,4 +70,5 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
     |> put_change(:uuid, uuid)
   end
   defp add_uuid(%Ecto.Changeset{valid?: false} = changeset), do: changeset
+
 end

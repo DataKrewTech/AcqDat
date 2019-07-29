@@ -40,7 +40,7 @@ defmodule AcqdatWeb.ToolManagement.EmployeeController do
       {:error, message} ->
         conn
         |> put_flash(:error, message)
-        |> redirect(Routes.employee_path(conn, :index))
+        |> redirect(to: Routes.employee_path(conn, :index))
     end
   end
 

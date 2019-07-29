@@ -3,9 +3,9 @@ defmodule Acqdat.Model.SensorType do
   Exposes APIs for handling sensor type entity.
   """
 
+  import Ecto.Query
   alias Acqdat.Repo
   alias Acqdat.Schema.SensorType
-  import Ecto.Query
 
   @doc """
   Creates a new sensor type.

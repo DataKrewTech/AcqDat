@@ -22,6 +22,7 @@ defmodule AcqdatWeb.SensorController do
     case Sensor.create(params) do
       {:ok, _sensor} ->
         conn
+        |> put_flash(:info, "Record Added!")
         |> redirect(to: Routes.device_path(conn, :show, device_id))
 
       {:error, changeset} ->

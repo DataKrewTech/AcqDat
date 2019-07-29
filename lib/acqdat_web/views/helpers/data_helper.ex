@@ -1,5 +1,5 @@
 defmodule AcqdatWeb.View.DataHelpers do
-  alias Acqdat.Model.SensorType
+  alias Acqdat.Model.{SensorType, ToolManagement.ToolType}
 
   @doc """
   Creates formatted data to be used in dropdown selection for association in forms.
@@ -8,4 +8,6 @@ defmodule AcqdatWeb.View.DataHelpers do
   Can also be used elsewhere.
   """
   def formatted_list(:sensor_type), do: SensorType.formatted_list()
+  def formatted_list(:tool_type), do: ToolType.formatted_list()
+
 end
