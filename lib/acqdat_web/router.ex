@@ -71,7 +71,9 @@ defmodule AcqdatWeb.Router do
     scope "/tool-management", ToolManagement do
       get("/dashboard", DashboardController, :show)
       resources("/employee", EmployeeController)
-      resources("/tool-box", ToolBoxController)
+      resources("/tool-box", ToolBoxController) do
+        resources("/tools", ToolController)
+      end
       resources("/tool-type", ToolTypeController, except: [:show])
     end
 

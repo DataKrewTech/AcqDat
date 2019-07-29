@@ -3,6 +3,7 @@ defmodule Acqdat.Model.ToolManagement.ToolType  do
   Exposes APIs to interact with tool_type DB table.
   """
 
+  import Ecto.Query
   alias Acqdat.Repo
   alias Acqdat.Schema.ToolManagement.ToolType
 
@@ -44,5 +45,13 @@ defmodule Acqdat.Model.ToolManagement.ToolType  do
     ToolType
     |> Repo.get(id)
     |> Repo.delete()
+  end
+
+  @spec formatted_list() :: [{String.t(), non_neg_integer}]
+  def formatted_list do
+    ToolType
+    |> order_by([s], asc: s.identifier)
+    |> select([s], {s.identifier, s.id})
+    |> Repo.all()
   end
 end

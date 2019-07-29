@@ -7,6 +7,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolBox do
   """
 
   use Acqdat.Schema
+  alias Acqdat.Schema.ToolManagement.Tool
   @tb_prefix "TB"
 
   @typedoc """
@@ -20,6 +21,8 @@ defmodule Acqdat.Schema.ToolManagement.ToolBox do
     field(:name, :string)
     field(:description, :string)
     field(:uuid, :string)
+
+    has_many(:tools, Tool)
 
     timestamps()
   end

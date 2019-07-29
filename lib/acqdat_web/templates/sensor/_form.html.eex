@@ -10,7 +10,7 @@
 <div class="form-group row">
   <%= label f, :sensor_type_id, "Sensor Type", class: "col-2 col-form-table" %>
   <div class="col-5">
-    <%= select(f, :sensor_type_id, formatted_list(:sensor_type), class: "form-control") %>
+    <%= select(f, :sensor_type_id, formatted_list(:sensor_type), class: "form-control", prompt: "Choose Sensor Type") %>
   </div>
   <%= error_tag(f, :sensor_type_id) %>
 </div>
