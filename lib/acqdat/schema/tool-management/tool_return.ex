@@ -24,7 +24,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolReturn do
     belongs_to(:tool_box, ToolBox)
     belongs_to(:tool_issue, ToolIssue)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @permitted ~w(return_time employee_id tool_id tool_box_id tool_issue_id)a

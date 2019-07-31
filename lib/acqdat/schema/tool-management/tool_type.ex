@@ -11,7 +11,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolType do
     field(:identifier, :string)
     field(:description, :string)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required ~w(identifier)a

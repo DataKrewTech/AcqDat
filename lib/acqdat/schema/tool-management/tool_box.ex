@@ -24,7 +24,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolBox do
 
     has_many(:tools, Tool)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_params ~w(name uuid)a

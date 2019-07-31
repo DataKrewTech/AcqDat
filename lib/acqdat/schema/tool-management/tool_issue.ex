@@ -22,7 +22,7 @@ defmodule Acqdat.Schema.ToolManagement.ToolIssue do
     belongs_to(:tool, Tool)
     belongs_to(:tool_box, ToolBox)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @permitted ~w(issue_time employee_id tool_id tool_box_id)a

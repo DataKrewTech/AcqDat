@@ -22,7 +22,7 @@ defmodule Acqdat.Schema.ToolManagement.Employee do
     field(:uuid, :string)
     field(:role, :string)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_fields ~w(name phone_number uuid role)a

@@ -38,7 +38,7 @@ defmodule Acqdat.Schema.SensorNotifications do
     field(:alarm_status, :boolean, default: true)
     belongs_to(:sensor, Sensor, on_replace: :delete)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_params ~w(sensor_id rule_values)a
