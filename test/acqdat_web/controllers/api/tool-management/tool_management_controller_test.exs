@@ -2,7 +2,6 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
   use ExUnit.Case, async: true
   use AcqdatWeb.ConnCase
   import Acqdat.Support.Factory
-  alias AcqdatWeb.API.ToolManagementController
 
   setup %{conn: conn} do
     conn = put_req_header(conn, "content-type", "application/json")
@@ -42,12 +41,12 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
         "transaction" => "issue"}
 
       result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(200)
-      assert %{"status" => "success", "data" => "transaction issue succedded"} == result
+      assert %{"status" => "success", "data" => "transaction issue succeded"} == result
     end
 
     @tag tool_count: 2
     test "error if non tool ids not found", context do
-      %{tools: tools, employee: employee, tool_box: tool_box,
+      %{employee: employee, tool_box: tool_box,
       conn: conn} = context
       params = %{"user_uuid" => employee.uuid,
         "tool_box_uuid" => tool_box.uuid, "tool_ids" => ["1234", "abcd"],
@@ -73,7 +72,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
         "tool_box_uuid" => tool_box.uuid, "tool_ids" => tool_uuid_list(tools),
         "transaction" => "return"}
       result = conn |> post("/api/tl-mgmt/tool-transaction", return_params) |> json_response(200)
-      assert result == %{"data" => "transaction return succedded", "status" => "success"}
+      assert result == %{"data" => "transaction return succeded", "status" => "success"}
     end
 
     @tag tool_count: 2

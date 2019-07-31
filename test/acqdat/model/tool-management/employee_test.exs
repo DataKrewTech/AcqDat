@@ -24,7 +24,7 @@ defmodule Acqdat.Model.ToolManagament.EmployeeTest do
     setup :employee_list
 
     @tag employee_count: 2
-    test "returns a list of employee", context do
+    test "returns a list of employee" do
       result = Employee.get_all()
       assert length(result) == 2
     end

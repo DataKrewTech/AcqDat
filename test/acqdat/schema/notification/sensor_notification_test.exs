@@ -63,10 +63,8 @@ defmodule Acqdat.Schema.SensorNotificationsTest do
       refute validity
 
       assert %{
-               rule_values: [
-                 "humid: {lower_limit: [\"is invalid\"] }\n{upper_limit: [\"is invalid\"] }\n"
-               ]
-             } == errors_on(changeset)
+        rule_values: ["{\"humid\":{\"lower_limit\":[\"is invalid\"],\"upper_limit\":[\"is invalid\"]}}"]
+      } == errors_on(changeset)
     end
   end
 end
