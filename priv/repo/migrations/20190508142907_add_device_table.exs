@@ -8,7 +8,7 @@ defmodule Acqdat.Repo.Migrations.AddDeviceTable do
       add(:access_token, :string, null: false)
       add(:description, :text)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_devices", [:name])

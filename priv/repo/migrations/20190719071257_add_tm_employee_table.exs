@@ -9,7 +9,7 @@ defmodule Acqdat.Repo.Migrations.AddTmEmployeeTable do
       add(:uuid, :string, null: false)
       add(:role, :string, null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_tm_employees", [:uuid])

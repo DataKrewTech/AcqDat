@@ -7,7 +7,7 @@ defmodule Acqdat.Repo.Migrations.AddTmToolBoxTable do
       add(:description, :string)
       add(:uuid, :string, null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_tm_tool_boxes", [:uuid])
