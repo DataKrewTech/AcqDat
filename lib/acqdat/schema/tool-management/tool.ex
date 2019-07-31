@@ -25,7 +25,7 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
 
     belongs_to(:tool_box, ToolBox)
     belongs_to(:tool_type, ToolType)
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required ~w(name tool_type_id uuid tool_box_id )a

@@ -10,7 +10,7 @@ defmodule Acqdat.Repo.Migrations.AddUserTable do
       add(:email, :citext, null: false)
       add(:password_hash, :string, null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("users", [:email])

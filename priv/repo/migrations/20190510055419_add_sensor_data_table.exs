@@ -3,11 +3,11 @@ defmodule Acqdat.Repo.Migrations.AddSensorDataTable do
 
   def change do
     create table("acqdat_sensor_data") do
-      add(:inserted_timestamp, :utc_datetime, null: false)
+      add(:inserted_timestamp, :timestamptz, null: false)
       add(:datapoint, :map, null: false)
       add(:sensor_id, references("acqdat_sensors", on_delete: :restrict), null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
   end
 end

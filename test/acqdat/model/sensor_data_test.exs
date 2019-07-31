@@ -3,6 +3,7 @@ defmodule Acqdat.Model.SensorDataTest do
   use Acqdat.DataCase
   import Acqdat.Support.Factory
   alias Acqdat.Model.{SensorData, Sensor}
+  alias Acqdat.Repo
 
   describe "get_by_time_range/2" do
     test "returns data in the given time stamp" do
@@ -16,7 +17,9 @@ defmodule Acqdat.Model.SensorDataTest do
       start_time = Timex.shift(DateTime.utc_now(), minutes: -1)
       end_time = DateTime.utc_now()
 
-      result = SensorData.get_by_time_range(start_time, end_time)
+      query = SensorData.get_by_time_range(start_time, end_time)
+      result = Repo.all(query)
+
       assert length(result) == 4
     end
 
@@ -31,7 +34,9 @@ defmodule Acqdat.Model.SensorDataTest do
       start_time = Timex.shift(DateTime.utc_now(), minutes: -4)
       end_time = Timex.shift(DateTime.utc_now(), minutes: -2)
 
-      result = SensorData.get_by_time_range(start_time, end_time)
+      query = SensorData.get_by_time_range(start_time, end_time)
+      result = Repo.all(query)
+
       assert result == []
     end
   end

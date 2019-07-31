@@ -60,6 +60,7 @@ defmodule Acqdat.Domain.NotificationTest do
       params = %{device: device, data: data}
 
       result = Notification.handle_notification(params)
+      assert {:ok, "notification_sent"} == result
     end
   end
 end

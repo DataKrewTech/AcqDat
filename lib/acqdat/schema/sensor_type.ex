@@ -34,7 +34,7 @@ defmodule Acqdat.Schema.SensorType do
     field(:identifier, :string)
     field(:value_keys, {:array, :string})
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_params ~w(name identifier value_keys)a

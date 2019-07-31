@@ -6,7 +6,7 @@ defmodule Acqdat.Repo.Migrations.AddTmToolTypeTable do
       add(:identifier, :citext)
       add(:description, :string)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_tm_tool_types", [:identifier])

@@ -17,7 +17,7 @@ defmodule Acqdat.Schema.User do
     field(:password_confirmation, :string, virtual: true)
     field(:password_hash, :string)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required ~w(first_name email password password_confirmation)a

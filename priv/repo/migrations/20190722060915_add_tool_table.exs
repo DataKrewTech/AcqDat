@@ -11,7 +11,7 @@ defmodule Acqdat.Repo.Migrations.AddToolTable do
       add(:tool_box_id, references("acqdat_tm_tool_boxes", on_delete: :delete_all), null: false)
       add(:tool_type_id, references("acqdat_tm_tool_types", on_delete: :delete_all), null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_tm_tools", [:uuid])

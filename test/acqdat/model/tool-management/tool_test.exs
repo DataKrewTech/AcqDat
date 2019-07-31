@@ -42,10 +42,7 @@ defmodule Acqdat.Model.ToolManagament.ToolTest do
     end
 
     @tag tool_count: 3
-    test "returns [] if no uuid match", context do
-      %{tools: tools} = context
-      tool_uuids = Enum.map(tools, fn tool -> tool.uuid end)
-
+    test "returns [] if no uuid match" do
       tool_ids = Tool.get_all_by_uuids_and_status(["1234", "abcd"], "in_inventory")
       assert tool_ids == []
     end

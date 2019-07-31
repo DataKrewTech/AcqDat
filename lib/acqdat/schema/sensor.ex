@@ -33,7 +33,7 @@ defmodule Acqdat.Schema.Sensor do
     belongs_to(:sensor_type, SensorType)
 
     has_many(:sensor_data, SensorData)
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @permitted ~w(device_id sensor_type_id uuid name)a

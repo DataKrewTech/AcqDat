@@ -25,7 +25,7 @@ defmodule Acqdat.Schema.Device do
 
     has_many(:sensors, Sensor)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_params ~w(name access_token uuid)a

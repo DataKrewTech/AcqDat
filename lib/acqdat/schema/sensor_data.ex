@@ -24,7 +24,7 @@ defmodule Acqdat.Schema.SensorData do
     field(:datapoint, :map)
     belongs_to(:sensor, Sensor)
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @required_params ~w(inserted_timestamp datapoint sensor_id)a

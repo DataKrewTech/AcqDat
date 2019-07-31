@@ -9,7 +9,7 @@ defmodule Acqdat.Repo.Migrations.AddSensorTypeTable do
       add(:identifier, :string, null: false)
       add(:value_keys, {:array, :string}, null: false)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_sensor_types", [:name])

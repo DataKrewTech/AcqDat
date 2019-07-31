@@ -7,7 +7,7 @@ defmodule Acqdat.Repo.Migrations.AddSensorNotification do
       add(:sensor_id, references("acqdat_sensors", on_delete: :delete_all), null: false)
       add(:alarm_status, :boolean, default: true)
 
-      timestamps()
+      timestamps(type: :timestamptz)
     end
 
     create unique_index("acqdat_sensor_notifications", [:sensor_id])
