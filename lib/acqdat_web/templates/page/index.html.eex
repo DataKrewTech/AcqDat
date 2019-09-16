@@ -20,6 +20,14 @@
             <div class="clearfix"></div>
           </div>
         </div>
+        <div class="col-md-6 col-lg-6 col-xl-6">
+          <div class="widget-bg-color-icon card-box fadeInDown animated">
+            <h5>Pm2.5</h5>
+            <div id="container-pm2-gauge" style="min-width: 100px; width: 100%; height: 250px">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
 
         <div class="col-md-6 col-lg-6 col-xl-6">
           <div class="widget-bg-color-icon card-box fadeInDown animated">
@@ -30,54 +38,53 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-6 col-xl-4">
-          <div class="widget-bg-color-icon card-box">
-            <h5>Accelerometer</h5>
-            <div class="pull-left">
-              <img src="/images/accelerometer.png" class="thumb-lg rounded-circle img-fluid" alt="">
+        <div class="col-md-6">
+          <div class="row ml-2">
+            <div class="col-md-3 widget-bg-color-icon card-box">
+              <h5>Accelerometer</h5>
+              <div class="row pl-4">
+                <img src="/images/accelerometer.png" class="thumb-lg rounded-circle img-fluid" alt="">
+              </div>
+              <div class="row pl-4">
+                <div class="accelerometer">
+                  <h5 class="text-dark ax">Ax: <b class="counter">0.16</b></h5>
+                  <h5 class="text-dark ay">Ay: <b class="counter">0.16</b></h5>
+                  <h5 class="text-dark az">Az: <b class="counter">0.16</b></h5>
+                </div>
+              </div>
             </div>
-            <div class="text-right accelerometer">
-              <h5 class="text-dark ax">Ax: <b class="counter">0.16</b></h5>
-              <h5 class="text-dark ay">Ay: <b class="counter">0.16</b></h5>
-              <h5 class="text-dark az">Az: <b class="counter">0.16</b></h5>
+            <div class="col-md-3 widget-bg-color-icon card-box ml-3">
+              <h5>Gyroscope</h5>
+              <div class="row pl-4">
+                <img src="/images/gyro_scope.png" class="thumb-lg rounded-circle img-fluid" alt="">
+              </div>
+              <div class="row pl-4">
+                <div class="gyroscope">
+                  <h5 class="text-dark gx">Gx: <b class="counter">0.16</b></h5>
+                  <h5 class="text-dark gy">Gy: <b class="counter">0.16</b></h5>
+                  <h5 class="text-dark gz">Gz: <b class="counter">0.16</b></h5>
+                </div>
+              </div>
             </div>
-            <div class="clearfix"></div>
+            <div class="col-md-3 widget-bg-color-icon card-box ml-3">
+              <h5>Light</h5>
+              <div class="row pl-4">
+                <img src="/images/light_bulb.png" class="thumb-lg rounded-circle img-fluid" alt="">
+              </div>
+              <div class="row pl-4">
+                <h5 class="text-dark light_bulb">Lumens: <b class="counter light_bulb">0.16</b></h5>
+              </div>
+            </div>
           </div>
+
         </div>
 
-        <div class="col-md-6 col-lg-6 col-xl-4">
-          <div class="widget-bg-color-icon card-box">
-            <h5>Gyroscope</h5>
-            <div class="pull-left">
-              <img src="/images/gyro_scope.png" class="thumb-lg rounded-circle img-fluid" alt="">
-            </div>
-            <div class="text-right gyroscope">
-              <h5 class="text-dark gx">Gx: <b class="counter">0.16</b></h5>
-              <h5 class="text-dark gy">Gy: <b class="counter">0.16</b></h5>
-              <h5 class="text-dark gz">Gz: <b class="counter">0.16</b></h5>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-xl-4">
-          <div class="widget-bg-color-icon card-box">
-            <h5>Light</h5>
-            <div class="pull-left">
-              <img src="/images/light_bulb.png" class="thumb-lg rounded-circle img-fluid" alt="">
-            </div>
-            <div class="text-right">
-              <h5 class="text-dark light_bulb">Lumens: <b class="counter light_bulb">0.16</b></h5>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-      </div>
-    </div> <!-- container -->
+      </div> <!-- container -->
 
-  </div> <!-- content -->
+    </div> <!-- content -->
 
-  <footer class="footer text-right">
-    &copy; 2016 - 2018. All rights reserved.
-  </footer>
+    <footer class="footer text-right">
+      &copy; 2016 - 2018. All rights reserved.
+    </footer>
 
-</div>
+  </div>
