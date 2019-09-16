@@ -2,9 +2,11 @@ import MainView from '../main';
 import liveView from "./socket";
 import humidChartObj from "./humid_chart";
 import tempChartObj from "./temp_chart";
+import pm2ChartObj from "./pm2_chart";
 
 var chartHumid;
-var chartTemp
+var chartTemp;
+var chartpm2;
 
 export default class View extends MainView {
   
@@ -13,6 +15,7 @@ export default class View extends MainView {
 
     chartHumid = Highcharts.chart('container-humid-gauge', humidChartObj);
     chartTemp = Highcharts.chart('container-temperature-gauge', tempChartObj);
+    chartpm2 = Highcharts.chart('container-pm2-gauge', pm2ChartObj);
 
     channel.on("data_point", payload => {
       this.updateSensorWidgets(payload["sensor_data"]);
@@ -42,6 +45,9 @@ export default class View extends MainView {
         data = payload[key]["temp"]
         chartTemp.series[0].points[0].update(parseFloat(data))
         break;
+      case "Pm2.5":
+        data = payload[key]["ug/m3"]
+        chartpm2.series[0].points[0].update(parseFloat(data))
       case "Accelerometer": 
         let ax = payload[key]["ax"]
         let ay = payload[key]["ay"]
