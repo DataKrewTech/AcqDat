@@ -5,7 +5,7 @@ defmodule Acqdat.MixProject do
     [
       app: :acqdat,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -47,7 +47,7 @@ defmodule Acqdat.MixProject do
       {:phoenix, "~> 1.4.8"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.0"},
+      {:ecto_sql, "~> 3.2.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.13.2"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
