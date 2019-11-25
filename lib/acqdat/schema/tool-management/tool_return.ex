@@ -29,8 +29,8 @@ defmodule Acqdat.Schema.ToolManagement.ToolReturn do
 
   @permitted ~w(return_time employee_id tool_id tool_box_id tool_issue_id)a
 
-  def changeset(%__MODULE__{} = tool_issue, params) do
-    tool_issue
+  def changeset(%__MODULE__{} = tool_return, params) do
+    tool_return
     |> cast(params, @permitted)
     |> validate_required(@permitted)
     |> assoc_constraint(:employee)

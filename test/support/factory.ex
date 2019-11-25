@@ -15,7 +15,8 @@ defmodule Acqdat.Support.Factory do
     ToolType,
     ToolBox,
     Tool,
-    ToolIssue
+    ToolIssue,
+    ToolReturn
   }
 
   def user_factory() do
@@ -79,7 +80,7 @@ defmodule Acqdat.Support.Factory do
       name: sequence(:employee_name, &"Employee#{&1}"),
       phone_number: "123456",
       address: "54 Peach Street, Gotham",
-      role: "big boss",
+      role: "worker",
       uuid: "U" <> permalink(4)
     }
   end
@@ -118,7 +119,7 @@ defmodule Acqdat.Support.Factory do
     [tools: tools]
   end
 
-  def tool_issue() do
+  def tool_issue_factory() do
     %ToolIssue{
       employee: build(:employee),
       tool: build(:tool),
@@ -126,6 +127,19 @@ defmodule Acqdat.Support.Factory do
 
       issue_time: DateTime.truncate(DateTime.utc_now(), :second)
     }
+  end
+
+  def tool_return(tool_issue) do
+    return_params = %{
+      employee_id: tool_issue.employee_id,
+      tool_id: tool_issue.tool.id,
+      tool_box_id: tool_issue.tool_box.id,
+      tool_issue_id: tool_issue.id,
+
+      return_time: DateTime.truncate(DateTime.utc_now(), :second)
+    }
+    changeset = ToolReturn.changeset(%ToolReturn{}, return_params)
+    Repo.insert(changeset)
   end
 
 end

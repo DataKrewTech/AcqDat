@@ -8,13 +8,14 @@ defmodule Acqdat.Model.ToolManagament.EmployeeTest do
 
   describe "create/1" do
     test "creates an employee with supplied params" do
-      params = %{name: "IronMan", phone_number: "1234567", role: "employee"}
+      params = %{name: "IronMan", phone_number: "1234567", role: "worker"}
       assert {:ok, _employee} = Employee.create(params)
     end
 
     test "fails if existing name and phone number combination used" do
       employee = insert(:employee)
-      params = %{name: employee.name, phone_number: employee.phone_number, role: "employee"}
+      params = %{name: employee.name, phone_number: employee.phone_number,
+        role: "worker"}
       assert {:error, changeset} = Employee.create(params)
       assert %{name: ["User already exists!"]} == errors_on(changeset)
     end
@@ -59,6 +60,43 @@ defmodule Acqdat.Model.ToolManagament.EmployeeTest do
       assert {:ok, updated_employee} = Employee.update(employee, params)
       assert employee.id == updated_employee.id
       assert employee.name != updated_employee.name
+    end
+  end
+
+  describe "employee_tool_issue_status/1" do
+    setup do
+      employee = insert(:employee)
+      tool_box = insert(:tool_box)
+      tool_issue_1 = insert(:tool_issue, employee: employee, tool_box: tool_box)
+      tool_issue_2 = insert(:tool_issue, employee: employee, tool_box: tool_box)
+      tool_issue_list = [tool_issue_1, tool_issue_2]
+
+      [employee: employee, tool_issue_list: tool_issue_list]
+    end
+
+    test "returns list of tools issued but not returned", context do
+      %{tool_issue_list: tool_issue_list, employee: employee} = context
+      [tool_issue_1, tool_issue_2] = tool_issue_list
+
+      # return tool 1
+      tool_return(tool_issue_1)
+
+      # tool two still with employee
+      [tool] = Employee.employee_tool_issue_status(employee.id)
+      assert tool.id == tool_issue_2.tool_id
+    end
+
+    test "empty list if all tools returned", context do
+      %{tool_issue_list: tool_issue_list, employee: employee} = context
+      [tool_issue_1, tool_issue_2] = tool_issue_list
+
+      # return tool 1 and tool 2
+      tool_return(tool_issue_1)
+      tool_return(tool_issue_2)
+
+      # no tools remaining with employee
+      current_status = Employee.employee_tool_issue_status(employee.id)
+      assert current_status == []
     end
   end
 
