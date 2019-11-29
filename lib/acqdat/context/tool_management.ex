@@ -52,7 +52,8 @@ defmodule Acqdat.Context.ToolManagement do
   def tool_box_status(tool_box_uuid) do
     case ToolBox.get(%{uuid: tool_box_uuid}) do
       {:ok, tool_box} ->
-        {:ok, Repo.preload(tool_box, :tools)}
+        tool_box = Repo.preload(tool_box, :tools)
+        {:ok, tool_box.tools}
       {:error, _error} = error ->
         error
     end

@@ -232,6 +232,27 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
     end
   end
 
+  describe "tool_box_status/2" do
+    setup do
+      employee = insert(:employee)
+      tool_box = insert(:tool_box)
+
+      [employee: employee, tool_box: tool_box]
+    end
+
+    setup :tool_list
+
+    @tag tool_count: 3
+    test "returns status of all tools in the tool box", context do
+      %{conn: conn, tool_box: tool_box} = context
+
+      params = %{tool_box_uuid: tool_box.uuid}
+      result = conn |> post("/api/tl-mgmt/tool-box-status", params) |> json_response(200)
+      assert Map.has_key?(result, "tools")
+      assert length(result["tools"]) == 3
+    end
+  end
+
   defp tool_uuid_list(tools) do
     Enum.map(tools, fn tool ->
       tool.uuid
