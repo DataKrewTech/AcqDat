@@ -26,7 +26,7 @@
 <div class="form-group row">
   <%= label f, :role, "Role", class: "col-2 col-form-table" %>
   <div class="col-5">
-    <%= text_input(f, :role, class: "form-control") %>
+   <%= select(f, :role, employee_role(), class: "form-control", prompt: "Choose Role") %>
   </div>
   <%= error_tag(f, :role) %>
 </div>

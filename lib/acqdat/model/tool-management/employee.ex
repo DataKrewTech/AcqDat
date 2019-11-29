@@ -4,7 +4,8 @@ defmodule Acqdat.Model.ToolManagement.Employee  do
   """
 
   alias Acqdat.Repo
-  alias Acqdat.Schema.ToolManagement.Employee
+  alias Acqdat.Schema.ToolManagement.{Employee, ToolIssue}
+  import Ecto.Query
 
   def create(params) do
     changeset = Employee.create_changeset(%Employee{}, params)
@@ -45,4 +46,32 @@ defmodule Acqdat.Model.ToolManagement.Employee  do
     |> Repo.get(id)
     |> Repo.delete()
   end
+
+  @doc """
+  Returns a list of tools issued by client which are not yet returned.
+
+  Expects `employee_id` to be passed.
+  Returns an empty list if client has no remaining tools issued.
+  """
+  @spec employee_tool_issue_status(non_neg_integer) :: [ToolIssue]
+  def employee_tool_issue_status(employee_id) do
+    query =
+      from(tool_issue in ToolIssue,
+        where: tool_issue.employee_id == ^employee_id and
+          fragment("
+            NOT EXISTS(
+              SELECT 1
+              FROM acqdat_tm_tool_return as tr
+              WHERE tr.employee_id = ? and
+              tr.tool_issue_id = ?
+            )
+            ", ^employee_id, tool_issue.id
+          ),
+        preload: [:tool],
+        select: tool_issue
+    )
+
+    query |> Repo.all() |> Enum.map(fn tool_issue -> tool_issue.tool end)
+  end
+
 end
