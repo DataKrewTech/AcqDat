@@ -21,20 +21,23 @@ defmodule Acqdat.Schema.ToolManagement.ToolTest do
       assert %{
         name: ["can't be blank"],
         tool_box_id: ["can't be blank"],
-        tool_type_id: ["can't be blank"]
+        tool_type_id: ["can't be blank"],
+        card_uuid: ["can't be blank"]
       } == errors_on(changeset)
     end
 
     test "fails for, assoc constraint, if tool box does not exist", context do
       %{tool_type: tool_type} = context
-      params = %{name: "Tool_1", status: "issued", tool_box_id: -1, tool_type_id: tool_type.id}
+      params = %{name: "Tool_1", status: "issued", tool_box_id: -1,
+        tool_type_id: tool_type.id, card_uuid: permalink(4)}
       assert {:error, changeset} = %Tool{} |> Tool.create_changeset(params) |> Repo.insert()
       assert %{tool_box: ["does not exist"]} == errors_on(changeset)
     end
 
     test "fails for assoc constraint tool type does not exist", context do
       %{tool_box: tool_box} = context
-      params = %{name: "Tool_1", status: "issued", tool_box_id: tool_box.id, tool_type_id: -1}
+      params = %{name: "Tool_1", status: "issued", tool_box_id: tool_box.id,
+        tool_type_id: -1, card_uuid: permalink(4)}
       assert {:error, changeset} = %Tool{} |> Tool.create_changeset(params) |> Repo.insert()
       assert %{tool_type: ["does not exist"]} == errors_on(changeset)
     end
@@ -43,14 +46,16 @@ defmodule Acqdat.Schema.ToolManagement.ToolTest do
       %{tool_box: tool_box, tool_type: tool_type} = context
       tool = insert(:tool, tool_box: tool_box, tool_type: tool_type)
 
-      params =  params = %{name: tool.name, status: "issued", tool_box_id: tool_box.id, tool_type_id: tool_type.id}
+      params = %{name: tool.name, status: "issued", tool_box_id: tool_box.id,
+        tool_type_id: tool_type.id, card_uuid: permalink(4)}
       assert {:error, changeset} = %Tool{} |> Tool.create_changeset(params) |> Repo.insert()
       assert %{name: ["Unique tool name per tool box!"]} == errors_on(changeset)
     end
 
     test "fails if status not in inclusion list", context do
       %{tool_type: tool_type, tool_box: tool_box} = context
-      params = %{name: "Tool_1", status: "xyz", tool_box_id: tool_box.id, tool_type_id: tool_type.id}
+      params = %{name: "Tool_1", status: "xyz", tool_box_id: tool_box.id,
+        tool_type_id: tool_type.id, card_uuid: permalink(4)}
       assert changeset = Tool.create_changeset(%Tool{}, params)
       assert %{status: ["is invalid"]} == errors_on(changeset)
     end

@@ -8,7 +8,8 @@ defmodule Acqdat.Schema.ToolManagement.EmployeeTest do
 
   describe "create_changeset/2" do
     test "returns valid changeset" do
-      params = %{name: "IronMan", phone_number: "1234567", role: "worker"}
+      params = %{name: "IronMan", phone_number: "1234567", role: "worker",
+        card_uuid: permalink(4)}
       %{valid?: validity} = Employee.create_changeset(%Employee{}, params)
       assert validity
     end
@@ -20,7 +21,8 @@ defmodule Acqdat.Schema.ToolManagement.EmployeeTest do
       assert %{
         name: ["can't be blank"],
         phone_number: ["can't be blank"],
-        role: ["can't be blank"]
+        role: ["can't be blank"],
+        card_uuid: ["can't be blank"]
       } == errors_on(changeset)
     end
   end

@@ -5,6 +5,8 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
 
   setup %{conn: conn} do
     conn = put_req_header(conn, "content-type", "application/json")
+    user = insert(:user)
+    conn = signin_guardian(conn, user)
     [conn: conn]
   end
 
@@ -21,7 +23,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
     test "fails for bad params", context do
       %{conn: conn} = context
 
-      result = conn |> post("/api/tl-mgmt/tool-transaction", %{}) |> json_response(200)
+      result = conn |> post("/api/tl-mgmt/tool-transaction", %{}) |> json_response(400)
       assert %{
           "errors" => %{
             "tool_box_uuid" => ["can't be blank"],
@@ -45,14 +47,14 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
     end
 
     @tag tool_count: 2
-    test "error if non tool ids not found", context do
+    test "error if issuable tool ids not found", context do
       %{employee: employee, tool_box: tool_box,
       conn: conn} = context
       params = %{"user_uuid" => employee.uuid,
         "tool_box_uuid" => tool_box.uuid, "tool_ids" => ["1234", "abcd"],
         "transaction" => "issue"}
 
-      result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(200)
+      result = conn |> post("/api/tl-mgmt/tool-transaction", params) |> json_response(400)
       assert %{"status" => "error", "errors" => "no issuable tools"} == result
     end
 
@@ -90,7 +92,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
       return_params = %{"user_uuid" => employee.uuid,
         "tool_box_uuid" => tool_box.uuid, "tool_ids" => ["abcd", "1234"],
         "transaction" => "return"}
-      result = conn |> post("/api/tl-mgmt/tool-transaction", return_params) |> json_response(200)
+      result = conn |> post("/api/tl-mgmt/tool-transaction", return_params) |> json_response(400)
       assert result == %{"status" => "error", "errors" => "no returnable tools"}
     end
 
@@ -151,7 +153,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
     @tag tool_count: 1
     test "return tool if found", context do
       %{conn: conn, tool_box: tool_box, tools: [tool]} = context
-      params = %{tool_uuid: tool.uuid, tool_box_uuid: tool_box.uuid}
+      params = %{tool_uuid: tool.card_uuid, tool_box_uuid: tool_box.uuid}
       result =
         conn
         |> post("/api/tl-mgmt/verify-tool", params)
@@ -205,7 +207,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
       # return tool 1
       tool_return(tool_issue_1)
 
-      params = %{employee_uuid: employee.uuid}
+      params = %{employee_uuid: employee.card_uuid}
       result = conn
         |> post("/api/tl-mgmt/employee-tool-issue-status", params)
         |> json_response(200)
@@ -222,7 +224,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
       tool_return(tool_issue_1)
       tool_return(tool_issue_2)
 
-      params = %{employee_uuid: employee.uuid}
+      params = %{employee_uuid: employee.card_uuid}
       result = conn
         |> post("/api/tl-mgmt/employee-tool-issue-status", params)
         |> json_response(200)
@@ -255,7 +257,7 @@ defmodule AcqdatWeb.API.ToolManagementControllerTest do
 
   defp tool_uuid_list(tools) do
     Enum.map(tools, fn tool ->
-      tool.uuid
+      tool.card_uuid
     end)
   end
 end

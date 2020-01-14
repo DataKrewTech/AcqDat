@@ -23,6 +23,23 @@ defmodule AcqdatWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint AcqdatWeb.Endpoint
+
+      @default_opts [
+        store: :cookie,
+        key: "secretkey",
+        encryption_salt: "encrypted cookie salt",
+        signing_salt: "signing salt"
+      ]
+      @signing_opts Plug.Session.init(Keyword.put(@default_opts, :encrypt, false))
+
+      def signin_guardian(conn, user) do
+        conn =
+          conn
+          |> Plug.Session.call(@signing_opts)
+          |> Plug.Conn.fetch_session()
+          |> AcqdatWeb.Guardian.Plug.sign_in(user)
+          |> Guardian.Plug.VerifySession.call([])
+      end
     end
   end
 

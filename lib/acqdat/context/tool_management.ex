@@ -41,8 +41,11 @@ defmodule Acqdat.Context.ToolManagement do
       end
   end
 
+  @doc """
+  Verifies a tool by it's rfid card uuid.
+  """
   def verify_tool(%{tool_uuid: tool_uuid}) do
-    Tool.get(%{uuid: tool_uuid})
+    Tool.get(%{card_uuid: tool_uuid})
   end
 
   def employees(_facotry_id) do
@@ -59,9 +62,15 @@ defmodule Acqdat.Context.ToolManagement do
     end
   end
 
+  @doc """
+  Returns record of tools issued by the employee.
+
+  ## See
+  `Acqdat.Schema.ToolManagement.ToolIssue`
+  """
   @spec employee_transaction_status(non_neg_integer) :: {:ok, []} | {:error, any}
   def employee_transaction_status(employee_uuid) do
-    case Employee.get(%{uuid: employee_uuid}) do
+    case Employee.get(%{card_uuid: employee_uuid}) do
       {:ok, employee} ->
         {:ok, Employee.employee_tool_issue_status(employee.id)}
       {:error, _message} = error->

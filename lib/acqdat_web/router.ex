@@ -94,11 +94,11 @@ defmodule AcqdatWeb.Router do
     post "/sensor/:id/data", SensorController, :data
     post("/tl-mgmt/employee/identify", ToolManagementController, :verify_employee)
     post("/tl-mgmt/tool-transaction", ToolManagementController, :tool_transaction)
-    post("tl-mgmt/employees", ToolManagementController, :list_employees)
-    post("tl-mgmt/verify-tool", ToolManagementController, :verify_tool)
-    post("tl-mgmt/employee-tool-issue-status", ToolManagementController,
+    post("/tl-mgmt/employees", ToolManagementController, :list_employees)
+    post("/tl-mgmt/verify-tool", ToolManagementController, :verify_tool)
+    post("/tl-mgmt/employee-tool-issue-status", ToolManagementController,
       :employee_tool_issue_status)
-    post("tl-mgmt/tool-box-status", ToolManagementController,
+    post("/tl-mgmt/tool-box-status", ToolManagementController,
       :tool_box_status)
 
   end
