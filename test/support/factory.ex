@@ -24,7 +24,7 @@ defmodule Acqdat.Support.Factory do
       first_name: "Tony",
       last_name: "Stark",
       email: "tony@starkindustries.com",
-      password_hash: ""
+      password_hash: "NOTASECRET"
     }
   end
 
@@ -81,7 +81,8 @@ defmodule Acqdat.Support.Factory do
       phone_number: "123456",
       address: "54 Peach Street, Gotham",
       role: "worker",
-      uuid: "U" <> permalink(4)
+      uuid: "U" <> permalink(4),
+      card_uuid: "U" <> permalink(4)
     }
   end
 
@@ -106,6 +107,7 @@ defmodule Acqdat.Support.Factory do
       status: "in_inventory",
       tool_box: build(:tool_box),
       tool_type: build(:tool_type),
+      card_uuid: "T" <> permalink(4)
     }
   end
 

@@ -23,7 +23,7 @@ defmodule Acqdat.Model.ToolManagament.ToolTest do
 
   end
 
-  describe "get_all_by_uuids/1" do
+  describe "get_all_by_card_uuids/1" do
     setup  do
       tool_box = insert(:tool_box)
 
@@ -35,7 +35,7 @@ defmodule Acqdat.Model.ToolManagament.ToolTest do
     @tag tool_count: 3
     test "returns a list of tool ids", context do
       %{tools: tools} = context
-      tool_uuids = Enum.map(tools, fn tool -> tool.uuid end)
+      tool_uuids = Enum.map(tools, fn tool -> tool.card_uuid end)
 
       tool_ids = Tool.get_all_by_uuids_and_status(tool_uuids, "in_inventory")
       assert length(tool_ids) == length(tool_uuids)

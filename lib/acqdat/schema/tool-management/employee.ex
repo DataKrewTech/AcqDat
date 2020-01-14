@@ -22,11 +22,12 @@ defmodule Acqdat.Schema.ToolManagement.Employee do
     field(:address, :string)
     field(:uuid, :string)
     field(:role, :string)
+    field(:card_uuid, :string)
 
     timestamps(type: :utc_datetime)
   end
 
-  @required_fields ~w(name phone_number uuid role)a
+  @required_fields ~w(name phone_number uuid role card_uuid)a
   @optional_fields ~w(address)a
 
   @permitted @required_fields ++ @optional_fields

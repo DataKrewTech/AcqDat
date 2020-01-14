@@ -22,7 +22,6 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
     end
   end
 
-
   def get(query) when is_map(query) do
     case Repo.get_by(Tool, query) do
       nil ->
@@ -48,11 +47,18 @@ defmodule Acqdat.Model.ToolManagement.Tool  do
     |> Repo.delete()
   end
 
+
+  @doc """
+  Returns a list of tools, the `card_uuid` of which is present in
+  supplied `uuids` list and corresponds to status supplied.
+
+  > The status can be `issued` or `in_inventory`.
+  """
   @spec get_all_by_uuids_and_status(list, String.t()) :: [non_neg_integer]
   def get_all_by_uuids_and_status(uuids, status) do
     query = from(
       tool in Tool,
-      where: tool.uuid in ^uuids and tool.status == ^status,
+      where: tool.card_uuid in ^uuids and tool.status == ^status,
       select: tool.id
     )
     Repo.all(query)

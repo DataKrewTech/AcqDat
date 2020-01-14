@@ -8,14 +8,15 @@ defmodule Acqdat.Model.ToolManagament.EmployeeTest do
 
   describe "create/1" do
     test "creates an employee with supplied params" do
-      params = %{name: "IronMan", phone_number: "1234567", role: "worker"}
+      params = %{name: "IronMan", phone_number: "1234567", role: "worker",
+        card_uuid: permalink(4)}
       assert {:ok, _employee} = Employee.create(params)
     end
 
     test "fails if existing name and phone number combination used" do
       employee = insert(:employee)
       params = %{name: employee.name, phone_number: employee.phone_number,
-        role: "worker"}
+        role: "worker", card_uuid: permalink(4) }
       assert {:error, changeset} = Employee.create(params)
       assert %{name: ["User already exists!"]} == errors_on(changeset)
     end

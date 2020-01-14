@@ -22,13 +22,14 @@ defmodule Acqdat.Schema.ToolManagement.Tool do
     field(:name, :string)
     field(:status, :string, default: "in_inventory")
     field(:description, :string)
+    field(:card_uuid, :string)
 
     belongs_to(:tool_box, ToolBox)
     belongs_to(:tool_type, ToolType)
     timestamps(type: :utc_datetime)
   end
 
-  @required ~w(name tool_type_id uuid tool_box_id )a
+  @required ~w(name tool_type_id uuid tool_box_id card_uuid)a
   @optional ~w(description status)a
 
   @permitted @required ++ @optional
