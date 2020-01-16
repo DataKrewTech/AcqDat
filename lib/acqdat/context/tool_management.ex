@@ -26,7 +26,7 @@ defmodule Acqdat.Context.ToolManagement do
       user_uuid: user_uuid, tool_box_uuid: tool_box_uuid} = params
     tool_uuids = tool_uuids |> MapSet.new() |> Enum.to_list()
 
-      with {:employee, {:ok, employee}} <- {:employee, Employee.get(%{uuid: user_uuid})},
+      with {:employee, {:ok, employee}} <- {:employee, Employee.get(%{card_uuid: user_uuid})},
         {:tool_box, {:ok, tool_box}} <- {:tool_box, ToolBox.get(%{uuid: tool_box_uuid})} do
             %{}
             |> Map.put(:employee_id, employee.id)

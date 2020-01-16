@@ -43,6 +43,7 @@ defmodule AcqdatWeb.API.ToolManagementView do
       name: employee.name,
       role: employee.role,
       uuid: employee.uuid,
+      card_uuid: employee.card_uuid,
       phone_number: employee.phone_number
     }
   end
