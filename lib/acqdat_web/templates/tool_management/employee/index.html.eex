@@ -21,6 +21,7 @@
               <thead>
                 <tr>
                   <th data-field="name">UUID</th>
+                  <th data-field="rfid">RFID Number</th>
                   <th data-field="id" data-switchable="false">Name</th>
                   <th data-field="phone_number">Phone Number</th>
                   <th data-field="actions">Actions</th>
@@ -30,6 +31,7 @@
                 <%= for employee <- @employees do %>
                   <tr>
                     <td><%= employee.uuid %></td>
+                    <td><%= employee.card_uuid %></td>
                     <td>
                       <%= link employee.name, to: Routes.employee_path(@conn, :show, employee.id), 
                          class: "btn btn-default"%>
