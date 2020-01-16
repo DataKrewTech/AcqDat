@@ -19,7 +19,8 @@ defmodule AcqdatWeb.API.ToolManagementView do
       tool: %{
         name: tool.name,
         uuid: tool.uuid,
-        status: tool.status
+        status: tool.status,
+        card_uuid: tool.card_uuid
       }
     }
   end
