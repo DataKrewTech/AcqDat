@@ -8,7 +8,8 @@ defmodule AcqdatWeb.API.ToolManagementView do
     %{
       status: @status_verified,
       employee: %{
-        name: employee.name
+        name: employee.name,
+        role: employee.role
       }
     }
   end
