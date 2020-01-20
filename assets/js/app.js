@@ -41,7 +41,6 @@ $(document).ready(() => {
 function handleDOMContentLoaded() {
   // Get the current view name
   const viewName = document.getElementsByTagName("body")[0].dataset.jsViewName;
-  console.log('viewName', viewName);
   // Load view class and mount it
   const ViewClass = loadView(viewName);
   const view = new ViewClass();
@@ -51,7 +50,6 @@ function handleDOMContentLoaded() {
 }
 
 function handleDocumentUnload() {
-  console.log('unmounted view', window.currentView);
   window.currentView.unmount();
 }
 

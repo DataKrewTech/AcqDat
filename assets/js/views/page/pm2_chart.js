@@ -43,7 +43,9 @@ var pm2ChartObj =  {
         }
     }
   },
-
+  time: {
+    timezone: 'Asia/Jakarta'
+  },
   series: [{
     name: 'PM2.5',
     data: [0],
@@ -55,7 +57,14 @@ var pm2ChartObj =  {
     tooltip: {
         valueSuffix: 'ug/m3'
     }
-  }]
+  }],
+  exporting: {
+    buttons: {
+      contextButton: {
+        menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
+      }
+    }
+  }
 }
 
 export default pm2ChartObj

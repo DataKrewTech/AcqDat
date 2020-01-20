@@ -41,7 +41,9 @@ var humidChartObj =  {
         }
     }
   },
-
+  time: {
+    timezone: 'Asia/Jakarta'
+  },
   series: [{
     name: 'Humidity',
     data: [0],
@@ -53,7 +55,14 @@ var humidChartObj =  {
     tooltip: {
         valueSuffix: '%'
     }
-  }]
+  }],
+  exporting: {
+    buttons: {
+      contextButton: {
+        menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
+      }
+    }
+  }
 }
 
 export default humidChartObj

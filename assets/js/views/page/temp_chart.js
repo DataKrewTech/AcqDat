@@ -82,15 +82,23 @@ var tempChartObj = {
           color: '#DF5353' // red
       }]
   },
-
+  time: {
+    timezone: 'Asia/Jakarta'
+  },
   series: [{
       name: 'Temperature',
       data: [0],
       tooltip: {
           valueSuffix: String.fromCharCode(176) + "C"
       }
-  }]
-
+  }],
+  exporting: {
+    buttons: {
+      contextButton: {
+        menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
+      }
+    }
+  }
 }
 
 export default tempChartObj
