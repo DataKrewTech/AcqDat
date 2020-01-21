@@ -30,20 +30,31 @@ export default function chartInitializer(config) {
         }
       ]
     },
-
     title: {
       text: config.title
     },
     time: {
-      timezone: 'Asia/Jakarta'
+      timezone: "Asia/Jakarta"
     },
     series: config.series,
     exporting: {
       buttons: {
         contextButton: {
-          menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "downloadCSV"
+          ]
         }
       }
+    },
+    tooltip: {
+      headerFormat: '<small>{point.key} WIB</small><table>'
     }
   }
 }
