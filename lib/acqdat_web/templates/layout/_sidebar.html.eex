@@ -6,23 +6,29 @@
         <li class="has_sub">
           <a href="/" class="waves-effect"><i class="ti-pie-chart"></i> <span> Dashboard </span></a>
         </li>
-
         <li class="has_sub">
-          <a href="/devices" class="waves-effect"><i class="typcn typcn-device-tablet"></i> <span> Devices </span> </a>
+          <a href="/energy-management" class="waves-effect"><i class="ti-pie-chart"></i> <span> Energy Management </span></a>
         </li>
         <li class="has_sub">
-          <a href="/sensor_types" class="waves-effect"><i class="ti-pulse"></i> <span> Sensor Types </span> </a>
+          <a href="/tool-management/dashboard" class="waves-effect"><i class="icon-wrench"></i> <span> Tool Management </span> </a>
         </li>
-
         <li class="has_sub">
           <a href="/data-trace" class="waves-effect"><i class="ti-server"></i><span> Data Trace </span> </a>
         </li>
-
+        <li class="has_sub">
+          <a href="/process-data-history/dryer" class="waves-effect"><i class="ti-bell"></i> <span> Process Data History </span> </a>
+        </li>
         <li class="has_sub">
           <a href="/notifications" class="waves-effect"><i class="ti-bell"></i> <span> Knotify </span> </a>
         </li>
+
+        <div class="sidebar-divider"></div>
+
         <li class="has_sub">
-          <a href="/tool-management/dashboard" class="waves-effect"><i class="icon-wrench"></i> <span> Tool-Management </span> </a>
+          <a href="/devices" class="waves-effect"><i class="typcn typcn-device-tablet"></i> <span> Device Management </span> </a>
+        </li>
+        <li class="has_sub">
+          <a href="/sensor_types" class="waves-effect"><i class="ti-pulse"></i> <span> Sensor Management </span> </a>
         </li>
       </ul>
       <div class="clearfix"></div>

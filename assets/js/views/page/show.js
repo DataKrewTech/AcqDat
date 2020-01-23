@@ -7,15 +7,28 @@ import pm2ChartObj from "./pm2_chart";
 var chartHumid;
 var chartTemp;
 var chartpm2;
+var chartTemp2, chartTemp3, chartCurrent, chartVoltage, chartVoltage, chartPower,
+  chartEnergy, chartpH, chartConductivity, chartORP, chartTurbidity;
 
 export default class View extends MainView {
   
   mount() {
     let channel = liveView();
 
-    chartHumid = Highcharts.chart('container-humid-gauge', humidChartObj);
+    // chartHumid = Highcharts.chart('container-humid-gauge', humidChartObj);
     chartTemp = Highcharts.chart('container-temperature-gauge', tempChartObj);
-    chartpm2 = Highcharts.chart('container-pm2-gauge', pm2ChartObj);
+    // chartpm2 = Highcharts.chart('container-pm2-gauge', pm2ChartObj);
+
+    chartTemp2 = Highcharts.chart('container-temperature2-gauge', tempChartObj);
+    chartCurrent = Highcharts.chart('container-current-gauge', tempChartObj);
+    chartVoltage = Highcharts.chart('container-voltage-gauge', tempChartObj);
+    chartPower = Highcharts.chart('container-power-gauge', tempChartObj);
+    chartEnergy = Highcharts.chart('container-energy-gauge', tempChartObj);
+    chartpH = Highcharts.chart('container-pH-gauge', tempChartObj);
+    chartConductivity = Highcharts.chart('container-conductivity-gauge', tempChartObj);
+    chartORP = Highcharts.chart('container-ORP-gauge', tempChartObj);
+    chartTurbidity = Highcharts.chart('container-turbidity-gauge', tempChartObj);
+    chartTemp3 = Highcharts.chart('container-temperature3-gauge', tempChartObj);
 
     channel.on("data_point", payload => {
       this.updateSensorWidgets(payload["sensor_data"]);

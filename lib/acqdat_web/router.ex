@@ -66,6 +66,14 @@ defmodule AcqdatWeb.Router do
     get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
     post "/notification/rule_preferences", NotificationController, :policy_preferences
     resources("/data-trace", DataTraceController, only: [:index, :show])
+    resources("/energy-management", EnergyManagementController, only: [:index])
+
+    # Process Data History
+    scope "/process-data-history", ProcessDataHistory do
+      get "/dryer", DryerController, :data_history
+      get "/wet-pre-breaker", WetPreBreakerController, :data_history
+      get "/ipal-water-inlet", IpalWaterInletController, :data_history
+    end
 
     # Tool Management
     scope "/tool-management", ToolManagement do

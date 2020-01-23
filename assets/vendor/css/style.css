@@ -1140,6 +1140,20 @@ select[multiple] {
   margin-bottom: 0;
 }
 
+.process-data-history-container .history-tab-content {
+  margin-top: 45px;
+}
+
+.process-data-history-container .nav.nav-tabs > li > a, .nav.tabs-vertical > a {
+  background-color: white;
+  color: #36404a !important;
+}
+
+.process-data-history-container .nav.nav-tabs > li > a.active, .nav.tabs-vertical > a.active {
+  background-color: #3377B3;
+  color: white !important;
+}
+
 .table > thead > tr > td.middle-align, .table > tbody > tr > td.middle-align,
 .table > .tfood > tr > td.middle-align, .table > thead > tr > th.middle-align,
 .table > tbody > tr > th.middle-align, .table > .tfood > tr > th.middle-align {
@@ -1680,6 +1694,12 @@ body.fixed-left .side-menu.left {
   background: #f4f8fb !important;
   border-left: 3px solid #5fbeaa;
   color: #5fbeaa !important;
+}
+
+#sidebar-menu .sidebar-divider {
+  height: 0;
+  margin: .5rem 0;
+  border-top: 2px dashed #ebeff2;
 }
 
 .menu-title {

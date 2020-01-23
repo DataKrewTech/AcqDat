@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-4">
+    <ul class="nav nav-tabs navtab-bg nav-justified mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-field-view-tab" data-toggle="pill" href="#pills-field-view" role="tab" aria-controls="pills-field-view" aria-selected="true">Field View</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-data-history-tab" data-toggle="pill" href="#pills-data-history" role="tab" aria-controls="pills-data-history" aria-selected="false">Data History</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-field-view" role="tabpanel" aria-labelledby="pills-field-view-tab">
+        <div class="row">
+          <div class="col-3">
+            <div class="card-deck">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <img class="card-img-top" src="https://loremflickr.com/640/360" alt="Card image cap">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-data-history" role="tabpanel" aria-labelledby="pills-data-history-tab">
+        <div class="row">
+          <div class="col-2">
+            <div class="nav flex-column nav-tabs navtab-bg nav-justified tabs-vertical" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-water-sensor-tab" data-toggle="pill" href="#v-pills-water-sensor" role="tab" aria-controls="v-pills-water-sensor" aria-selected="true">Water Sensors</a>
+            </div>
+           </div>
+          <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-water-sensor" role="tabpanel" aria-labelledby="v-pills-water-sensor-tab">
+                <div id="ipal-water-inlet-ph-container" style="width:100%; height:400px; margin-bottom: 30px;"></div>
+                <div id="ipal-water-inlet-conductivity-container" style="width:100%; height:400px; margin-bottom: 30px;"></div>
+                <div id="ipal-water-inlet-orp-container" style="width:100%; height:400px; margin-bottom: 30px;"></div>
+                <div id="ipal-water-inlet-turbidity-container" style="width:100%; height:400px; margin-bottom: 30px;"></div>
+                <div id="ipal-water-inlet-temp-container" style="width:100%; height:400px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
