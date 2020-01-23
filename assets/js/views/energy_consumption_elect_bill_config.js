@@ -65,6 +65,22 @@ export default function energychartInitializer(config) {
         tooltip: {
             valueSuffix: ' IDR'
         }
-    }]
+    }],
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "downloadCSV"
+          ]
+        }
+      }
+    }
   }
 }

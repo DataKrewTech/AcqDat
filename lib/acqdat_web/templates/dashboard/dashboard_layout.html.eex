@@ -19,6 +19,7 @@
             <div class="card">
               <div class="card-body" style="height: 300px">
                 <h6 class="card-title">Bird's eye view</h6>
+                <img class="d-block w-100" src="/images/bird_eye_view.png" alt="">
               </div>
             </div>
           </div>
@@ -39,7 +40,7 @@
                   <div class="col-8">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
                       <li class="nav-item">
-                        <% key=("") %>
+                        <% key=("dryer") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
                           href="/">Dryer (Line 2)</a>
                       </li>

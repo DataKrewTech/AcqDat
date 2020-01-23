@@ -20,13 +20,19 @@
                 <div class="col-md-4">
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
-                      <div class="col-md-4">
-                        <img src="" class="card-img" alt="">
-                      </div>
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <div class="card-body">
-                          <h5 class="card-title">Current Status</h5>
-                          <%= @data.current_status %>
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title">Current Status</h5>
+                            </div>
+                            <div class="col-4">
+                              <label class="switch">
+                                <input type="checkbox" <%= @data.current_status && 'checked' %>>
+                                <span class="slider round"></span>
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -35,13 +41,16 @@
                 <div class="col-md-4">
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
-                      <div class="col-md-4">
-                        <img src="" class="card-img" alt="">
-                      </div>
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <div class="card-body">
-                          <h5 class="card-title">Total Hours On</h5>
-                          <%= @data.total_uptime %>
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title">Total Hours On</h5>
+                            </div>
+                            <div class="col-4">
+                              <%= @data.total_uptime %>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -50,13 +59,16 @@
                 <div class="col-md-4">
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
-                      <div class="col-md-4">
-                        <img src="" class="card-img" alt="">
-                      </div>
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <div class="card-body">
-                          <h5 class="card-title">Total kWh consumed</h5>
-                          <%= @data.total_power %>
+                          <div class="row">
+                            <div class="col-8">
+                              <h5 class="card-title">Total kWh consumed</h5>
+                            </div>
+                            <div class="col-4">
+                              <%= @data.total_power %>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -42,7 +42,6 @@ export default class View extends MainView {
     let url = `/sensor-data/${sensor_id}`;
     let data = {identifier: identifier}
     $.get(url, data, function(response_data, status){
-      debugger;
       chart.series[series].setData(response_data.data, true)
       chart.redraw()
     })

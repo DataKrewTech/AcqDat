@@ -91,6 +91,22 @@ export default function chartInitializer() {
         tooltip: {
             valueSuffix: ' A'
         }
-    }]
+    }],
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "downloadCSV"
+          ]
+        }
+      }
+    }
   }
 }
