@@ -48,6 +48,8 @@ defmodule AcqdatWeb.Router do
 
     post("/device/add-data", DeviceController, :insert_data)
     get("/sensor-data/:id/", SensorController, :sensor_data)
+    get("/current-voltage-senor-data", EnergyManagementController, :current_voltage_senor_data)
+    get("/energy-consumption-electricity-bill", EnergyManagementController, :energy_consumption_electricity_bill)
   end
 
   scope "/", AcqdatWeb do

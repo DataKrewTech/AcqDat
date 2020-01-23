@@ -7,19 +7,27 @@
         <div class="row">
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body">
-                Welcome to Project Apricot POC Dashboard
+              <div class="card-body" style="height: 300px;">
+              <h6 class="card-title">About Project and Platform</h6>
+              <p>
+                Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
+              </p>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body">Map</div>
+              <div class="card-body" style="height: 300px">
+                <h6 class="card-title">Bird's eye view</h6>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body">Site Layout</div>
+              <div class="card-body" style="height: 300px">
+                <h6 class="card-title">Processes and Sensor Locations</h6>
+                <img class="d-block w-100" src="/images/dryer_carousel4.png" alt="">
+              </div>
             </div>
           </div>
         </div>

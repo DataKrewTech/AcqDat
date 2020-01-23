@@ -1,102 +1,55 @@
 import MainView from '../main';
+import chartInitializer from "../current_voltage_config";
+import energychartInitializer from "../energy_consumption_elect_bill_config";
+
+
+var currentVoltageChart, energyBillChart;
 
 export default class View extends MainView {
   mount() {
-    Highcharts.chart('container-current-voltage-line', {
+    this.renderChart(currentVoltageChart, 'container-current-voltage-line');
+    this.renderEnergyBillChart(energyBillChart, 'container-energy-bill-column');
+  }
 
-      title: {
-          text: 'Daily Avg, Max, Min Current & Voltage'
-      },
-  
-      yAxis: {
-          title: {
-              text: ''
-          }
-      },
-      legend: {
-          enabled: false
-      },
-  
-      plotOptions: {
-          series: {
-              label: {
-                  connectorAllowed: false
-              },
-              pointStart: 2010
-          }
-      },
-  
-      series: [{
-          name: 'Tokyo',
-          data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-      }, {
-          name: 'London',
-          data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-      }],
-  
-      responsive: {
-          rules: [{
-              condition: {
-                  maxWidth: 500
-              },
-              chartOptions: {
-                  legend: {
-                      layout: 'horizontal',
-                      align: 'center',
-                      verticalAlign: 'bottom'
-                  }
-              }
-          }]
-      }
-  
-    });
+  unmount() {
+    currentVoltageChart.destroy();
+    energyBillChart.destroy();
+    super.unmount();
+  }
 
-    Highcharts.chart('container-power-column', {
-      chart: {
-          type: 'column'
-      },
-      title: {
-          text: 'Daily kWh and $'
-      },
-      legend: {
-        enabled: false
-      },
-      xAxis: {
-          categories: [
-            '2012', '2013', '2014', '2015', '2016', '2017', '2018'
-          ],
-          crosshair: true
-      },
-      yAxis: {
-          min: 0,
-          title: {
-              text: ''
-          }
-      },
-      tooltip: {
-          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-              '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-          footerFormat: '</table>',
-          shared: true,
-          useHTML: true
-      },
-      plotOptions: {
-          column: {
-              pointPadding: 0.2,
-              borderWidth: 0
-          }
-      },
-      series: [{
-          name: 'Tokyo',
-          data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6]
-  
-      }, {
-          name: 'New York',
-          data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0]
-  
-      }]
-    });
+  renderChart(chart, container) {
+    let chartConfig = chartInitializer()
+    chart = Highcharts.chart(container, chartConfig);
+    this.get_current_voltage_data(chart)
+  }
 
+  renderEnergyBillChart(chart, container) {
+    let chartConfig = energychartInitializer()
+    chart = Highcharts.chart(container, chartConfig);
+    this.get_energy_consumption_bill(chart)
+  }
+
+  get_energy_consumption_bill(chart) {
+    let url = `/energy-consumption-electricity-bill`;
+    $.get(url, {}, function(response_data, status){
+      let daily_energy_consumption = response_data.data.daily_energy_consumption.map(x => [new Date(x[0]).getTime(), Math.abs(x[1])]);
+      let daily_bill = response_data.data.daily_bill.map(x => [new Date(x[0]).getTime(), Math.abs(x[1])]);
+
+      chart.series[0].setData(daily_energy_consumption, true)
+      chart.series[1].setData(daily_bill, true)
+      chart.redraw()      
+    })
+  }
+
+  get_current_voltage_data(chart) {
+    let url = `/current-voltage-senor-data`;
+    $.get(url, {}, function(response_data, status){
+      let avg_current_data = response_data.data.avg_current.map(x => [new Date(x[0]).getTime(), x[1]]);
+      let avg_voltage_data = response_data.data.avg_voltage.map(x => [new Date(x[0]).getTime(), x[1]]);
+
+      chart.series[0].setData(avg_voltage_data, true)
+      chart.series[1].setData(avg_current_data, true)
+      chart.redraw()
+    })
   }
 }
