@@ -7,6 +7,9 @@ import EnergyManagementIndexView from "./energy_management/index"
 import DryerDataHistoryView from "./process_data_history/dryer/data_history"
 import WetPreBreakerDataHistoryView from "./process_data_history/wet_pre_breaker/data_history"
 import IpalWaterInletDataHistoryView from "./process_data_history/ipat_water_inlet/data_history"
+import DryerIndexView from "./dashboard/dryer/index"
+import WetPreBreakerIndexView from "./dashboard/wet_pre_breaker/index"
+import IpalWaterInletIndexView from "./dashboard/ipal_water_inlet/index"
 
 // Collection of specific view modules
 const views = {
@@ -17,7 +20,10 @@ const views = {
   EnergyManagementIndexView,
   DryerDataHistoryView,
   WetPreBreakerDataHistoryView,
-  IpalWaterInletDataHistoryView
+  IpalWaterInletDataHistoryView,
+  DryerIndexView,
+  WetPreBreakerIndexView,
+  IpalWaterInletIndexView
 };
 
 export default function loadView(viewName) {

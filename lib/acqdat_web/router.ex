@@ -53,7 +53,14 @@ defmodule AcqdatWeb.Router do
   scope "/", AcqdatWeb do
     pipe_through [:browser, :authentication]
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+
+    scope "/", Dashboard do
+      get "", DryerController, :index
+      get "/wet-pre-breaker", WetPreBreakerController, :index
+      get "/ipal-water-inlet", IpalWaterInletController, :index
+    end
+
     resources("/sensor_types", SensorTypeController)
 
     resources("/devices", DeviceController) do

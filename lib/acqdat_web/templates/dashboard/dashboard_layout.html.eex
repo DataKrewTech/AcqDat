@@ -1,0 +1,65 @@
+<%= render_layout "app.html", assigns do %>
+
+  <div class="content-page">
+  <!-- Start content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                Welcome to Project Apricot POC Dashboard
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">Map</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">Site Layout</div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+          <div class="col-sm-12">
+            <div class="list-container process-data-history-container">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                      <li class="nav-item">
+                        <% key=("") %>
+                        <a class="nav-link <%= active_link(@conn, key) %>"
+                          href="/">Dryer (Line 2)</a>
+                      </li>
+                      <li class="nav-item">
+                        <% key=("wet-pre-breaker")  %>
+                        <a class="nav-link <%= active_link(@conn, key) %>"
+                          href="/wet-pre-breaker">Wet Pre-breaker (Line 2)</a>
+                      </li>
+                      <li class="nav-item">
+                        <% key=("ipal-water-inlet") %>
+                        <a class="nav-link <%= active_link(@conn, key) %>"
+                          href="/ipal-water-inlet">IPAL Water Inlet</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="history-tab-content">
+                      <%= render @view_module, @view_template, assigns %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
