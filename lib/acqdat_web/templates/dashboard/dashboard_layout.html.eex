@@ -13,7 +13,7 @@
                 </div>
                 <p class="text-blue float-right">About Project and Platform</p>
                 <div style="height: 40px;"></div>
-                <div class="ribbon-content" style="padding-top: 30px; font-size: 15px;">
+                <div class="ribbon-content" style="padding-top: 40px; font-size: 15px;">
                   Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
                 </div>
               </div>
