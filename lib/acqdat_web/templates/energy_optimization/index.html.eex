@@ -1,0 +1,22 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body ribbon-box">
+          <div class="ribbon ribbon-blue float-left">
+            Energy Optimization
+          </div>
+          <div style="height: 60px;"></div>
+          <div class="ribbon-content" style="clear: both; height: auto;">
+            Managing energy consumption results in greener operations, lower energy costs, less unplanned downtime and more consistent quality. <br> <br>
+            Globally, manufacturers are increasingly pursuing a resource efficient and sustainable approach due to several economic, social and governmental mandates. In energy-intensive industries, energy costs form a significant part of the operation costs. In this scenario, the use of IoT and predictive analytics has an important role, as these technologies can reduce energy consumption and operating costs substantially. <br><br>
+            For manufacturing companies, metering does not reveal how energy is distributed across buildings, processes and equipment. Therefore, the first step towards developing a systematic approach to energy management and improving a company’s competitive position lies in the increased visibility of energy consumption patterns. <br><br>
+            <b>DataKrew</b> is working extensively in this area, as we are building energy monitoring and analytics systems for the manufacturing industry. Our objective is to use the energy usage insights to optimise processes and equipment utilisation and incur operating cost savings. For this we must monitor the energy consumption patterns in a plant through sensors within processes or equipment. Monitoring deviations from regular energy consumption can help to detect failing equipment. In addition, manufacturing execution systems (MES) such as <b>HeveaPro Software</b> in case of <b>HalcyonAgri</b> capture relevant data, such as equipment settings, shifts and process parameters, providing insight into how energy is used in operations. Further, predictive analytics also provides manufacturers with insights that help in the implementation of energy programs. <br><br>
+            According to research by McKinsey & Company, PWC and Roland Berger, energy management using IoT can reduce factory energy costs by 10–30%. <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
