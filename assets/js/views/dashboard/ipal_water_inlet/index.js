@@ -1,6 +1,7 @@
 import MainView from '../../main'
 import liveView from "../../page/socket"
 import tempChartObj from "../../page/temp_chart";
+import phChartObj from "../../page/ph_chart";
 
 var tempChart, phChart, conductivityChart, orpChart, turbidityChart;
 
@@ -25,60 +26,23 @@ export default class View extends MainView {
       title: "Site Location"
     })
 
-    let phChartObj = Object.assign({}, tempChartObj, { title: {text: 'pH'} }, {
-      series: [{
-        name: 'pH',
-        data: [0],
-        tooltip: {
-            valueSuffix: " pH"
-        }
-      }]
-    })
-
-    let conductivityChartObj = Object.assign({}, tempChartObj, { title: {text: 'Conductivity'} }, {
-      series: [{
-        name: 'Conductivity',
-        data: [0],
-        tooltip: {
-            valueSuffix: " S/m"
-        }
-      }]
-    })
-
-    let orpChartObj = Object.assign({}, tempChartObj, { title: {text: 'ORP'} }, {
-      series: [{
-        name: 'ORP',
-        data: [0],
-        tooltip: {
-            valueSuffix: " mV"
-        }
-      }]
-    })
-
-    let turbidityChartObj = Object.assign({}, tempChartObj, { title: {text: 'Turbidity'} }, {
-      series: [{
-        name: 'Turbidity',
-        data: [0],
-        tooltip: {
-            valueSuffix: " FTU"
-        }
-      }]
-    })
-
-    phChart = Highcharts.chart('dashboard-ipal-water-inlet-pH-gauge-container', phChartObj);
-    conductivityChart = Highcharts.chart('dashboard-ipal-water-inlet-conductivity-gauge-container', conductivityChartObj);
-    orpChart = Highcharts.chart('dashboard-ipal-water-inlet-orp-gauge-container', orpChartObj);
-    turbidityChart = Highcharts.chart('dashboard-ipal-water-inlet-turbidity-gauge-container', turbidityChartObj);
     tempChart = Highcharts.chart('dashboard-ipal-water-inlet-temp-gauge-container', tempChartObj);
+    phChart = Highcharts.chart('dashboard-ipal-water-inlet-pH-gauge-container', phChartObj);
 
-    // channel.on("data_point", payload => {
-    //   this.updateSensorWidgets(payload["sensor_data"]);
-    // })
-
+    channel.on("data_point", payload => {
+      if (payload['device_id'] == '3108061e733a11e9a42fe86a64b144a9' ||
+          payload['device_id'] == '4198846e10f511eaa4de0a3b7373b85d' ||
+          payload['device_id'] == '77b0621010b911ea8139e2cdb2b6549d' ||
+          payload['device_id'] == 'a18384fc10f811ea88ad0a3b7373b85d'
+      ) {
+        this.updateSensorWidgets(payload["sensor_data"]);
+      }
+    })
   }
 
   unmount() {
-    chartTemp.destroy();
+    tempChart.destroy();
+    phChart.destroy();
     super.unmount()
   }
 
@@ -90,37 +54,26 @@ export default class View extends MainView {
 
   updateDashboardDom(key, payload) {
     switch(key) {
-      case "Humidity": 
-        let data = payload[key]["hum"];
-        chartHumid.series[0].points[0].update(parseFloat(data));
+      case "pH": 
+        let data = payload[key]["ph"];
+        phChart.series[0].points[0].update(parseFloat(data));
         break;
-      case "Temperature":
+      case "temperature":
         data = payload[key]["temp"]
-        chartTemp.series[0].points[0].update(parseFloat(data))
+        tempChart.series[0].points[0].update(parseFloat(data))
         break;
-      case "Pm2.5":
-        data = payload[key]["ug/m3"]
-        chartpm2.series[0].points[0].update(parseFloat(data))
-      case "Accelerometer": 
-        let ax = payload[key]["ax"]
-        let ay = payload[key]["ay"]
-        let az = payload[key]["az"]
-        $(".ax b").text(ax)
-        $(".ay b").text(ay)
-        $(".az b").text(az)
+      case "Conductivity":
+        data = payload[key]["cond"]
+        $(".conductivity b").text(gx)
         break;
-      case "Gyroscope":
-        let gx = payload[key]["gx"]
-        let gy = payload[key]["gy"]
-        let gz = payload[key]["gz"]
-
-        $(".gx b").text(gx)
-        $(".gy b").text(gy)
-        $(".gz b").text(gz)
+      case "Turbidity": 
+        data = payload[key]["turbidity"]
+        $(".turbidity b").text(gx)
         break;
-      case "Light":
-        let lum = payload[key]["lum"]
-        $(".light_bulb b").text(lum)        
+      case "ORP":
+        data = payload[key]["orp"]
+        $(".orp b").text(gx)
+        break;
     }
   }
 }
