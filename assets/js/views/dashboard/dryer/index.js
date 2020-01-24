@@ -12,11 +12,11 @@ export default class View extends MainView {
     const element = document.getElementById('google-map')
     const options = {
       zoom: 0,
-      center: new google.maps.LatLng(1.1700, 104.3000),
+      center: new google.maps.LatLng(0.905497, 104.553407),
       disableDefaultUI: true
     }
 
-    let position = new google.maps.LatLng(1.1700, 104.3000)
+    let position = new google.maps.LatLng(0.905497, 104.553407)
 
     const map = new google.maps.Map(element, options)
 

@@ -30,6 +30,19 @@
         <li class="has_sub">
           <a href="/sensor_types" class="waves-effect"><i class="ti-pulse"></i> <span> Sensor Management </span> </a>
         </li>
+
+        <div class="sidebar-divider"></div>
+
+        <li class="has_sub">
+          <a href="/energy-optimization" class="waves-effect"><img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
+            <span> Energy Optimization </span>
+          </a>
+        </li>
+        <li class="has_sub">
+          <a href="/predictive-maintenance" class="waves-effect"><img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
+            <span> Predictive Maintenance </span>
+          </a>
+        </li>
       </ul>
       <div class="clearfix"></div>
     </div>

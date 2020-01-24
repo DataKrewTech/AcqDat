@@ -1,0 +1,22 @@
+<div class="content-page">
+  <!-- Start content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body ribbon-box">
+          <div class="ribbon ribbon-blue float-left">
+            Predictive Maintenance
+          </div>
+          <div style="height: 60px;"></div>
+          <div class="ribbon-content" style="clear: both; height: auto;">
+            Using sensors to determine when equipment needs to be serviced can prevent breakdowns and reduce routine maintenance costs. <br><br>
+            With retro-fit sensors connected to the cloud, it is possible to monitor production equipment remotely and in real-time. This enables predictive maintenance, where analytical models can be applied to predict future areas of concern. In this case, recommendations can be sent to operations, maintenance and IT departments to address a breakdown, even before it occurs. By doing so, operating costs and capital costs can be reduced by facilitating proactive servicing and repair of equipment, thereby improving capacity utilization and productivity. <br><br>
+            Together with Bosch, <b>DataKrew</b> is developing a pneumatic and hydraulic equipment maintenance solution for manufacturing companies in Singapore and SEA, using the latest IoT technology. The objective is to transition to a more proactive, predictive maintenance approach driven by real-time data. The solution extracts data from smart sensors on the equipment, generates an equipment health score (EHS) using advanced analytics. This information can be made available to supervisors and service technicians via cloud-based dashboards or manufacturing execution systems (MES) such as <b>HeveaPro Software</b> in case of <b>HalcyonAgri</b>. The system is being tested for a number of the industrial equipment and has shown promising results in reducing downtime and improving resource planning, cost forecasting and maintenance scheduling. <br><br>
+            In this way, manufacturing companies can use IoT technology to change their operations model, by signing up for ongoing maintenance under a subscription contract and enjoy a guaranteed uptime for equipment. IoT technology enables real-time monitoring and remote service. In addition, performance data can be gathered to improve the design and reliability of the equipment, thereby reducing warranty costs. Once equipment is interconnected and managed through IoT, it is possible to improve asset utilization significantly. <br><br>
+            According to research by McKinsey & Company, predictive maintenance using IoT can reduce maintenance costs of factory equipment by 10–40% and bring down equipment downtime by up to 50%. <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

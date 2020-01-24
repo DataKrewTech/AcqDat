@@ -76,6 +76,9 @@ defmodule AcqdatWeb.Router do
     post "/notification/rule_preferences", NotificationController, :policy_preferences
     resources("/data-trace", DataTraceController, only: [:index, :show])
     resources("/energy-management", EnergyManagementController, only: [:index])
+    resources("/energy-optimization", EnergyOptimizationController, only: [:index])
+    resources("/predictive-maintenance", PredictiveMaintenanceController, only: [:index])
+
 
     # Process Data History
     scope "/process-data-history", ProcessDataHistory do
