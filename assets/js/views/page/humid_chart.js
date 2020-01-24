@@ -56,13 +56,6 @@ var humidChartObj =  {
         valueSuffix: '%'
     }
   }],
-  exporting: {
-    buttons: {
-      contextButton: {
-        menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
-      }
-    }
-  }
 }
 
 export default humidChartObj

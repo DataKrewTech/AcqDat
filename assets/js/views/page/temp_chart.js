@@ -9,7 +9,12 @@ var tempChartObj = {
   },
 
   title: {
-      text: 'Temperature'
+    text: 'Temperature'
+  },
+
+
+  exporting: {
+    enabled: false
   },
 
   pane: {
@@ -92,13 +97,6 @@ var tempChartObj = {
           valueSuffix: String.fromCharCode(176) + "C"
       }
   }],
-  exporting: {
-    buttons: {
-      contextButton: {
-        menuItems: ["viewFullscreen", "printChart", "separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG", "downloadCSV"]
-      }
-    }
-  }
 }
 
 export default tempChartObj
