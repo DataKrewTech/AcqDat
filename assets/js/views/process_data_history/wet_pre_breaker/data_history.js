@@ -19,7 +19,7 @@ export default class View extends MainView {
     this.renderChart(rmsVelocityChart, 'wet-pre-breaker-vib-rms-vel-container', ["x_axis","z_axis"], "vibration_rms_velocity_mm_sec", 16);
     this.renderChart(peakVelocityCompChart, 'wet-pre-breaker-vib-peak-vel-comp-container', ["x_axis","z_axis"], "vibration_peak_velocity_comp_freq_hz", 17);
     this.renderChart(peakAccChart, 'wet-pre-breaker-vib-peak-acc-container', ["x_axis","z_axis"], "vibration_peak_acceleration_g", 18);
-    this.renderChart(rmsAccChart, 'wet-pre-breaker-vib-rms-acc-container', ["x_axis","z_axis"], "vibration_rms_acceleration_g", 19);
+    // this.renderChart(rmsAccChart, 'wet-pre-breaker-vib-rms-acc-container', ["x_axis","z_axis"], "vibration_rms_acceleration_g", 19);
     this.renderChart(highFreqRmsAcc, 'wet-pre-breaker-vib-high-freq-rms-acc-container', ["x_axis","z_axis"], "vibration_high_frequency_rms_acceleration_g", 20);
     this.renderChart(kurtosisChart, 'wet-pre-breaker-vib-kurtosis-container', ["x_axis","z_axis"], "vibration_kurtosis", 21);
     this.renderChart(crestFactorChart, 'wet-pre-breaker-vib-crest-factor-container', ["x_axis","z_axis"], "vibration_crest_factor", 22);
