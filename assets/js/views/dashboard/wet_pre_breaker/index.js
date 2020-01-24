@@ -4,6 +4,23 @@ import tempChartObj from "../../page/temp_chart";
 import vuMeterObj from "../../page/vu_meter";
 var tempChart, avgCurrentChart, avgVoltageChart, activePowerChart, activeEnergyChart;
 
+const element = document.getElementById('google-map')
+const options = {
+  zoom: 0,
+  center: new google.maps.LatLng(1.1700, 104.3000)
+}
+
+let position = new google.maps.LatLng(1.1700, 104.3000)
+
+const map = new google.maps.Map(element, options)
+
+new google.maps.Marker({
+  position,
+  animation: google.maps.Animation.DROP,
+  map,
+  title: "Site Location"
+})
+
 let avgCurrentChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Avg. Current' } },
   {
     yAxis: {
@@ -73,7 +90,6 @@ let avgVoltageChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Avg. Vo
       }
     }]
   })
-
 let activePowerChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Active Power' } },
 
   {

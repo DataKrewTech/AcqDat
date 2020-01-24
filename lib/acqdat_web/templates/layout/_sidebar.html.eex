@@ -12,11 +12,11 @@
         <li class="has_sub">
           <a href="/tool-management/dashboard" class="waves-effect"><i class="icon-wrench"></i> <span> Tool Management </span> </a>
         </li>
-        <li class="has_sub">
+        <%# <li class="has_sub">
           <a href="/data-trace" class="waves-effect"><i class="ti-server"></i><span> Data Trace </span> </a>
-        </li>
+        </li> %>
         <li class="has_sub">
-          <a href="/process-data-history/dryer" class="waves-effect"><i class="ti-bell"></i> <span> Process Data History </span> </a>
+          <a href="/process-data-history/ipal-water-inlet" class="waves-effect"><i class="ti-bell"></i> <span> Process Data History </span> </a>
         </li>
         <li class="has_sub">
           <a href="/notifications" class="waves-effect"><i class="ti-bell"></i> <span> Knotify </span> </a>

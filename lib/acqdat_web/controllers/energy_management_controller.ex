@@ -24,13 +24,14 @@ defmodule AcqdatWeb.EnergyManagementController do
     uptime =
       uptime_sensor_id
       |> Sensor.sensor_data("uptime")
-      |> Enum.reduce(0, fn [_, date_uptime], total_uptime -> date_uptime + total_uptime end)
+      |> List.last
+      |> List.last
 
     power =
       energy_sensor_id
       |> Sensor.sensor_data("active_energy")
-      |> Enum.reduce(0, fn[_, date_power], total_power -> date_power + total_power end)
-
+      |> List.last
+      |> List.last
 
     render(conn, "index.html", data: %{current_status: is_active, total_uptime: uptime, total_power: power})
   end
@@ -81,7 +82,7 @@ defmodule AcqdatWeb.EnergyManagementController do
     electricity_bill =
       energy_consumption_map
       |> Enum.map(fn [date, energy] ->
-        [date, energy * 10000]
+        [date, energy * 1609]
       end)
 
     result = %{
@@ -125,18 +126,22 @@ defmodule AcqdatWeb.EnergyManagementController do
       |> Enum.reduce(%{}, fn [timestamp, current], avg_current_map_acc ->
         date = timestamp |> DateTime.from_unix!(:millisecond) |> Timex.Timezone.convert("Asia/Jakarta") |> DateTime.to_date |> Date.to_string
         avg_current_map_acc = if Map.has_key?(avg_current_map_acc, date) do
-          value = avg_current_map_acc[date] + current
+          value = avg_current_map_acc[date] ++ [current]
           Map.put(avg_current_map_acc, date, value)
         else
-          Map.put(avg_current_map_acc, date, current)
+          Map.put(avg_current_map_acc, date, [current])
         end
         avg_current_map_acc
       end)
 
-    avg_current_map
-    |> Enum.map(fn {key, val} ->
-      [key, val]
-    end)
+
+    avg_current_map =
+      avg_current_map
+      |> Enum.map(fn {date, daily_current_list} ->
+        total_daily_points = length(daily_current_list)
+        total = Enum.sum(daily_current_list)
+        [date, total/total_daily_points]
+      end)
   end
 
   defp get_avg_voltage_data() do
@@ -169,19 +174,22 @@ defmodule AcqdatWeb.EnergyManagementController do
       |> Enum.reduce(%{}, fn [timestamp, voltage], avg_voltage_map_acc ->
         date = timestamp |> DateTime.from_unix!(:millisecond) |> DateTime.to_date |> Date.to_string
         avg_voltage_map_acc = if Map.has_key?(avg_voltage_map_acc, date) do
-          value = avg_voltage_map_acc[date] + voltage
+          value = avg_voltage_map_acc[date] ++ [voltage]
           Map.put(avg_voltage_map_acc, date, value)
         else
-          Map.put(avg_voltage_map_acc, date, voltage)
+          Map.put(avg_voltage_map_acc, date, [voltage])
         end
         avg_voltage_map_acc
       end)
 
 
-    avg_voltage_map
-    |> Enum.map(fn {key, val} ->
-      [key, val]
-    end)
+    avg_voltage_map =
+      avg_voltage_map
+      |> Enum.map(fn {date, daily_voltage_list} ->
+        total_daily_points = length(daily_voltage_list)
+        total = Enum.sum(daily_voltage_list)
+        [date, total/total_daily_points]
+      end)
   end
 
 end

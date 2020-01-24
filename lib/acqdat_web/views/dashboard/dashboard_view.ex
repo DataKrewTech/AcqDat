@@ -3,7 +3,7 @@ defmodule AcqdatWeb.DashboardView do
   import AcqdatWeb.LayoutView, only: [render_layout: 3]
 
   def active_link(conn, key) do
-    if(key === "dryer") do
+    if(key === "ipal-water-inlet") do
       if conn.request_path === "/" do
         "active"
       else
