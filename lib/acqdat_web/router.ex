@@ -58,9 +58,9 @@ defmodule AcqdatWeb.Router do
     # get "/", PageController, :index
 
     scope "/", Dashboard do
-      get "", DryerController, :index
+      get "/", IpalWaterInletController, :index
       get "/wet-pre-breaker", WetPreBreakerController, :index
-      get "/ipal-water-inlet", IpalWaterInletController, :index
+      get "/dryer", DryerController, :index
     end
 
     resources("/sensor_types", SensorTypeController)

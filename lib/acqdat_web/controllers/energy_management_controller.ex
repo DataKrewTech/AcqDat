@@ -24,13 +24,14 @@ defmodule AcqdatWeb.EnergyManagementController do
     uptime =
       uptime_sensor_id
       |> Sensor.sensor_data("uptime")
-      |> Enum.reduce(0, fn [_, date_uptime], total_uptime -> date_uptime + total_uptime end)
+      |> List.last
+      |> List.last
 
     power =
       energy_sensor_id
       |> Sensor.sensor_data("active_energy")
-      |> Enum.reduce(0, fn[_, date_power], total_power -> date_power + total_power end)
-
+      |> List.last
+      |> List.last
 
     render(conn, "index.html", data: %{current_status: is_active, total_uptime: uptime, total_power: power})
   end

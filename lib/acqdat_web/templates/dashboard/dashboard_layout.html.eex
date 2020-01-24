@@ -7,27 +7,43 @@
         <div class="row">
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body" style="height: 300px;">
-              <h6 class="card-title">About Project and Platform</h6>
-              <p>
-                Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
-              </p>
+              <div class="card-body ribbon-box" style="height: 300px;">
+                <div class="ribbon ribbon-blue float-left">
+                  Welcome
+                </div>
+                <p class="text-blue float-right">About Project and Platform</p>
+                <div style="height: 40px;"></div>
+                <div class="ribbon-content" style="padding-top: 30px; font-size: 15px;">
+                  Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
+                </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body" style="height: 300px">
-                <h6 class="card-title">Bird's eye view</h6>
-                <img class="d-block w-100" src="/images/bird_eye_view.png" alt="">
+              <div class="card-body ribbon-box" style="height: 300px;">
+                <div class="ribbon ribbon-blue float-left">
+                  Site Explorer
+                </div>
+                <p class="text-blue float-right">Bird's eye view</p>
+                <div style="height: 40px;"></div>
+                <div class="ribbon-content">
+                  <img class="" src="/images/bird_eye_view.png" alt="">
+                </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body" style="height: 300px">
-                <h6 class="card-title">Processes and Sensor Locations</h6>
-                <img class="d-block w-100" src="/images/dryer_carousel4.png" alt="">
+              <div class="card-body ribbon-box" style="height: 300px;">
+                <div class="ribbon ribbon-blue float-left">
+                  Site Layout
+                </div>
+                <p class="text-blue float-right">Proceses and Sensor Locations</p>
+                <div style="height: 40px;"></div>
+                <div class="ribbon-content">
+                  <img class="" src="/images/pbd-process-sensor-location.png" alt="">
+                </div>
               </div>
             </div>
           </div>
@@ -40,19 +56,19 @@
                   <div class="col-8">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
                       <li class="nav-item">
-                        <% key=("dryer") %>
+                        <% key=("ipal-water-inlet") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/">Dryer (Line 2)</a>
+                          href="/">IPAL Water Inlet</a>
                       </li>
                       <li class="nav-item">
                         <% key=("wet-pre-breaker")  %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/wet-pre-breaker">Wet Pre-breaker (Line 2)</a>
+                          href="/wet-pre-breaker">Wet Pre-breaker 1 (Line 2)</a>
                       </li>
                       <li class="nav-item">
-                        <% key=("ipal-water-inlet") %>
+                        <% key=("dryer") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/ipal-water-inlet">IPAL Water Inlet</a>
+                          href="/dryer">Dryer (Line 2)</a>
                       </li>
                     </ul>
                   </div>

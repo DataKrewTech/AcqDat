@@ -12,19 +12,19 @@
                   <div class="col-8">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
                       <li class="nav-item">
-                        <% key=("dryer") %>
+                        <% key=("ipal-water-inlet") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/process-data-history/dryer">Dryer (Line 2)</a>
+                          href="/process-data-history/ipal-water-inlet">IPAL Water Inlet</a>
                       </li>
                       <li class="nav-item">
                         <% key=("wet-pre-breaker")  %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/process-data-history/wet-pre-breaker">Wet Pre-breaker (Line 2)</a>
+                          href="/process-data-history/wet-pre-breaker">Wet Pre-breaker 1 (Line 2)</a>
                       </li>
                       <li class="nav-item">
-                        <% key=("ipal-water-inlet") %>
+                        <% key=("dryer") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
-                          href="/process-data-history/ipal-water-inlet">IPAL Water Inlet</a>
+                          href="/process-data-history/dryer">Dryer (Line 2)</a>
                       </li>
                     </ul>
                   </div>
