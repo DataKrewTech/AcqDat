@@ -82,7 +82,7 @@ defmodule AcqdatWeb.EnergyManagementController do
     electricity_bill =
       energy_consumption_map
       |> Enum.map(fn [date, energy] ->
-        [date, energy * 10000]
+        [date, energy * 1609]
       end)
 
     result = %{
