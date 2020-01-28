@@ -26,8 +26,13 @@
                             <div class="col-8" style="display: flex; align-items: center;">
                               <h5 class="card-title" style="margin: 0;">Current Status</h5>
                             </div>
-                            <div class="col-4" style="text-align: right;">
-                              <label class="switch">
+                            <div class="col-4" style="display: flex; align-items: center; justify-content: flex-end;">
+                              <%= if @data.current_status do %>
+                                <span style="margin-right: 5px; color: #00ff00; font-size: 16px; font-weight: 600;">ON</span>
+                              <% else %>
+                                <span style="margin-right: 5px; color: #ff0000; font-size: 16px; font-weight: 600;">OFF</span>
+                              <% end %>
+                              <label class="switch" style="margin-bottom: 0; width: 52px; height: 28px;">
                                 <input type="checkbox" disabled <%= @data.current_status && 'checked' %>>
                                 <span class="slider round"></span>
                               </label>
@@ -80,72 +85,16 @@
                 </div>
               </div>
               <div class="row" style="margin-bottom: 30px;">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="widget-bg-color-icon card-box">
-                    <div id="container-current-voltage-line" style="min-width: 100px; width: 100%; height: 300px">
+                    <div id="container-current-voltage-line" style="min-width: 100px; width: 100%; height: 450px">
                     </div> 
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="widget-bg-color-icon card-box">
-                    <div id="container-energy-bill-column" style="min-width: 100px; width: 100%; height: 300px">
+                    <div id="container-energy-bill-column" style="min-width: 100px; width: 100%; height: 450px">
                     </div> 
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-6">
-                      <ul class="nav nav-tabs navtab-bg nav-justified mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active" id="pills-field-view-tab" data-toggle="pill" href="#pills-field-view" role="tab" aria-controls="pills-field-view" aria-selected="true">Energy Optimization</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="pills-data-history-tab" data-toggle="pill" href="#pills-data-history" role="tab" aria-controls="pills-data-history" aria-selected="false">Predictive Maintenance</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-field-view" role="tabpanel" aria-labelledby="pills-field-view-tab">
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="card">
-                                <div class="card-body">
-                                  <p>
-                                    Managing energy consumption results in greener operations, lower energy costs, less unplanned downtime and more consistent quality. <br> <br>
-                                    Globally, manufacturers are increasingly pursuing a resource efficient and sustainable approach due to several economic, social and governmental mandates. In energy-intensive industries, energy costs form a significant part of the operation costs. In this scenario, the use of IoT and predictive analytics has an important role, as these technologies can reduce energy consumption and operating costs substantially. <br><br>
-                                    For manufacturing companies, metering does not reveal how energy is distributed across buildings, processes and equipment. Therefore, the first step towards developing a systematic approach to energy management and improving a company’s competitive position lies in the increased visibility of energy consumption patterns. <br><br>
-                                    <b>DataKrew</b> is working extensively in this area, as we are building energy monitoring and analytics systems for the manufacturing industry. Our objective is to use the energy usage insights to optimise processes and equipment utilisation and incur operating cost savings. For this we must monitor the energy consumption patterns in a plant through sensors within processes or equipment. Monitoring deviations from regular energy consumption can help to detect failing equipment. In addition, manufacturing execution systems (MES) such as <b>HeveaPro Software</b> in case of <b>HalcyonAgri</b> capture relevant data, such as equipment settings, shifts and process parameters, providing insight into how energy is used in operations. Further, predictive analytics also provides manufacturers with insights that help in the implementation of energy programs. <br><br>
-                                    According to research by McKinsey & Company, PWC and Roland Berger, energy management using IoT can reduce factory energy costs by 10–30%. <br><br>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-data-history" role="tabpanel" aria-labelledby="pills-data-history-tab">
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="card">
-                                <div class="card-body">
-                                  <p>
-                                    Using sensors to determine when equipment needs to be serviced can prevent breakdowns and reduce routine maintenance costs. <br><br>
-                                    With retro-fit sensors connected to the cloud, it is possible to monitor production equipment remotely and in real-time. This enables predictive maintenance, where analytical models can be applied to predict future areas of concern. In this case, recommendations can be sent to operations, maintenance and IT departments to address a breakdown, even before it occurs. By doing so, operating costs and capital costs can be reduced by facilitating proactive servicing and repair of equipment, thereby improving capacity utilization and productivity. <br><br>
-                                    Together with Bosch, <b>DataKrew</b> is developing a pneumatic and hydraulic equipment maintenance solution for manufacturing companies in Singapore and SEA, using the latest IoT technology. The objective is to transition to a more proactive, predictive maintenance approach driven by real-time data. The solution extracts data from smart sensors on the equipment, generates an equipment health score (EHS) using advanced analytics. This information can be made available to supervisors and service technicians via cloud-based dashboards or manufacturing execution systems (MES) such as <b>HeveaPro Software</b> in case of <b>HalcyonAgri</b>. The system is being tested for a number of the industrial equipment and has shown promising results in reducing downtime and improving resource planning, cost forecasting and maintenance scheduling. <br><br>
-                                    In this way, manufacturing companies can use IoT technology to change their operations model, by signing up for ongoing maintenance under a subscription contract and enjoy a guaranteed uptime for equipment. IoT technology enables real-time monitoring and remote service. In addition, performance data can be gathered to improve the design and reliability of the equipment, thereby reducing warranty costs. Once equipment is interconnected and managed through IoT, it is possible to improve asset utilization significantly. <br><br>
-                                    According to research by McKinsey & Company, predictive maintenance using IoT can reduce maintenance costs of factory equipment by 10–40% and bring down equipment downtime by up to 50%. <br><br>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>

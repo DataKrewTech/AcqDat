@@ -41,7 +41,7 @@ defmodule AcqdatWeb.SessionController do
   defp login({:ok, user}, conn) do
     conn
     |> Guardian.Plug.sign_in(user)
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: Routes.ipal_water_inlet_path(conn, :index))
   end
 
   defp login({:error, _}, conn) do
