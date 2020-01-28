@@ -42,7 +42,26 @@
                 <p class="text-blue float-right">Proceses and Sensor Locations</p>
                 <div style="height: 40px;"></div>
                 <div class="ribbon-content">
-                  <img class="" src="/images/pbd-process-sensor-location.png" alt="">
+                  <img class="" src="/images/pbd-process-sensor-location.png" alt="" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
+                  <!-- Button trigger modal -->
+                  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                  </button> -->
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document" style="max-width: 75vw;">
+                      <div class="modal-content">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" style="float: right;">&times;</span>
+                        </button>
+                        <div class="modal-body">
+                          <img class="" src="/images/pbd-process-sensor-location.png" alt="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>

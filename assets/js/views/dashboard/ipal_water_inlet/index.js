@@ -34,7 +34,8 @@ export default class View extends MainView {
       if (payload['device_id'] == '3108061e733a11e9a42fe86a64b144a9' ||
           payload['device_id'] == '4198846e10f511eaa4de0a3b7373b85d' ||
           payload['device_id'] == '77b0621010b911ea8139e2cdb2b6549d' ||
-          payload['device_id'] == 'a18384fc10f811ea88ad0a3b7373b85d'
+          payload['device_id'] == 'a18384fc10f811ea88ad0a3b7373b85d' ||
+          payload['device_id'] == 'bad91588313311eaab2cf255025bf4f2'
       ) {
         this.updateSensorWidgets(payload["sensor_data"]);
       }
@@ -65,15 +66,15 @@ export default class View extends MainView {
         break;
       case "Conductivity":
         data = payload[key]["cond"]
-        $(".conductivity b").text(gx)
+        $(".conductivity b").text(data)
         break;
       case "Turbidity": 
         data = payload[key]["turbidity"]
-        $(".turbidity b").text(gx)
+        $(".turbidity b").text(data)
         break;
       case "ORP":
         data = payload[key]["orp"]
-        $(".orp b").text(gx)
+        $(".orp b").text(data)
         break;
     }
   }
