@@ -46,6 +46,7 @@
       </ul>
       <div class="clearfix"></div>
     </div>
+    <div class="sidebar-background" style="background-image: url('/images/sidebar-backgroundd.jpg');"></div>
     <div class="clearfix"></div>
   </div>
 </div>
