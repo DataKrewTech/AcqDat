@@ -8,7 +8,12 @@ var tempChart, phChart, conductivityChart, orpChart, turbidityChart;
 export default class View extends MainView {
   mount() {
     let channel = liveView();
-
+    const device_ids = ['3108061e733a11e9a42fe86a64b144a9', 
+                        '4198846e10f511eaa4de0a3b7373b85d',
+                        '77b0621010b911ea8139e2cdb2b6549d',
+                        'a18384fc10f811ea88ad0a3b7373b85d',
+                        'bad91588313311eaab2cf255025bf4f2'
+                      ]
     const element = document.getElementById('google-map')
     const options = {
       zoom: 0,
@@ -29,6 +34,15 @@ export default class View extends MainView {
 
     tempChart = Highcharts.chart('dashboard-ipal-water-inlet-temp-gauge-container', tempChartObj);
     phChart = Highcharts.chart('dashboard-ipal-water-inlet-pH-gauge-container', phChartObj);
+
+    var outside = this;
+    device_ids.forEach(function(device_id, index){
+      let url = `/api/devices/${device_id}/latest_data`;
+      $.get(url, function(response_data, status){
+        console.log(response_data);
+        outside.updateSensorWidgets(response_data["sensor_data"]);
+      })
+    })
 
     channel.on("data_point", payload => {
       if (payload['device_id'] == '3108061e733a11e9a42fe86a64b144a9' ||

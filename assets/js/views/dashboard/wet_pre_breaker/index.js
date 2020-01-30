@@ -4,22 +4,6 @@ import tempChartObj from "../../page/temp_chart";
 import vuMeterObj from "../../page/vu_meter";
 var tempChart, avgCurrentChart, avgVoltageChart, activePowerChart;
 
-// const element = document.getElementById('google-map')
-// const options = {
-//   zoom: 0,
-//   center: new google.maps.LatLng(1.1700, 104.3000)
-// }
-
-// let position = new google.maps.LatLng(1.1700, 104.3000)
-
-// const map = new google.maps.Map(element, options)
-
-// new google.maps.Marker({
-//   position,
-//   animation: google.maps.Animation.DROP,
-//   map,
-//   title: "Site Location"
-// })
 
 let avgCurrentChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Avg. Current' } },
   {
@@ -129,11 +113,22 @@ let activePowerChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Active
 export default class View extends MainView {
 
   mount() {
+
+    const device_ids = ["93b92b9a31e311ea8ed34eb4d13005bf", "309efbba119111eaaa47b6b16018c425"]
     let channel = liveView();
     tempChart = Highcharts.chart('dashboard-wet-pre-breaker-temperature-gauge-container', tempChartObj);
     avgCurrentChart = Highcharts.chart('dashboard-wet-pre-breaker-avg-current-gauge-container', avgCurrentChartObj);
     avgVoltageChart = Highcharts.chart('dashboard-wet-pre-breaker-avg-voltage-gauge-container', avgVoltageChartObj);
     activePowerChart = Highcharts.chart('dashboard-wet-pre-breaker-active-power-gauge-container', activePowerChartObj);
+
+    var outside = this;
+    device_ids.forEach(function(device_id, index){
+      let url = `/api/devices/${device_id}/latest_data`;
+      $.get(url, function(response_data, status){
+        console.log(response_data);
+        outside.updateSensorWidgets(response_data["sensor_data"]);
+      })
+    })
 
     channel.on("data_point", payload => {
       if (payload['device_id'] == "309efbba119111eaaa47b6b16018c425" || 
@@ -144,6 +139,7 @@ export default class View extends MainView {
       console.log(payload);
     })
   }
+
 
   unmount() {
     tempChart.destroy();

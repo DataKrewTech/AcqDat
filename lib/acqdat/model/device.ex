@@ -1,8 +1,10 @@
 defmodule Acqdat.Model.Device do
-  alias Acqdat.Schema.Device
+  import Ecto.Query
+  alias Acqdat.Schema.{Device, SensorData}
   alias Acqdat.Repo
   alias Acqdat.Model.Sensor
   alias Acqdat.Domain.Notification.Server, as: NotificationServer
+  alias Acqdat.Schema.Sensor, as: SensorSchema
 
   def create(params) do
     changeset = Device.changeset(%Device{}, params)
@@ -69,6 +71,41 @@ defmodule Acqdat.Model.Device do
     end
   end
 
+  def get_latest_data(device_uuid) do
+    with {:ok, device} <- get(%{uuid: device_uuid}) do
+      get_latest_data_query(device.id)
+    else
+      {:error, _} = result ->
+         result
+    end
+
+  end
+
+  defp get_latest_data_query(device_id) do
+      subquery = from(
+        sensor_data in SensorData,
+        group_by: sensor_data.sensor_id,
+        select: %{sensor_id: sensor_data.sensor_id,
+          mts: max(sensor_data.inserted_at)}
+      )
+
+      mid_query = from(
+        sensor_data in SensorData,
+        join: data in subquery(subquery),
+        on: sensor_data.sensor_id == data.sensor_id and
+            sensor_data.inserted_at == data.mts,
+        select: sensor_data
+      )
+
+      query = from(
+        sensor in SensorSchema,
+        join: sensor_data in subquery(mid_query),
+        on: sensor.id  == sensor_data.sensor_id and sensor.device_id == ^device_id,
+        select: %{sensor.name => sensor_data.datapoint}
+      )
+      Repo.all(query)
+  end
+
   defp insert_data(device, data) do
     # handle notification, move or modify the location of this call.
     params = %{device: device, data: data}
@@ -92,4 +129,5 @@ defmodule Acqdat.Model.Device do
   defp insert_sensor_data({:ok, sensor}, sensor_data) do
     Sensor.insert_data(sensor, sensor_data)
   end
+
 end

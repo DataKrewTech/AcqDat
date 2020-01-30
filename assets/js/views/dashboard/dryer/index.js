@@ -8,6 +8,7 @@ export default class View extends MainView {
   
   mount() {
     let channel = liveView();
+    const device_ids = ['3108061e733a11e9a42fe86a64b144a9'];
 
     const element = document.getElementById('google-map')
     const options = {
@@ -30,8 +31,17 @@ export default class View extends MainView {
 
     chartTemp = Highcharts.chart('dashboard-dryer-temperature-gauge-container', tempChartObj);
 
+    device_ids.forEach(function(device_id, index){
+      let url = `/api/devices/${device_id}/latest_data`;
+      $.get(url, function(response_data, status){
+        console.log(response_data);
+        let data = response_data["sensor_data"]["DryerTemperature"]["temp"]
+        chartTemp.series[0].points[0].update(parseFloat(data))
+      })
+    })
+
     channel.on("data_point", payload => {
-      data = payload[key]["temp"]
+      data = payload["sensor_data"]["DryerTemperature"]["temp"]
       chartTemp.series[0].points[0].update(parseFloat(data))
     })
   }

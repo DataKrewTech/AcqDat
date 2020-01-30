@@ -103,7 +103,7 @@ defmodule AcqdatWeb.Router do
     pipe_through [:api]
 
     post "/token", TokenController, :create
-
+    get "/devices/:device_id/latest_data", DeviceController, :latest_data
   end
 
   scope "/api", AcqdatWeb.API do
