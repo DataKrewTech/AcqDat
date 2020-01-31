@@ -50,6 +50,36 @@ defmodule AcqdatWeb.EnergyManagementController do
     |> render("current_voltage_senor_data.json", sensor_data: result)
   end
 
+  def total_energy_consumption(conn, _) do
+    energy_sensor_id = 28
+
+    energy_consumption_map =
+      energy_sensor_id
+      |> Sensor.sensor_data("active_energy")
+      |> Enum.reduce(%{}, fn [timestamp, energy], energy_acc ->
+        date = timestamp |> DateTime.from_unix!(:millisecond) |> Timex.Timezone.convert("Asia/Jakarta") |> DateTime.to_date |> Date.to_string
+        energy_acc = if Map.has_key?(energy_acc, date) do
+          value = energy_acc[date] ++ [energy]
+          Map.put(energy_acc, date, value)
+        else
+          Map.put(energy_acc, date, [energy])
+        end
+        energy_acc
+      end)
+      |> Enum.map(fn {date, daily_energy_list} ->
+        [date, List.last(daily_energy_list)]
+      end)
+
+    result = %{
+      total_energy_consumption: energy_consumption_map,
+    }
+
+    conn
+    |> put_status(200)
+    |> render("current_voltage_senor_data.json", sensor_data: result)
+
+  end
+
   def energy_consumption_electricity_bill(conn, _) do
     energy_sensor_id = 28
 

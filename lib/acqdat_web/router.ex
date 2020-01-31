@@ -50,6 +50,7 @@ defmodule AcqdatWeb.Router do
     get("/sensor-data/:id/", SensorController, :sensor_data)
     get("/current-voltage-senor-data", EnergyManagementController, :current_voltage_senor_data)
     get("/energy-consumption-electricity-bill", EnergyManagementController, :energy_consumption_electricity_bill)
+    get("/total-energy-consumption", EnergyManagementController, :total_energy_consumption)
   end
 
   scope "/", AcqdatWeb do
