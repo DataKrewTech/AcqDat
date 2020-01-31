@@ -99,97 +99,46 @@ defmodule AcqdatWeb.EnergyManagementController do
   defp get_avg_current_data() do
     current_sensor_id = 25
 
-    l1_current = Sensor.sensor_data(current_sensor_id, "l1_current")
-    l2_current = Sensor.sensor_data(current_sensor_id, "l2_current")
-    l3_current = Sensor.sensor_data(current_sensor_id, "l3_current")
-
-    l1_current_map =
-      l1_current
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    l2_current_map =
-      l2_current
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    l3_current_map =
-      l3_current
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    avg_current = Map.keys(l1_current_map)
-    |> Enum.map(fn date ->
-      avg_current = (l1_current_map[date] + l2_current_map[date] + l3_current_map[date]) / 3
-      [date, avg_current]
-    end)
-
-    avg_current_map =
-      avg_current
-      |> Enum.reduce(%{}, fn [timestamp, current], avg_current_map_acc ->
-        date = timestamp |> DateTime.from_unix!(:millisecond) |> Timex.Timezone.convert("Asia/Jakarta") |> DateTime.to_date |> Date.to_string
-        avg_current_map_acc = if Map.has_key?(avg_current_map_acc, date) do
-          value = avg_current_map_acc[date] ++ [current]
-          Map.put(avg_current_map_acc, date, value)
-        else
-          Map.put(avg_current_map_acc, date, [current])
-        end
-        avg_current_map_acc
+    current_sensor_id
+      |> Sensor.sensor_data
+      |> Enum.map(fn [timestamp, %{"avg_current" => avg_current, "l1_current" => l1_current, "l2_current" => l2_current, "l3_current" => l3_current}] ->
+        [timestamp, (l1_current + l2_current + l3_current)/3]
       end)
-
-
-    avg_current_map =
-      avg_current_map
-      |> Enum.map(fn {date, daily_current_list} ->
-        total_daily_points = length(daily_current_list)
-        total = Enum.sum(daily_current_list)
-        [date, total/total_daily_points]
+      |> Enum.reduce(%{}, fn [date, current], current_map ->
+        current_map = if Map.has_key?(current_map, date) do
+          value = current_map[date] ++ [current]
+          Map.put(current_map, date, value)
+        else
+          Map.put(current_map, date, [current])
+        end
+      end)
+      |> Enum.map(fn {date, current_list} ->
+        total_current_list = length(current_list)
+        avg_current = Enum.sum(current_list)/total_current_list
+        [date, avg_current]
       end)
   end
 
   defp get_avg_voltage_data() do
     voltage_sensor_id = 26
 
-    l1l2_voltage = Sensor.sensor_data(voltage_sensor_id, "l1l2_voltage")
-    l2l3_voltage = Sensor.sensor_data(voltage_sensor_id, "l2l3_voltage")
-    l3l1_voltage = Sensor.sensor_data(voltage_sensor_id, "l3l1_voltage")
-
-    l1l2_voltage_map =
-      l1l2_voltage
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    l2l3_voltage_map =
-      l2l3_voltage
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    l3l1_voltage_map =
-      l3l1_voltage
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-    avg_voltage = Map.keys(l1l2_voltage_map)
-    |> Enum.map(fn date ->
-      avg_voltage = (l1l2_voltage_map[date] + l2l3_voltage_map[date] + l3l1_voltage_map[date]) / 3
-      [date, avg_voltage]
-    end)
-
-    avg_voltage_map =
-      avg_voltage
-      |> Enum.reduce(%{}, fn [timestamp, voltage], avg_voltage_map_acc ->
-        date = timestamp |> DateTime.from_unix!(:millisecond) |> DateTime.to_date |> Date.to_string
-        avg_voltage_map_acc = if Map.has_key?(avg_voltage_map_acc, date) do
-          value = avg_voltage_map_acc[date] ++ [voltage]
-          Map.put(avg_voltage_map_acc, date, value)
-        else
-          Map.put(avg_voltage_map_acc, date, [voltage])
-        end
-        avg_voltage_map_acc
+    voltage_sensor_id
+      |> Sensor.sensor_data
+      |> Enum.map(fn [timestamp, %{"avg_ll_voltage" => avg_ll_voltage, "avg_ln_voltage" => avg_ln_voltage, "l1l2_voltage" => l1l2_voltage, "l2l3_voltage" => l2l3_voltage, "l3l1_voltage" => l3l1_voltage}] ->
+        [timestamp, (l1l2_voltage + l2l3_voltage + l3l1_voltage)/3]
       end)
-
-
-    avg_voltage_map =
-      avg_voltage_map
-      |> Enum.map(fn {date, daily_voltage_list} ->
-        total_daily_points = length(daily_voltage_list)
-        total = Enum.sum(daily_voltage_list)
-        [date, total/total_daily_points]
+      |> Enum.reduce(%{}, fn [date, voltage], voltage_map ->
+        voltage_map = if Map.has_key?(voltage_map, date) do
+          value = voltage_map[date] ++ [voltage]
+          Map.put(voltage_map, date, value)
+        else
+          Map.put(voltage_map, date, [voltage])
+        end
+      end)
+      |> Enum.map(fn {date, voltage_list} ->
+        total_voltage_list = length(voltage_list)
+        avg_voltage = Enum.sum(voltage_list)/total_voltage_list
+        [date, avg_voltage]
       end)
   end
-
 end
