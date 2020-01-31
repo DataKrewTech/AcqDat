@@ -53,16 +53,10 @@ defmodule AcqdatWeb.EnergyManagementController do
   def energy_consumption_electricity_bill(conn, _) do
     energy_sensor_id = 28
 
-    active_energy = Sensor.sensor_data(energy_sensor_id, "active_energy")
-
-    active_energy_map =
-      active_energy
-      |> Map.new(fn [k, v] -> { k, v } end)
-
-
     energy_consumption_map =
-      active_energy_map
-      |> Enum.reduce(%{}, fn {timestamp, energy}, energy_acc ->
+      energy_sensor_id
+      |> Sensor.sensor_data("active_energy")
+      |> Enum.reduce(%{}, fn [timestamp, energy], energy_acc ->
         date = timestamp |> DateTime.from_unix!(:millisecond) |> Timex.Timezone.convert("Asia/Jakarta") |> DateTime.to_date |> Date.to_string
         energy_acc = if Map.has_key?(energy_acc, date) do
           value = energy_acc[date] ++ [energy]
@@ -72,11 +66,8 @@ defmodule AcqdatWeb.EnergyManagementController do
         end
         energy_acc
       end)
-
-    energy_consumption_map =
-      energy_consumption_map
       |> Enum.map(fn {date, daily_energy_list} ->
-        [date, List.first(daily_energy_list) - List.last(daily_energy_list)]
+        [date, List.last(daily_energy_list) - List.first(daily_energy_list)]
       end)
 
     electricity_bill =
