@@ -7,7 +7,9 @@
           <a href="/" class="waves-effect"><i class="ti-pie-chart"></i> <span> Dashboard </span></a>
         </li>
         <li class="has_sub">
-          <a href="/energy-management" class="waves-effect"><i class="ti-pie-chart"></i> <span> Energy Management </span></a>
+          <a href="/energy-management" class="waves-effect">
+          <img src="/images/bolt-solid.png" alt="" style="width: 14px; display: inline-block; margin-left: 3px; margin-right: 15px;">
+          <span> Energy Monitoring </span></a>
         </li>
         <li class="has_sub">
           <a href="/tool-management/dashboard" class="waves-effect"><i class="icon-wrench"></i> <span> Tool Management </span> </a>
@@ -16,7 +18,9 @@
           <a href="/data-trace" class="waves-effect"><i class="ti-server"></i><span> Data Trace </span> </a>
         </li> %>
         <li class="has_sub">
-          <a href="/process-data-history/ipal-water-inlet" class="waves-effect"><i class="ti-bell"></i> <span> Process Data History </span> </a>
+          <a href="/process-data-history/ipal-water-inlet" class="waves-effect">
+          <img src="/images/chart-bar-solid.png" alt="" style="width: 18px; display: inline-block; margin-left: 3px; margin-right: 15px;">
+          <span> Process Data History </span> </a>
         </li>
         <li class="has_sub">
           <a href="/notifications" class="waves-effect"><i class="ti-bell"></i> <span> Knotify </span> </a>
@@ -34,12 +38,14 @@
         <div class="sidebar-divider"></div>
 
         <li class="has_sub">
-          <a href="/energy-optimization" class="waves-effect"><img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
+          <a href="/energy-optimization" class="waves-effect">
+            <img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
             <span> Energy Optimization </span>
           </a>
         </li>
         <li class="has_sub">
-          <a href="/predictive-maintenance" class="waves-effect"><img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
+          <a href="/predictive-maintenance" class="waves-effect">
+            <img src="/images/coming-soon-small.png" alt="" style="width: 30px; display: inline-block; margin-left: 3px; margin-right: 5px;">
             <span> Predictive Maintenance </span>
           </a>
         </li>

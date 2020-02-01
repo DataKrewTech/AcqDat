@@ -1,7 +1,7 @@
 import MainView from '../main';
 import chartInitializer from "../current_voltage_config";
 import energychartInitializer from "../energy_consumption_elect_bill_config";
-
+import totalEnergychartInitializer from "../total_energy_consumption";
 
 var currentVoltageChart, energyBillChart;
 
@@ -9,6 +9,7 @@ export default class View extends MainView {
   mount() {
     this.renderChart(currentVoltageChart, 'container-current-voltage-line');
     this.renderEnergyBillChart(energyBillChart, 'container-energy-bill-column');
+    this.rendertotalEnergyConsumptionChart(energyBillChart, 'container-total-energy-bill-column');
   }
 
   unmount() {
@@ -29,11 +30,17 @@ export default class View extends MainView {
     this.get_energy_consumption_bill(chart)
   }
 
+  rendertotalEnergyConsumptionChart(chart, container) {
+    let chartConfig = totalEnergychartInitializer()
+    chart = Highcharts.chart(container, chartConfig);
+    this.get_total_energy_consumption(chart)
+  }
+
   get_energy_consumption_bill(chart) {
     let url = `/energy-consumption-electricity-bill`;
     $.get(url, {}, function(response_data, status){
-      let daily_energy_consumption = response_data.data.daily_energy_consumption.map(x => [new Date(x[0]).getTime(), Math.abs(x[1])]);
-      let daily_bill = response_data.data.daily_bill.map(x => [new Date(x[0]).getTime(), Math.abs(x[1])]);
+      let daily_energy_consumption = response_data.data.daily_energy_consumption.map(x => [new Date(x[0]).getTime(), x[1]]);
+      let daily_bill = response_data.data.daily_bill.map(x => [new Date(x[0]).getTime(), x[1]]);
 
       chart.series[0].setData(daily_energy_consumption, true)
       chart.series[1].setData(daily_bill, true)
@@ -50,6 +57,16 @@ export default class View extends MainView {
       chart.series[0].setData(avg_voltage_data, true)
       chart.series[1].setData(avg_current_data, true)
       chart.redraw()
+    })
+  }
+
+  get_total_energy_consumption(chart) {
+    let url = `/total-energy-consumption`;
+    $.get(url, {}, function(response_data, status){
+      let total_energy_consumption = response_data.data.total_energy_consumption.map(x => [new Date(x[0]).getTime(), x[1]]);
+
+      chart.series[0].setData(total_energy_consumption, true)
+      chart.redraw()      
     })
   }
 }

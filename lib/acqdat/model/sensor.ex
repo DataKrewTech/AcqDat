@@ -64,6 +64,34 @@ defmodule Acqdat.Model.Sensor do
     Repo.insert(changeset)
   end
 
+  def sensor_data(sensor_id) do
+    query =
+      from(
+        data in SensorData,
+        where: data.sensor_id == ^sensor_id,
+        order_by: data.inserted_timestamp,
+        select: [data.inserted_timestamp, data.datapoint]
+      )
+
+    stream = Repo.stream(query)
+
+    {:ok, result} =
+      Repo.transaction(fn ->
+        Enum.map(stream, fn [date, value] ->
+          date =
+            date
+              |> Timex.Timezone.convert("Asia/Jakarta")
+              |> DateTime.to_date
+              |> Date.to_string
+
+          [date, value]
+        end)
+      end)
+
+    result
+  end
+
+
   def sensor_data(sensor_id, identifier) do
     query =
       from(
