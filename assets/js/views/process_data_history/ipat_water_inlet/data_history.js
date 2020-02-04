@@ -5,11 +5,15 @@ var phChart, conductivityChart, orpChart, turbidityChart, tempChart;
 
 export default class View extends MainView {
   mount() {
-    this.renderChart(phChart, 'ipal-water-inlet-ph-container', ["ph"], "pH", 9);
-    this.renderChart(conductivityChart, 'ipal-water-inlet-conductivity-container', ["cond"], "Conductivity", 6);
-    this.renderChart(orpChart, 'ipal-water-inlet-orp-container', ["orp"], "ORP", 11);
-    this.renderChart(turbidityChart, 'ipal-water-inlet-turbidity-container', ["turbidity"], "Turbidiy", 24);
-    this.renderChart(tempChart, 'ipal-water-inlet-temp-container', ["temp"], "Temperature", 8);
+    let that = this;
+
+    $("#pills-data-history-tab").one("click", () => {
+      that.renderChart(phChart, 'ipal-water-inlet-ph-container', ["ph"], "pH", 9);
+      that.renderChart(conductivityChart, 'ipal-water-inlet-conductivity-container', ["cond"], "Conductivity", 6);
+      that.renderChart(orpChart, 'ipal-water-inlet-orp-container', ["orp"], "ORP", 11);
+      that.renderChart(turbidityChart, 'ipal-water-inlet-turbidity-container', ["turbidity"], "Turbidiy", 24);
+      that.renderChart(tempChart, 'ipal-water-inlet-temp-container', ["temp"], "Temperature", 8);
+    });
   }
 
   unmount() {
@@ -25,6 +29,7 @@ export default class View extends MainView {
     let series = [];
     let seriesMap = {}; 
     let config = {title: title};
+    let that = this;
 
     for(var key of value_keys) {
       series.push({
@@ -38,7 +43,8 @@ export default class View extends MainView {
     
     let chartConfig = chartInitializer(config)
     chart = Highcharts.stockChart(container, chartConfig);
-    this.setChartData(seriesMap, series, chart, sensor_id)
+    
+    setTimeout(function(){ that.setChartData(seriesMap, series, chart, sensor_id); }, 250);
   }
 
   setChartData(seriesMap, series, chart, sensor_id) {

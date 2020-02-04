@@ -5,25 +5,29 @@ var chart;
 
 export default class View extends MainView {
   mount() {
-    let value_keys = ["temp"]
+    let that = this;
 
-    let series = [];
-    let seriesMap = {}; 
-    let config = {title: "DryerTemperature"};
+    $("#pills-data-history-tab").one("click", () => {
+      let value_keys = ["temp"]
 
-    for(var key of value_keys) {
-      series.push({
-        name: key,
-        data: []
-      })
-      seriesMap[key] = series.length -1;
-    }
-
-    config.series = series;
-    
-    let chartConfig = chartInitializer(config)
-    chart = Highcharts.stockChart('dryer-temp-container', chartConfig);
-    this.setChartData(seriesMap, series, chart, 1)
+      let series = [];
+      let seriesMap = {}; 
+      let config = {title: "DryerTemperature"};
+  
+      for(var key of value_keys) {
+        series.push({
+          name: key,
+          data: []
+        })
+        seriesMap[key] = series.length -1;
+      }
+  
+      config.series = series;
+      
+      let chartConfig = chartInitializer(config)
+      chart = Highcharts.stockChart('dryer-temp-container', chartConfig);
+      that.setChartData(seriesMap, series, chart, 1);
+    });
   }
 
   unmount() {
