@@ -54,10 +54,12 @@ export default class View extends MainView {
   }
 
   get_data(sensor_id, identifier, chart, series) {
+    chart.showLoading();
     let url = `/sensor-data/${sensor_id}`;
     let data = {identifier: identifier}
     $.get(url, data, function(response_data, status){
-      chart.series[series].setData(response_data.data, true)
+      chart.series[series].setData(response_data.data, true);
+      chart.hideLoading();
       chart.redraw()
     })
   }

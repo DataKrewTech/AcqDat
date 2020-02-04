@@ -1,32 +1,34 @@
 <%= render_layout "app.html", assigns do %>
 
-  <div class="content-page">
+  <div class="content-page dashboard">
   <!-- Start content -->
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-12">
             <div class="card">
-              <div class="card-body ribbon-box" style="height: 300px;">
+              <div class="card-body ribbon-box">
                 <div class="ribbon ribbon-blue float-left">
                   Welcome
                 </div>
                 <p class="text-blue float-right">About Project and Platform</p>
-                <div style="height: 40px;"></div>
-                <div class="ribbon-content" style="padding-top: 40px; font-size: 15px;">
-                  Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
+                <div style="height: 10%;"></div>
+                <div class="ribbon-content" style="padding-top: 40px; font-size: 15px; word-wrap: normal;">
+                  <p>
+                    Welcome to Project Apricot POC Dashboard. Project Apricot is an Internet-of-Things (IoT) trial project to capture and display real-time factory data using industrial sensors from the HalcyonAgri PT. Pulau Bintan Djaya (PBD) crumb rubber factory at Bintan, Indonesia.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body ribbon-box" style="height: 300px;">
+              <div class="card-body ribbon-box">
                 <div class="ribbon ribbon-blue float-left">
                   Site Explorer
                 </div>
-                <p class="text-blue float-right">Bird's eye view</p>
-                <div style="height: 40px;"></div>
+                <p class="text-blue float-right">Bird's-eye View</p>
+                <div style="height: 10%;"></div>
                 <div class="ribbon-content">
                   <div class="google-map" id="google-map" style="width: 100%; height: 100%;"></div>
                 </div>
@@ -35,12 +37,12 @@
           </div>
           <div class="col-md-4">
             <div class="card">
-              <div class="card-body ribbon-box" style="height: 300px;">
+              <div class="card-body ribbon-box">
                 <div class="ribbon ribbon-blue float-left">
                   Site Layout
                 </div>
                 <p class="text-blue float-right">Proceses and Sensor Locations</p>
-                <div style="height: 40px;"></div>
+                <div style="height: 10%;"></div>
                 <div class="ribbon-content">
                   <img class="" src="/images/pbd-process-sensor-location.png" alt="" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
                   <!-- Button trigger modal -->
@@ -72,19 +74,19 @@
             <div class="list-container process-data-history-container">
               <div class="col-12">
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-lg-8 col-md-12 col-sm-12">
                     <ul class="nav nav-tabs navtab-bg nav-justified">
-                      <li class="nav-item">
+                      <li class="nav-item" style="font-size: 12px">
                         <% key=("ipal-water-inlet") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
                           href="/">IPAL Water Inlet</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" style="font-size: 12px">
                         <% key=("wet-pre-breaker")  %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
                           href="/wet-pre-breaker">Wet Pre-breaker 1 (Line 2)</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item" style="font-size: 12px">
                         <% key=("dryer") %>
                         <a class="nav-link <%= active_link(@conn, key) %>"
                           href="/dryer">Dryer (Line 2)</a>

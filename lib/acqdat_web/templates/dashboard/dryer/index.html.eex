@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-dryer-temperature-gauge-container" style="min-width: 100px; width: 100%; height: 250px">
       </div>
     </div>

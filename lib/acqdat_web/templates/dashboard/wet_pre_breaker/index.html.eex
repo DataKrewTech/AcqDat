@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-wet-pre-breaker-temperature-gauge-container"
         style="min-width: 100px; width: 100%; height: 250px">
       </div>
@@ -8,22 +8,22 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-wet-pre-breaker-avg-current-gauge-container"
         style="min-width: 100px; width: 100%; height: 250px">
       </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-wet-pre-breaker-avg-voltage-gauge-container"
         style="min-width: 100px; width: 100%; height: 250px">
       </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-wet-pre-breaker-active-power-gauge-container"
         style="min-width: 100px; width: 100%; height: 250px">
       </div>
@@ -31,8 +31,8 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div class="row">
         <p>Total Active Energy</p>
       </div>

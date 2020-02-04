@@ -37,6 +37,7 @@ export default class View extends MainView {
   }
 
   get_energy_consumption_bill(chart) {
+    chart.showLoading();
     let url = `/energy-consumption-electricity-bill`;
     $.get(url, {}, function(response_data, status){
       let daily_energy_consumption = response_data.data.daily_energy_consumption.map(x => [new Date(x[0]).getTime(), x[1]]);
@@ -44,11 +45,13 @@ export default class View extends MainView {
 
       chart.series[0].setData(daily_energy_consumption, true)
       chart.series[1].setData(daily_bill, true)
+      chart.hideLoading();
       chart.redraw()      
     })
   }
 
   get_current_voltage_data(chart) {
+    chart.showLoading();
     let url = `/current-voltage-senor-data`;
     $.get(url, {}, function(response_data, status){
       let avg_current_data = response_data.data.avg_current.map(x => [new Date(x[0]).getTime(), x[1]]);
@@ -56,16 +59,19 @@ export default class View extends MainView {
 
       chart.series[0].setData(avg_voltage_data, true)
       chart.series[1].setData(avg_current_data, true)
+      chart.hideLoading();
       chart.redraw()
     })
   }
 
   get_total_energy_consumption(chart) {
+    chart.showLoading();
     let url = `/total-energy-consumption`;
     $.get(url, {}, function(response_data, status){
       let total_energy_consumption = response_data.data.total_energy_consumption.map(x => [new Date(x[0]).getTime(), x[1]]);
 
       chart.series[0].setData(total_energy_consumption, true)
+      chart.hideLoading();
       chart.redraw()      
     })
   }

@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-ipal-water-inlet-temp-gauge-container" style="min-width: 100px; width: 100%; height: 250px">
       </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div id="dashboard-ipal-water-inlet-pH-gauge-container" style="min-width: 100px; width: 100%; height: 250px">
       </div>
     </div>
@@ -14,8 +14,8 @@
 </div>
 <div class="row">
 
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div class="row">
         <p>Turbidity</p>
       </div>
@@ -33,8 +33,8 @@
   </div>
 
 
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div class="row">
         <p>Conductivity</p>
       </div>
@@ -52,8 +52,8 @@
   </div>
 
 
-  <div class="col-md-3">
-    <div class="widget-bg-color-icon card-box">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
       <div class="row">
         <p>ORP</p>
       </div>

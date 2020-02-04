@@ -113,6 +113,23 @@ let activePowerChartObj = Object.assign({}, vuMeterObj, { title: { text: 'Active
 export default class View extends MainView {
 
   mount() {
+    const element = document.getElementById('google-map')
+    const options = {
+      zoom: 0,
+      center: new google.maps.LatLng(0.905497, 104.553407),
+      disableDefaultUI: true
+    }
+
+    let position = new google.maps.LatLng(0.905497, 104.553407)
+
+    const map = new google.maps.Map(element, options)
+
+    new google.maps.Marker({
+      position,
+      animation: google.maps.Animation.DROP,
+      map,
+      title: "Site Location"
+    })
 
     const device_ids = ["93b92b9a31e311ea8ed34eb4d13005bf", "309efbba119111eaaa47b6b16018c425"]
     let channel = liveView();

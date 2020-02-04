@@ -9,7 +9,7 @@ File: Main Css
    Common
 ============= */
 body {
-  background: #ebeff2;
+  background: rgb(248, 248, 248);
   margin: 0;
   overflow-x: hidden;
   color: #797979;
@@ -20,7 +20,7 @@ body {
 html {
   position: relative;
   min-height: 100%;
-  background: #ebeff2;
+  background: rgb(248, 248, 248);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1147,11 +1147,13 @@ select[multiple] {
 .process-data-history-container .nav.nav-tabs > li > a, .nav.tabs-vertical > a {
   background-color: white;
   color: #36404a !important;
+  border: 1px solid rgba(248, 248, 248);
 }
 
 .process-data-history-container .nav.nav-tabs > li > a.active, .nav.tabs-vertical > a.active {
   background-color: #3377B3;
   color: white !important;
+  /* border: none; */
 }
 
 .table > thead > tr > td.middle-align, .table > tbody > tr > td.middle-align,
@@ -1320,6 +1322,7 @@ select[multiple] {
   width: 260px;
   z-index: 1;
   background-color: rgb(6,6,6);
+  min-height: 70px;
 }
 
 .topbar .topbar-left-sm {
@@ -1535,8 +1538,10 @@ body.fixed-left .side-menu.left {
 }
 
 .content-page > .content {
-  margin-bottom: 60px;
-  margin-top: 70px;
+  max-width: 2560px;
+  margin: 70px auto 60px;
+  /* margin-bottom: 60px;
+  margin-top: 70px; */
   padding: 20px 5px 15px 5px;
   min-height: 300px;
 }
@@ -7413,11 +7418,12 @@ input:checked + .slider:before {
 /* Card Ribbon  */
 .ribbon-box {
   position: relative;
-  padding: 20px !important;
+  padding: 5% !important;
 }
 
 .ribbon-box .ribbon.float-left {
-  margin-left: -30px;
+  left: -10px;
+  top: 10px;
   border-radius: 0 3px 3px 0;
 }
 
@@ -7426,7 +7432,7 @@ input:checked + .slider:before {
 }
 
 .ribbon-box .ribbon {
-  position: relative;
+  position: absolute;
   clear: both;
   padding: 6px 12px;
   margin-bottom: 15px;
@@ -7453,7 +7459,7 @@ input:checked + .slider:before {
 
 .ribbon-box .ribbon-content {
   /* clear: both; */
-  height: 220px;
+  /* height: 220px; */
 }
 
 .ribbon-box .ribbon-content img {
@@ -7839,3 +7845,142 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+/* Dashboard */
+/* Small devices (landscape phones, 576px and up) */
+
+.content-page.dashboard .row .col-md-4{
+  display: flex;
+}
+
+.content-page.dashboard .row .col-md-4 .card{
+  width: 100%;
+}
+
+.content-page.dashboard .row .col-md-4 .card .ribbon-box .ribbon-content{
+  height: 80%;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .side-menu, .topbar-left {
+    width: 200px;
+  }
+
+  #sidebar-menu {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #sidebar-menu > ul > li > a {
+    padding: 6px 9px;
+    margin: 5px 15px 0;
+  }
+
+  #sidebar-menu > ul > li > a > i {
+    font-size: 14px;
+  }
+
+  #sidebar-menu > ul > li > a > img {
+    width: 11px !important;
+    margin-left: 9px !important;
+  }
+
+  #sidebar-menu > ul > li > a > span {
+    font-size: 10px;
+  }
+
+  .content-page, .navbar-custom {
+    margin-left: 200px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .ribbon{
+    font-size: 10px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .text-blue{
+    font-size: 10px;
+    padding: 9px 12px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .ribbon-content{
+    font-size: 10px !important;
+  }
+
+  .content-page .process-data-history-container .nav.nav-tabs .nav-item{
+    font-size: 10px !important;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body {
+    height: 60px !important;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body .card-title {
+    font-size: 14px;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body span, .content-page.energy-management .process-data-history-container .card-body h3 {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 991.98px) {
+  .side-menu, .topbar-left {
+    width: 200px;
+  }
+
+  #sidebar-menu {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #sidebar-menu > ul > li > a {
+    padding: 6px 9px;
+    margin: 5px 15px 0;
+  }
+
+  #sidebar-menu > ul > li > a > i {
+    font-size: 10px;
+  }
+
+  #sidebar-menu > ul > li > a > img {
+    width: 9px !important;
+    margin-left: 9px !important;
+  }
+
+  #sidebar-menu > ul > li > a > span {
+    font-size: 8px;
+  }
+
+  .content-page, .navbar-custom {
+    margin-left: 200px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .ribbon{
+    font-size: 8px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .text-blue{
+    font-size: 8px;
+    padding: 9px 12px;
+  }
+
+  .content-page.dashboard .row .col-md-4 .card .ribbon-box .ribbon-content{
+    font-size: 10px !important;
+  }
+
+  .content-page .process-data-history-container .nav.nav-tabs .nav-item{
+    font-size: 9px !important;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body {
+    height: 60px !important;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body .card-title {
+      font-size: 14px;
+  }
+
+  .content-page.energy-management .process-data-history-container .card-body span, .content-page.energy-management .process-data-history-container .card-body h3 {
+    font-size: 12px !important;
+  }
+}

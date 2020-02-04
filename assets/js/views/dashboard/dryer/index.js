@@ -28,7 +28,6 @@ export default class View extends MainView {
       title: "Site Location"
     })
 
-
     chartTemp = Highcharts.chart('dashboard-dryer-temperature-gauge-container', tempChartObj);
 
     device_ids.forEach(function(device_id, index){
