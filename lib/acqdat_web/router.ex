@@ -48,12 +48,22 @@ defmodule AcqdatWeb.Router do
 
     post("/device/add-data", DeviceController, :insert_data)
     get("/sensor-data/:id/", SensorController, :sensor_data)
+    get("/current-voltage-senor-data", EnergyManagementController, :current_voltage_senor_data)
+    get("/energy-consumption-electricity-bill", EnergyManagementController, :energy_consumption_electricity_bill)
+    get("/total-energy-consumption", EnergyManagementController, :total_energy_consumption)
   end
 
   scope "/", AcqdatWeb do
     pipe_through [:browser, :authentication]
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+
+    scope "/", Dashboard do
+      get "/", IpalWaterInletController, :index
+      get "/wet-pre-breaker", WetPreBreakerController, :index
+      get "/dryer", DryerController, :index
+    end
+
     resources("/sensor_types", SensorTypeController)
 
     resources("/devices", DeviceController) do
@@ -66,6 +76,17 @@ defmodule AcqdatWeb.Router do
     get "/notification-configuration/:id", NotificationController, :sensor_rule_configurations
     post "/notification/rule_preferences", NotificationController, :policy_preferences
     resources("/data-trace", DataTraceController, only: [:index, :show])
+    resources("/energy-management", EnergyManagementController, only: [:index])
+    resources("/energy-optimization", EnergyOptimizationController, only: [:index])
+    resources("/predictive-maintenance", PredictiveMaintenanceController, only: [:index])
+
+
+    # Process Data History
+    scope "/process-data-history", ProcessDataHistory do
+      get "/dryer", DryerController, :data_history
+      get "/wet-pre-breaker", WetPreBreakerController, :data_history
+      get "/ipal-water-inlet", IpalWaterInletController, :data_history
+    end
 
     # Tool Management
     scope "/tool-management", ToolManagement do
@@ -83,7 +104,7 @@ defmodule AcqdatWeb.Router do
     pipe_through [:api]
 
     post "/token", TokenController, :create
-
+    get "/devices/:device_id/latest_data", DeviceController, :latest_data
   end
 
   scope "/api", AcqdatWeb.API do

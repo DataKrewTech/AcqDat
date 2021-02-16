@@ -50,3 +50,5 @@ npm-debug.log
 /env/local.env
 
 /env/docker.env
+latest.dump
+latest.dump.1

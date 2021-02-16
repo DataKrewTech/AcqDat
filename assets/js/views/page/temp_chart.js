@@ -9,7 +9,12 @@ var tempChartObj = {
   },
 
   title: {
-      text: 'Temperature'
+    text: 'Temperature'
+  },
+
+
+  exporting: {
+    enabled: false
   },
 
   pane: {
@@ -82,15 +87,16 @@ var tempChartObj = {
           color: '#DF5353' // red
       }]
   },
-
+  time: {
+    timezone: 'Asia/Jakarta'
+  },
   series: [{
       name: 'Temperature',
       data: [0],
       tooltip: {
           valueSuffix: String.fromCharCode(176) + "C"
       }
-  }]
-
+  }],
 }
 
 export default tempChartObj

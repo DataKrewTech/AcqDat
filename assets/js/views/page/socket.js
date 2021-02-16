@@ -62,8 +62,8 @@ export default function liveView() {
   var channel = socket.channel("room:lobby", {})
   
   channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", resp => {})
+  .receive("error", resp => {})
   
   return channel
 }

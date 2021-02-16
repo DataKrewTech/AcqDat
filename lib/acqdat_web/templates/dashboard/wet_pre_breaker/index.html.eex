@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
+      <div id="dashboard-wet-pre-breaker-temperature-gauge-container"
+        style="min-width: 100px; width: 100%; height: 250px">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
+      <div id="dashboard-wet-pre-breaker-avg-current-gauge-container"
+        style="min-width: 100px; width: 100%; height: 250px">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
+      <div id="dashboard-wet-pre-breaker-avg-voltage-gauge-container"
+        style="min-width: 100px; width: 100%; height: 250px">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
+      <div id="dashboard-wet-pre-breaker-active-power-gauge-container"
+        style="min-width: 100px; width: 100%; height: 250px">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="widget-bg-color-icon card-box" style="width: 100%;">
+      <div class="row">
+        <p>Total Active Energy</p>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="https://image.flaticon.com/icons/svg/99/99744.svg" class="thumb-lg rounded-circle img-fluid" alt="">
+        </div>
+        <div class="col-md-6">
+          <div class="total_energy">
+            <h5 class="text-dark "><b class="counter kwh_energy" >0.16</b> kWh</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

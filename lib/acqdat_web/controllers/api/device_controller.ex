@@ -16,4 +16,9 @@ defmodule AcqdatWeb.API.DeviceController do
       render(conn, "show.json-api", data: device, opts: [include: "sensors"])
     end
   end
+
+  def latest_data(conn, %{"device_id" => device_uuid}) do
+    data = Device.get_latest_data(device_uuid)
+    render(conn, "latest-data.json-api", data: data)
+  end
 end

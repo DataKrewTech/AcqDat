@@ -12,6 +12,112 @@
       </div>
 
       <div class="row">
+        <div class="col-md-4">
+          <div class="card-box"></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-box"></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-box"></div>
+        </div>
+      </div>
+
+      <div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dryer (Line 2)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Wet Pre-breaker (Line 2)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">IPAL Water Inlet</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-temperature-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-temperature2-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-current-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-voltage-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-power-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div> 
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-energy-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-pH-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-conductivity-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-ORP-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-turbidity-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="widget-bg-color-icon card-box">
+                  <div id="container-temperature3-gauge" style="min-width: 100px; width: 100%; height: 250px">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
         <div class="col-md-6 col-lg-6 col-xl-6">
           <div class="widget-bg-color-icon card-box fadeInDown animated">
             <h5>PM2.5</h5>
@@ -78,7 +184,8 @@
 
         </div>
 
-      </div> <!-- container -->
+      </div> -->
+      <!-- container -->
 
     </div> <!-- content -->
 
